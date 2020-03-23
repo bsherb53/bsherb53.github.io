@@ -4,23 +4,28 @@ app.controller('myCtrl', function($scope) {
     $scope.lastName = "Doe";
     var t = [];
     var i;
-    var numTiles = 1000;
+    var numTiles = 988;
     for (i = 0; i < numTiles; i++) {
         t.push({
             number: i,
-            biome: "forest",
-            src: "https://i.pinimg.com/originals/0b/61/12/0b611238fe328faa6ba30e89aab39e32.jpg",
+            biome: "Forest",
+            src: "grass.jpg",
             type: "asdf",
             weather: "weather",
             rating: 0,
-            name: "my first zone"
+            name: "Zone " + i,
+            owner: "Ginger"
         });
     };
     $scope.tiles = t;
 
-$scope.selected = undefined;
+    $scope.selected = undefined;
     $scope.select = function(n) {
         $scope.selected = t[n];
+    };
+
+    $scope.close = function() {
+        $scope.selected = undefined;
     };
 
 });

@@ -15,19 +15,23 @@
         <li class="hex" ng-repeat="t in ::tiles" ng-click="select(t.number)">
           <div class="hexIn" >
             <a class="hexLink" href="#">
-              <img src="{{t.src}}" alt="{{t.name}}" />
-              <h1>{{t.name}}</h1>
-              <p>{{t.biome}}
-                {{t.type}}
-                {{t.weather}}
-                {{t.rating}}
-              {{t.number}}</p>
+              <img src="{{::t.src}}" alt="{{::t.name}}" />
             </a>
           </div>
         </li>
       </ul>
-      <div ng-if="selected != 'undefined'">
-      {{selected}}</div>
+      <div ng-if="selected != undefined">
+        <div class="selected-box">
+          <p>Name: {{selected.name}}</p>
+          <p>DM: {{selected.owner}}</p>
+          <p>Number: {{selected.number}}</p>
+          <p>Biome: {{selected.biome}}</p>
+          <p>Weather: {{selected.weather}}</p>
+          <p>Type: {{selected.type}}</p>
+          <p>CR: {{selected.rating}}</p>
+          <p class="button" ng-click="close()">CLOSE</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
