@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Hexagonal Grid by Codin @ Codesmite.com</title>
+		<meta name="description" content="Hexagonal Grid by Codin @ Codesmite.com">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	</head>
+  <body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    <ul id="hexGrid">
+      <li class="hex" ng-repeat="t in tiles">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="{{t.src}}" alt="{{t.name}}" />
+            <h1>{{t.name}}</h1>
+            <p>{{t.biome}}
+            {{t.type}}
+            {{t.weather}}
+            {{t.rating}}
+            {{t.number}}</p>
+          </a>
+        </div>
+      </li>
+    </ul>
+
+  </body>
+</html>
+<script>
+	var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.firstName= "John";
+  $scope.lastName= "Doe";
+
+
+
+  var t = [];
+
+  var i;
+for (i = 0; i < 100; i++) {
+  t.push({
+  	number: i,
+  	biome: "forest",
+  	src: "https://farm9.staticflickr.com/8461/8048823381_0fbc2d8efb.jpg",
+  	type:"asdf",
+  	weather:"weather",
+  	rating:0,
+  	name: "my first zone"
+  });
+
+}
+
+$scope.tiles = t
+
+
+
+
+});
+</script>
