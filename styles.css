@@ -7,15 +7,14 @@ body {
 }
 
 #hexGrid {
-    /*background-image: url("https://chronicabucket.s3.amazonaws.com/2020/03/22/18/59/39/f026c094-ac76-4c32-b8f5-42dc2ffce7bb/WorldMap_v3x2Grid.jpg");
-      background-size: contain;*/
-min-width:1200px;
+    background: url("images/WorldMap.jpg") ;
   display: flex;
+  background-size: contain;
+  background-repeat: no-repeat;
   flex-wrap: wrap;
-  width: 90%;
-  margin: 0 auto;
+    width: 1523px;
+      margin: 0 auto;
   margin-top: 10%;
-  overflow: hidden;
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
   list-style-type: none;
@@ -24,7 +23,6 @@ min-width:1200px;
 
 
 .hex {
-  width: 12.5%;
   position: relative;
   visibility:hidden;
   outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
@@ -153,17 +151,25 @@ min-width:1200px;
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 /*media (min-width:1201px) { /* <- 5-4  hexagons per row */
     .hex:nth-child(n+1) {
-margin-left: 1.76179%;
+margin-left: 1.87%;
 }
 
   #hexGrid{
     padding-bottom: 4.4%
   }
   .hex {
-    width: 2.5%; /* = 100 / 40 */
+    width: 47px; /* = 100 / 40 */
   
-    margin-bottom: -15px;
+    margin-bottom: -18px;
   }
-  .hex:nth-child(44n+23){ /* first hexagon of even rows */
-    margin-left:3.75%;  /* = width of .hex / 2  to indent even rows */
+ 
+  .hex:nth-child(20n+1){ /* first hexagon of even rows */
+    margin-left:5px;  /* = width of .hex / 2  to indent even rows */
+    visibility: visible;
+    background-color: #00ff0066;
+  }
+
+   .hex:nth-child(40n+21){ /* first hexagon of even rows */
+    margin-left:42px; 
+    background-color: #ff000044;
   }
