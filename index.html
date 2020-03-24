@@ -11,7 +11,7 @@
   </head>
   <body>
     <div ng-app="myApp" ng-controller="myCtrl">
-      <ul id="hexGrid">
+      <ul id="hexGrid" ng-if="loading != true">
         <li class="hex" ng-repeat="t in ::tiles" ng-click="select(t.number)">
           <div class="hexIn" >
             <a class="hexLink" href="#">
@@ -21,7 +21,7 @@
           </div>
         </li>
       </ul>
-      <div ng-if="selected != undefined">
+      <div ng-if="selected != undefined && loading != true">
         <div class="selected-box">
           <p>Name: {{selected.name}}</p>
           <p>DM: {{selected.owner}}</p>
