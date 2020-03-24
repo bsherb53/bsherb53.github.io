@@ -3,10 +3,13 @@
     padding: 0;
 }
 body {
-  background-color: blue;
+  background-color: #3149FF;
 }
+
 #hexGrid {
-  min-width:1201px;
+    /*background-image: url("https://chronicabucket.s3.amazonaws.com/2020/03/22/18/59/39/f026c094-ac76-4c32-b8f5-42dc2ffce7bb/WorldMap_v3x2Grid.jpg");
+      background-size: contain;*/
+min-width:1201px;
   display: flex;
   flex-wrap: wrap;
   width: 90%;
@@ -18,6 +21,7 @@ body {
   list-style-type: none;
 
 }
+
 
 .hex {
   width: 12.5%;
@@ -163,55 +167,3 @@ margin-left: 1.875%;
   .hex:nth-child(44n+23){ /* first hexagon of even rows */
     margin-left:3.75%;  /* = width of .hex / 2  to indent even rows */
   }
-
-  /*
-  .hex:nth-child(an+b) // above
-x = the number of hexagons on odd rows(1st, 3rd, 5th...)
-Y = the number of hexagons on even rows(2nd, 4th, 6th...)
-a = x + y
-b = x + 1*/
-
-/*}
-/*
-/*@media (max-width: 1200px) and (min-width:901px) { /* <- 4-3  hexagons per row */
-  /*#hexGrid{
-    /*padding-bottom: 5.5%
-  /*}
-  /*.hex {
-    /*width: 25%; /* = 100 / 4 */
-  /*}
-  /*.hex:nth-child(7n+5){ /* first hexagon of even rows */
-    /*margin-left:12.5%;  /* = width of .hex / 2  to indent even rows */
-  /*}
-/*}
-/*
-/*@media (max-width: 900px) and (min-width:601px) { /* <- 3-2  hexagons per row */
-  /*#hexGrid{
-    /*padding-bottom: 7.4%
-  /*}
-  /*.hex {
-    /*width: 33.333%; /* = 100 / 3 */
-  /*}
-  /*.hex:nth-child(5n+4){ /* first hexagon of even rows */
-    /*margin-left:16.666%;  /* = width of .hex / 2  to indent even rows */
-  /*}
-/*}
-/*
-/*@media (max-width: 600px) { /* <- 2-1  hexagons per row */
-  /*#hexGrid{
-    /*padding-bottom: 11.2%
-  /*}
-  /*.hex {
-    /*width: 50%; /* = 100 / 3 */
-  /*}
-  /*.hex:nth-child(3n+3){ /* first hexagon of even rows */
-    /*margin-left:25%;  /* = width of .hex / 2  to indent even rows */
-  /*}
-/*}
-
-@media (max-width: 400px) {
-    #hexGrid {
-        font-size: 13px;
-    }
-}
-© 2020 GitHub, Inc.
