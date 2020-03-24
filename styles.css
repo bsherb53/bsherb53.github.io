@@ -58,7 +58,7 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    background: #ffffff33;
+    background: #ffffff11;
     color: #fff;
     overflow: hidden;
     -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
@@ -158,18 +158,18 @@ margin-left: 1.87%;
     padding-bottom: 4.4%
   }
   .hex {
-    width: 47px; /* = 100 / 40 */
-  
-    margin-bottom: -18px;
+    width: 47px;
+    height: 47px;
+    margin-bottom: -25px;  
   }
  
   .hex:nth-child(20n+1){ /* first hexagon of even rows */
     margin-left:5px;  /* = width of .hex / 2  to indent even rows */
-    visibility: visible;
-    background-color: #00ff0066;
+    /*visibility: visible;*/
+    /*background-color: #00ff0066;*/
   }
 
    .hex:nth-child(40n+21){ /* first hexagon of even rows */
     margin-left:42px; 
-    background-color: #ff000044;
+    /*background-color: #ff000044;*/
   }
