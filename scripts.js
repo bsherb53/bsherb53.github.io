@@ -4,11 +4,11 @@ app.controller('myCtrl', function($scope) {
 
 $scope.loading = true;
 
-    var t = [];
+    $scope.tiles = [];
     var i;
     var numTiles = 1520;
     for (i = 1; i <= numTiles; i++) {
-        t.push({
+        $scope.tiles.push({
             number: i,
             biome: "Forest",
             // src: "images/"+randomImage(),
@@ -19,7 +19,6 @@ $scope.loading = true;
             owner: "Ginger"
         });
     };
-    $scope.tiles = t;
 
     $scope.selected = undefined;
     $scope.select = function(n) {
