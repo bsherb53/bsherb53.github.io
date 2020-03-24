@@ -6,7 +6,7 @@ app.controller('myCtrl', function($scope) {
 
     var t = [];
     var i;
-    var numTiles = 1580;
+    var numTiles = 1520;
     for (i = 1; i <= numTiles; i++) {
         t.push({
             number: i,
