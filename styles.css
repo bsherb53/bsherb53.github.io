@@ -3,7 +3,7 @@
     padding: 0;
 }
 body {
-  background-color: #3149FF;
+  background-color: #1E589C;
 }
 
 #hexGrid {
@@ -124,18 +124,22 @@ body {
     width: 10%;
     min-width: 200px;
     padding: 5px;
+    border-radius: 10px;
 }
 
 .button{
   width:50%;
-  background: #ffcccb;
+  background: #8eabcd;
   border: 1px solid black;
-  transition: all .2s ease-out;
+  transition: all .1s ease-out;
+  border-radius: 3px;
   margin:auto;
 }
 
-.botton:hover{
-  background: #333333
+.button:hover, .button:focus{
+  background: #1E589C;
+  border-radius: 5px;
+  color:white;
 }
 
 
