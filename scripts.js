@@ -4,7 +4,7 @@ app.controller('myCtrl', function($scope) {
     $scope.lastName = "Doe";
     var t = [];
     var i;
-    var numTiles = 988;
+    var numTiles = 1580;
     for (i = 0; i < numTiles; i++) {
         t.push({
             number: i,
