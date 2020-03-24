@@ -7,7 +7,7 @@ body {
 }
 
 #hexGrid {
-    background: url("images/WorldMap.jpg") ;
+    background: url("images/WorldMap.webp") ;
   display: flex;
   background-size: contain;
   background-repeat: no-repeat;
