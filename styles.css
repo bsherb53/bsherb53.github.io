@@ -26,7 +26,6 @@ body {
   position: relative;
   visibility:hidden;
   outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
-
     -webkit-transform: rotate3d(0,0,1,90deg) skewY(0deg);
       -ms-transform: rotate3d(0,0,1,90deg) skewY(0deg);
           transform: rotate3d(0,0,1,90deg) skewY(0deg);
@@ -141,15 +140,13 @@ body {
 
 
 /*** HOVER EFFECT  **********************************************************************/
-/*.hexLink:hover h1, .hexLink:focus h1,
+.hexLink:hover h1, .hexLink:focus h1,.hexLink:hover, .hexLink:focus
+.hexLink:hover div, .hexLink:focus div,
 .hexLink:hover p, .hexLink:focus p{
-  -webkit-transform:translate3d(0,0,0);
-      -ms-transform:translate3d(0,0,0);
-          transform:translate3d(0,0,0);
-}*/
+ background-color: #ff000033;
+}
 
-/*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
-/*media (min-width:1201px) { /* <- 5-4  hexagons per row */
+
     .hex:nth-child(n+1) {
 margin-left: 1.87%;
 }
@@ -163,8 +160,8 @@ margin-left: 1.87%;
     margin-bottom: -25px;  
   }
  
-  .hex:nth-child(20n+1){ /* first hexagon of even rows */
-    margin-left:5px;  /* = width of .hex / 2  to indent even rows */
+  .hex:nth-child(20n+1){ /* first hexagon of odd rows */
+    margin-left:5px; 
     /*visibility: visible;*/
     /*background-color: #00ff0066;*/
   }
