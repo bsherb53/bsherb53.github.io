@@ -9,7 +9,7 @@ body {
 #hexGrid {
     /*background-image: url("https://chronicabucket.s3.amazonaws.com/2020/03/22/18/59/39/f026c094-ac76-4c32-b8f5-42dc2ffce7bb/WorldMap_v3x2Grid.jpg");
       background-size: contain;*/
-min-width:1201px;
+min-width:1200px;
   display: flex;
   flex-wrap: wrap;
   width: 90%;
@@ -153,7 +153,7 @@ min-width:1201px;
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
 /*media (min-width:1201px) { /* <- 5-4  hexagons per row */
     .hex:nth-child(n+1) {
-margin-left: 1.875%;
+margin-left: 1.76179%;
 }
 
   #hexGrid{
