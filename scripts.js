@@ -99,19 +99,19 @@ app.controller('myCtrl', function($scope) {
     $scope.loading = true;
 
     $scope.tiles = [];
-    var i;
-    var numTiles = 1520;
-    for (i = 1; i <= numTiles; i++) {
-        $scope.tiles.push({
-            number: i,
-            name: "pending name",
-            biome: $scope.biomes[Math.floor(Math.random() * $scope.biomes.length)],
-            type: $scope.types[Math.floor(Math.random() * $scope.types.length)],
-            weather: $scope.weathers[Math.floor(Math.random() * $scope.weathers.length)],
-            rating: $scope.ratings[Math.floor(Math.random() * $scope.ratings.length)],
-            owner: $scope.owners[Math.floor(Math.random() * $scope.owners.length)]
-        });
-    };
+    // var i;
+    // var numTiles = 1520;
+    // for (i = 1; i <= numTiles; i++) {
+    //     $scope.tiles.push({
+    //         number: i,
+    //         name: "pending name",
+    //         biome: $scope.biomes[Math.floor(Math.random() * $scope.biomes.length)],
+    //         type: $scope.types[Math.floor(Math.random() * $scope.types.length)],
+    //         weather: $scope.weathers[Math.floor(Math.random() * $scope.weathers.length)],
+    //         rating: $scope.ratings[Math.floor(Math.random() * $scope.ratings.length)],
+    //         owner: $scope.owners[Math.floor(Math.random() * $scope.owners.length)]
+    //     });
+    // };
 
     $scope.selected = undefined;
     $scope.select = function(n) {
