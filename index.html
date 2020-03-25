@@ -8,10 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
-<script type="text/javascript" src="data.json"></script>
-
-    
+    <script type="text/javascript" src="data.json"></script>
   </head>
   <body>
     <div ng-app="myApp" ng-controller="myCtrl">
@@ -20,7 +17,6 @@
           <div class="hexIn" >
             <a class="hexLink" href="#">
               <img src="" alt="" />
-
             </a>
           </div>
         </li>
@@ -28,17 +24,25 @@
       <div ng-if="selected != undefined && loading != true">
         <div class="selected-box">
           <p>Name: {{selected.name}}</p>
-          <p>DM: <select ng-model="selected.owner" ng-options="item as item.label for item in owners track by item.id"></select></p>
+          <p>DM: <select ng-model="selected.owner" ng-options="key as value for (key, value) in owners"></select></p>
           <p>Number: {{selected.number}}</p>
-          <p>Biome: <select ng-model="selected.biome" ng-options="item as item.label for item in biomes track by item.id"></select></p>
-          <p>Weather: <select ng-model="selected.weather" ng-options="item as item.label for item in weathers track by item.id"></select></p>
-          <p>Type: <select ng-model="selected.type" ng-options="item as item.label for item in types track by item.id"></select></p>
-          <p>CR: <select ng-model="selected.rating" ng-options="item as item.label for item in ratings track by item.id"></select></p>
+          <p>Biome: <select ng-model="selected.biome" ng-options="key as value for (key, value) in biomes"></select></p>
+          <p>Weather: <select ng-model="selected.weather" ng-options="key as value for (key, value) in weathers"></select></p>
+          <p>Type: <select ng-model="selected.type" ng-options="key as value for (key, value) in types"></select></p>
+          <p>CR: <select ng-model="selected.rating" ng-options="key as value for (key, value) in ratings"></select></p>
           <p class="button" ng-click="close()">CLOSE</p>
         </div>
       </div>
       <textarea class="objectText">{{tiles}}</textarea>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+
+
   </body>
 </html>
 <script src="scripts.js" defer></script>
