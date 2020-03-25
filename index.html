@@ -13,7 +13,7 @@
   <body>
     <div ng-app="myApp" ng-controller="myCtrl">
       <ul id="hexGrid" ng-if="loading != true">
-        <li class="hex" ng-repeat="t in ::tiles" ng-click="select(t.number)">
+        <li class="hex" ng-repeat="t in tiles" ng-click="select(t.id)">
           <div class="hexIn" >
             <a class="hexLink" href="#">
               <img src="" alt="" />
@@ -24,6 +24,7 @@
       <div ng-if="selected != undefined && loading != true">
         <div class="selected-box">
           <p>Name: {{selected.name}}</p>
+          <p>ID: {{selected.id}}</p>
           <p>DM: <select ng-model="selected.owner" ng-options="key as value for (key, value) in owners"></select></p>
           <p>Number: {{selected.number}}</p>
           <p>Biome: <select ng-model="selected.biome" ng-options="key as value for (key, value) in biomes"></select></p>
