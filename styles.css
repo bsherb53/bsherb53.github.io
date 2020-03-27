@@ -14,13 +14,19 @@ body {
   flex-wrap: wrap;
     width: 1524px;
       margin: 0 auto;
-  margin-top: 10%;
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
   list-style-type: none;
 
 }
 
+.header {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  font-size: x-large;
+  color: aliceblue;
+}
 
 .hex {
   position: relative;
@@ -59,6 +65,7 @@ body {
     text-align: center;
     background: #ffffff11;
     color: #fff;
+    transition: all .2s ease;
     overflow: hidden;
     -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
         -ms-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
@@ -147,7 +154,7 @@ body {
 .hexLink:hover h1, .hexLink:focus h1,.hexLink:hover, .hexLink:focus
 .hexLink:hover div, .hexLink:focus div,
 .hexLink:hover p, .hexLink:focus p{
- background-color: #ff000033;
+ background-color: #ffffff7a;
 }
 
 

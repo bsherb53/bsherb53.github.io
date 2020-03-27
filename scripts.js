@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-
+    $scope.version = "0.0.1";
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
