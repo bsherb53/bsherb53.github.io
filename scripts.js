@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.0.8";
+    $scope.version = "0.0.9";
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
@@ -29,6 +29,12 @@ app.controller('myCtrl', function ($scope) {
     }
 
     var stored = localStorage['time'];
+    if (stored == undefined) {
+        console.log("cache issues?")
+        localStorage['time'] = JSON.stringify(0);
+    }
+
+
     var expiration = 1000 * 60 * 60;// 1 hour
     if (stored) {
         var myVar = JSON.parse(stored);
