@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.0.6";
+    $scope.version = "0.0.7";
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
@@ -29,7 +29,7 @@ app.controller('myCtrl', function ($scope) {
     }
 
     var stored = localStorage['time'];
-    var expiration = 1000 * 60 * 1000;// 10 minutes?
+    var expiration = 1000 * 60 * 60;// 1 hour
     if (stored) {
         var myVar = JSON.parse(stored);
         var diff = n - myVar;
@@ -247,12 +247,12 @@ app.controller('myCtrl', function ($scope) {
 
     $scope.clearCache = function () {
         console.log("clearing cache");
-        localStorage['tiles'] = JSON.stringify($scope.tiles);
-        localStorage['biomes'] = JSON.stringify($scope.biomes);
-        localStorage['owners'] = JSON.stringify($scope.biomes);
-        localStorage['ratings'] = JSON.stringify($scope.biomes);
-        localStorage['weathers'] = JSON.stringify($scope.biomes);
-        localStorage['types'] = JSON.stringify($scope.biomes);
-        localStorage['time'] = JSON.stringify(1);
+        localStorage['tiles'] ="";
+        localStorage['biomes'] ="";
+        localStorage['owners'] ="";
+        localStorage['ratings'] ="";
+        localStorage['weathers'] ="";
+        localStorage['types'] ="";
+        localStorage['time'] ="";
     }
 });
