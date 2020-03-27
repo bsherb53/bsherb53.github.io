@@ -120,7 +120,7 @@ body {
 }
 
 .selected-box {
-    position: absolute;
+    position: fixed;
     top: 10%;
     margin: auto;
     text-align: center;
