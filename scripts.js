@@ -1,6 +1,6 @@
 var app = angular.module('myApp', []);
 
-app.controller('myCtrl', function($scope) {
+app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
 
     // Your web app's Firebase configuration
@@ -33,14 +33,21 @@ app.controller('myCtrl', function($scope) {
     var d = new Date();
     var n = d.getTime();
 
+    function compare(a, b) {
+        // console.log(a.number,b.number);
+        if (a.number === b.number){
+            return 0;
+        }
+        return a.number < b.number ? -1 : 1;
+    }
 
     var stored = localStorage['time'];
-
+    var expiration = 1000 * 60 * 10;// 10 minutes?
     if (stored) {
         var myVar = JSON.parse(stored);
-                    console.log(myVar)
-
-        if (n - myVar > (1000 * 60 *10 )) {
+        var diff = n - myVar;
+        console.log("checking diff", diff, "with", expiration);
+        if (diff > expiration) {
             // localstorage more than 10 minutes
             useCache = false
         }
@@ -50,7 +57,10 @@ app.controller('myCtrl', function($scope) {
     if (useCache) {
         var stored = localStorage['tiles']
         if (stored) {
-            $scope.tiles = JSON.parse(stored);
+            var alltiles = JSON.parse(stored);
+            alltiles = alltiles.sort(compare);
+            console.log("sorted tiles", alltiles)
+            $scope.tiles = alltiles;
         }
         stored = localStorage['biomes']
         if (stored) {
@@ -73,68 +83,71 @@ app.controller('myCtrl', function($scope) {
             $scope.ratings = JSON.parse(stored);
         }
     } else {
-        datas.doc("biomes").get(getOptions).then(function(doc) {
+        console.log("Setting cache as " + n)
+        localStorage['time'] = JSON.stringify(n);
+
+        datas.doc("biomes").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.biomes = doc.data();
                 console.log("Loaded Biomes:", $scope.biomes);
-                // console.log($scope.biomes[1])
+                localStorage['biomes'] = JSON.stringify($scope.biomes);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log($scope.biomes);
             console.log("Error getting document:", error);
         });
 
-        datas.doc("owners").get(getOptions).then(function(doc) {
+        datas.doc("owners").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.owners = doc.data();
                 console.log("Loaded owners:", $scope.owners);
-                // console.log($scope.owners[1])
+                localStorage['owners'] = JSON.stringify($scope.owners);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
 
-        datas.doc("ratings").get(getOptions).then(function(doc) {
+        datas.doc("ratings").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.ratings = doc.data();
                 console.log("Loaded ratings:", $scope.ratings);
-                // console.log($scope.ratings[1])
+                localStorage['ratings'] = JSON.stringify($scope.ratings);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
 
-        datas.doc("types").get(getOptions).then(function(doc) {
+        datas.doc("types").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.types = doc.data();
                 console.log("Loaded types:", $scope.types);
-                // console.log($scope.types[1])
+                localStorage['types'] = JSON.stringify($scope.types);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
-        datas.doc("weathers").get(getOptions).then(function(doc) {
+        datas.doc("weathers").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.weathers = doc.data();
                 console.log("Loaded weathers:", $scope.weathers);
-                // console.log($scope.weathers[1])
+                localStorage['weathers'] = JSON.stringify($scope.weathers);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
         $scope.tiles = [];
@@ -145,34 +158,37 @@ app.controller('myCtrl', function($scope) {
                 tile = doc.data();
                 tile.id = doc.id;
                 alltiles.push(tile);
-                // console.log(doc.id);
-                // tile = doc.data();
-                // console.log(tile);
             });
+            alltiles.sort(compare);
             $scope.tiles = alltiles;
-            console.log($scope.tiles);
+            console.log("loaded tiles", $scope.tiles);
+            localStorage['tiles'] = JSON.stringify($scope.tiles);
         });
     }
 
+    
+
     $scope.selected = undefined;
-    $scope.select = function(n) {
+    $scope.select = function (n) {
+        console.log("selected ", n, $scope.tiles[n])
         if ($scope.selected != undefined) {
             save($scope.selected)
         }
         $scope.selected = $scope.tiles[n];
     };
 
-    $scope.close = function() {
+    $scope.close = function () {
         save($scope.selected)
         $scope.selected = undefined;
     };
 
-    var save = function(t) {
-        console.log(t);
-        // var temp = $scope.tiles;
-        // temp[t.number] = t;
-        // $scope.tiles = temp;
-
+    var save = function (t) {
+        console.log("saving", t);
+        var temp = $scope.tiles;
+        temp[t.number-1] = t;
+        $scope.tiles = temp;
+        // save to cache too: 
+        localStorage['tiles'] = JSON.stringify($scope.tiles);
 
         // Get a new write batch
         var batch = db.batch();
@@ -190,25 +206,19 @@ app.controller('myCtrl', function($scope) {
         });
 
         // Commit the batch
-        batch.commit().then(function() {
+        batch.commit().then(function () {
             // ...
+            console.log("batch complete");
         });
 
     }
     $scope.loading = false;
-    console.log($scope.tiles)
+    // console.log($scope.tiles)
     if ($scope.tiles == undefined || $scope.tiles.length == 0) {
         $scope.tiles = JSON.parse(data);
     }
 
-    console.log("Setting cache as " + n)
-    localStorage['time'] = JSON.stringify(n);
-    localStorage['tiles'] = JSON.stringify($scope.tiles);
-    localStorage['biomes'] = JSON.stringify($scope.biomes);
-    localStorage['owners'] = JSON.stringify($scope.owners);
-    localStorage['weathers'] = JSON.stringify($scope.weathers);
-    localStorage['types'] = JSON.stringify($scope.types);
-    localStorage['ratings'] = JSON.stringify($scope.ratings);
+
 
     // $scope.tiles.forEach(myFunction);
 
