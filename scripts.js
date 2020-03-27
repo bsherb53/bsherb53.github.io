@@ -46,7 +46,7 @@ app.controller('myCtrl', function ($scope) {
         if (stored) {
             var alltiles = JSON.parse(stored);
             alltiles = alltiles.sort(compare);
-            console.log("sorted tiles", alltiles)
+            // console.log("sorted tiles", alltiles)
             $scope.tiles = alltiles;
         }
         stored = localStorage['biomes']
@@ -148,7 +148,7 @@ app.controller('myCtrl', function ($scope) {
             });
             alltiles.sort(compare);
             $scope.tiles = alltiles;
-            console.log("loaded tiles", $scope.tiles);
+            console.log("loaded tiles");
             localStorage['tiles'] = JSON.stringify($scope.tiles);
         });
     }
