@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.0.3";
+    $scope.version = "0.0.4";
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
@@ -185,6 +185,11 @@ app.controller('myCtrl', function ($scope) {
 
 
         console.log("saving", t);
+
+        if (t.id == undefined){
+            console.log("undefined id", t);
+            return;
+        }
         var temp = $scope.tiles;
         temp[t.number - 1] = t;
         $scope.tiles = temp;
