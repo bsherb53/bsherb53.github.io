@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.0.4";
+    $scope.version = "0.0.5";
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
@@ -186,12 +186,12 @@ app.controller('myCtrl', function ($scope) {
 
         console.log("saving", t);
 
-        if (t.id == undefined){
+        if (t.id == undefined) {
             console.log("undefined id", t);
             return;
         }
         var temp = $scope.tiles;
-        temp[t.number - 1] = t;
+        temp[t.number] = t;
         $scope.tiles = temp;
         // save to cache too: 
         localStorage['tiles'] = JSON.stringify($scope.tiles);
@@ -224,28 +224,25 @@ app.controller('myCtrl', function ($scope) {
         $scope.tiles = JSON.parse(data);
     }
 
-
-
-    // $scope.tiles.forEach(myFunction);
-
-    // function myFunction(item, index) {
+    // load all new tiles with blank data
+    // for (var i = 0; i < 1520; i++) {
     //     var newTile = {
-    //         number: item.number,
+    //         number: i,
     //         name: "",
-    //         biome: 0,
-    //         type: 0,
-    //         weather: 0,
-    //         rating: 0,
-    //         owner: 0
+    //         biome: "0",
+    //         type: "0",
+    //         weather: "0",
+    //         rating: "0",
+    //         owner: "0"
     //     }
-    //     console.log(newTile);
 
     //     db.collection("tiles").add(newTile)
-    //         .then(function(docRef) {
+    //         .then(function (docRef) {
     //             console.log("Document written with ID: ", docRef.id);
     //         })
-    //         .catch(function(error) {
+    //         .catch(function (error) {
     //             console.error("Error adding document: ", error);
     //         });
     // }
+
 });
