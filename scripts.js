@@ -42,7 +42,7 @@ app.controller('myCtrl', function ($scope) {
     }
 
     var stored = localStorage['time'];
-    var expiration = 1000 * 60 * 11;// 10 minutes?
+    var expiration = 1000// * 60 * 1;// 10 minutes?
     if (stored) {
         var myVar = JSON.parse(stored);
         var diff = n - myVar;
