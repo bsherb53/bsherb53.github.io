@@ -1,52 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Divine Monarchs Hex Map by @GingerKing</title>
-    <meta name="description" content="Divine Monarchs Hex Map by @GingerKing">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script type="text/javascript" src="data.json"></script>
-    <script type="text/javascript" src="firebaseconfig.js"></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <div ng-app="myApp" ng-controller="myCtrl">
-      <div class="header">Version {{version}} made by Ginger King</div>
-      <ul id="hexGrid" ng-if="loading != true">
-        <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
-          <div class="hexIn" >
-            <a class="hexLink" href="#">
-              <img src="" alt="" />
-            </a>
-          </div>
-        </li>
-      </ul>
-      <div ng-if="selected != undefined && loading != true">
-        <div class="selected-box">
-          <p>Name: {{selected.name}}</p>
-          <p>ID: {{selected.id}}</p>
-          <p>DM: <select ng-model="selected.owner" ng-options="key as value for (key, value) in owners"></select></p>
-          <p>Number: {{selected.number}}</p>
-          <p>Biome: <select ng-model="selected.biome" ng-options="key as value for (key, value) in biomes"></select></p>
-          <p>Weather: <select ng-model="selected.weather" ng-options="key as value for (key, value) in weathers"></select></p>
-          <p>Type: <select ng-model="selected.type" ng-options="key as value for (key, value) in types"></select></p>
-          <p>CR: <select ng-model="selected.rating" ng-options="key as value for (key, value) in ratings"></select></p>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Divine Monarchs Hex Map by @GingerKing</title>
+  <meta name="description" content="Divine Monarchs Hex Map by @GingerKing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script type="text/javascript" src="data.json"></script>
+  <script type="text/javascript" src="firebaseconfig.js"></script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <div class="header">Version {{version}} made by Ginger King</div>
+    <ul id="hexGrid" ng-if="loading != true">
+      <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src="" alt="" />
+          </a>
+        </div>
+      </li>
+    </ul>
+    <div ng-if="selected != undefined && loading != true">
+      <div class="selected-box">
+
+        <div class="line">
+          <div class="left">Tile {{selected.name}}</div>
+          <div id="id" class="right">{{selected.id}}</div>
+        </div>
+        <div class="line">
+          <div class="left">DM:</div>
+          <div class="right"><select ng-model="selected.owner"
+              ng-options="key as value for (key, value) in owners"></select></div>
+        </div>
+
+        <div class="line">
+          <div class="left">Biome:</div>
+          <div class="right"><select ng-model="selected.biome"
+              ng-options="key as value for (key, value) in biomes"></select></div>
+        </div>
+        <div class="line">
+          <div class="left">Weather:</div>
+          <div class="right"><select ng-model="selected.weather"
+              ng-options="key as value for (key, value) in weathers"></select></div>
+        </div>
+        <div class="line">
+          <div class="left">Type:</div>
+          <div class="right"><select ng-model="selected.type"
+              ng-options="key as value for (key, value) in types"></select></div>
+        </div>
+        <div class="line">
+          <div class="left">CR:</div>
+          <div class="right"><select ng-model="selected.rating"
+              ng-options="key as value for (key, value) in ratings"></select></div>
+        </div>
+        <div class="line">
           <p class="button" ng-click="close()">CLOSE</p>
         </div>
       </div>
-      <!-- <textarea class="objectText">{{tiles}}</textarea> -->
     </div>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <div class="button" ng-click="clearCache()">Clear Data</div>
+  </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+  <script src="scripts.js" defer></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+</body>
 
-
-  </body>
 </html>
-<script src="scripts.js" defer></script>

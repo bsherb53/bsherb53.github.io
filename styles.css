@@ -1,23 +1,23 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
+
 body {
   background-color: #1E589C;
 }
 
 #hexGrid {
-    background: url("images/WorldMap.webp") ;
+  background: url("images/WorldMap.webp");
   display: flex;
   background-size: contain;
   background-repeat: no-repeat;
   flex-wrap: wrap;
-    width: 1524px;
-      margin: 0 auto;
+  width: 1524px;
+  margin: 0 auto;
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
   list-style-type: none;
-
 }
 
 .header {
@@ -30,78 +30,90 @@ body {
 
 .hex {
   position: relative;
-  visibility:hidden;
-  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
-    -webkit-transform: rotate3d(0,0,1,90deg) skewY(0deg);
-      -ms-transform: rotate3d(0,0,1,90deg) skewY(0deg);
-          transform: rotate3d(0,0,1,90deg) skewY(0deg);
+  visibility: hidden;
+  outline: 1px solid transparent;
+  /* fix for jagged edges in FF on hover transition */
+  -webkit-transform: rotate3d(0, 0, 1, 90deg) skewY(0deg);
+  -ms-transform: rotate3d(0, 0, 1, 90deg) skewY(0deg);
+  transform: rotate3d(0, 0, 1, 90deg) skewY(0deg);
 }
-.hex::after{
-  content:'';
-  display:block;
-  padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
+
+.hex::after {
+  content: '';
+  display: block;
+  padding-bottom: 86.602%;
+  /* =  100 / tan(60) * 1.5 */
 }
-.hexIn{
+
+.hexIn {
   position: absolute;
-  width:96%;
-  padding-bottom: 110.851%; /* =  width / sin(60) */
-  margin:0 2%;
+  width: 96%;
+  padding-bottom: 110.851%;
+  /* =  width / sin(60) */
+  margin: 0 2%;
   overflow: hidden;
   visibility: hidden;
-  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
-  -webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-      -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-          transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+  outline: 1px solid transparent;
+  /* fix for jagged edges in FF on hover transition */
+  -webkit-transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+  -ms-transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+  transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
 }
+
 .hexIn * {
   position: absolute;
   visibility: visible;
-  outline:1px solid transparent; /* fix for jagged edges in FF on hover transition */
+  outline: 1px solid transparent;
+  /* fix for jagged edges in FF on hover transition */
 }
+
 .hexLink {
-    display:block;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    background: #ffffff11;
-    color: #fff;
-    transition: all .2s ease;
-    overflow: hidden;
-    -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-        -ms-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-            transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ffffff11;
+  color: #fff;
+  transition: all .2s ease;
+  overflow: hidden;
+  -webkit-transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+  -ms-transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+  transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
 }
 
 /*** HEX CONTENT **********************************************************************/
+
 .hex img {
   left: -100%;
   right: -100%;
   width: auto;
   height: 100%;
   margin: 0 auto;
-  -webkit-transform: rotate3d(0,0,0,0deg);
-      -ms-transform: rotate3d(0,0,0,0deg);
-          transform: rotate3d(0,0,0,0deg);
+  -webkit-transform: rotate3d(0, 0, 0, 0deg);
+  -ms-transform: rotate3d(0, 0, 0, 0deg);
+  transform: rotate3d(0, 0, 0, 0deg);
 }
 
 .hex h1, .hex p {
   width: 100%;
   padding: 5%;
-  box-sizing:border-box;
+  box-sizing: border-box;
   background-color: rgba(0, 128, 128, 0.8);
   font-weight: 300;
-  -webkit-transition:  -webkit-transform .2s ease-out, opacity .3s ease-out;
-          transition:          transform .2s ease-out, opacity .3s ease-out;
+  -webkit-transition: -webkit-transform .2s ease-out, opacity .3s ease-out;
+  transition: transform .2s ease-out, opacity .3s ease-out;
 }
+
 .hex h1 {
   bottom: 50%;
-  padding-top:50%;
+  padding-top: 50%;
   font-size: 1.5em;
   z-index: 1;
-  -webkit-transform:translate3d(0,-100%,0);
-      -ms-transform:translate3d(0,-100%,0);
-          transform:translate3d(0,-100%,0);
+  -webkit-transform: translate3d(0, -100%, 0);
+  -ms-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
 }
+
 .hex h1::after {
   content: '';
   position: absolute;
@@ -111,79 +123,107 @@ body {
   text-align: center;
   border-bottom: 1px solid #fff;
 }
+
 .hex p {
   top: 50%;
-  padding-bottom:50%;
-  -webkit-transform:translate3d(0,100%,0);
-      -ms-transform:translate3d(0,100%,0);
-          transform:translate3d(0,100%,0);
+  padding-bottom: 50%;
+  -webkit-transform: translate3d(0, 100%, 0);
+  -ms-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
 }
 
 .selected-box {
-    position: fixed;
-    top: 10%;
-    margin: auto;
-    text-align: center;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid black;
-    width: 10%;
-    min-width: 200px;
-    padding: 5px;
-    border-radius: 10px;
+  position: fixed;
+  top: 2%;
+  margin: auto;
+  text-align: center;
+  left: 0;
+  right: 0;
+  background: #ffffffee;
+  display: inline-block;
+  border: 1px solid black;
+  max-width: 26%;
+  min-width: 200px;
+  padding: 20px 5px;
+  border-radius: 10px;
 }
 
-.button{
-  width:50%;
+.button {
+  width: 50%;
   background: #8eabcd;
   border: 1px solid black;
   transition: all .1s ease-out;
   border-radius: 3px;
-  margin:auto;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
 }
 
-.button:hover, .button:focus{
+.button:hover, .button:focus {
   background: #1E589C;
   border-radius: 5px;
-  color:white;
+  color: white;
 }
-
 
 /*** HOVER EFFECT  **********************************************************************/
-.hexLink:hover h1, .hexLink:focus h1,.hexLink:hover, .hexLink:focus
-.hexLink:hover div, .hexLink:focus div,
-.hexLink:hover p, .hexLink:focus p{
- background-color: #ffffff7a;
+
+.hexLink:hover h1, .hexLink:focus h1, .hexLink:hover, .hexLink:focus .hexLink:hover div, .hexLink:focus div, .hexLink:hover p, .hexLink:focus p {
+  background-color: #ffffff7a;
 }
 
-
-    .hex:nth-child(n+1) {
-margin-left: 1.87%;
+.hex:nth-child(n+1) {
+  margin-left: 1.87%;
 }
 
-  #hexGrid{
-    padding-bottom: 4.4%
-  }
-  .hex {
-    width: 47px;
-    height: 47px;
-    margin-bottom: -25px;  
-  }
- 
-  .hex:nth-child(20n+1){ /* first hexagon of odd rows */
-    margin-left:5px; 
-    /*visibility: visible;*/
-    /*background-color: #00ff0066;*/
+#hexGrid {
+  padding-bottom: 4.4%
+}
+
+.hex {
+  width: 47px;
+  height: 47px;
+  margin-bottom: -25px;
+}
+
+.hex:nth-child(20n+1) {
+  /* first hexagon of odd rows */
+  margin-left: 5px;
+  /*visibility: visible;*/
+  /*background-color: #00ff0066;*/
+}
+
+.hex:nth-child(40n+21) {
+  /* first hexagon of even rows */
+  margin-left: 42px;
+  /*background-color: #ff000044;*/
+}
+
+.objectText {
+  height: 100vh;
+  width: 90%;
+  margin: auto;
+}
+
+.line {
+  background-color: #e9eff6;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+/* .left{
+    background-color: green;
+  
   }
 
-   .hex:nth-child(40n+21){ /* first hexagon of even rows */
-    margin-left:42px; 
-    /*background-color: #ff000044;*/
+  .right{
+    background-color: yellow;
   }
+  #id{
+    background-color: teal;
+  }  */
 
-  .objectText{
-    height: 100vh;
-    width: 90%;
-    margin: auto;
-  }
+.left, .right {
+  width: 40%;
+  display: inline-grid;
+}
