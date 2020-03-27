@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.0.7";
+    $scope.version = "0.0.8";
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
@@ -247,12 +247,6 @@ app.controller('myCtrl', function ($scope) {
 
     $scope.clearCache = function () {
         console.log("clearing cache");
-        localStorage['tiles'] ="";
-        localStorage['biomes'] ="";
-        localStorage['owners'] ="";
-        localStorage['ratings'] ="";
-        localStorage['weathers'] ="";
-        localStorage['types'] ="";
-        localStorage['time'] ="";
+        localStorage.clear();
     }
 });
