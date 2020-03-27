@@ -4,38 +4,25 @@ app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
 
     // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyDoOudFLvfOtqrccpqJHwv1_SNnuU836NI",
-        authDomain: "divine-monarchs.firebaseapp.com",
-        databaseURL: "https://divine-monarchs.firebaseio.com",
-        projectId: "divine-monarchs",
-        storageBucket: "divine-monarchs.appspot.com",
-        messagingSenderId: "61899700098",
-        appId: "1:61899700098:web:511d7e8876b07c2b93c19b",
-        measurementId: "G-JKY4TH6D49"
-    };
+    var firebaseConfig = JSON.parse(fbcfg);
+
     // Initialize Firebase
     var app = firebase.initializeApp(firebaseConfig);
-    // console.log(app);
     firebase.analytics();
     var db = firebase.firestore();
-    // console.log(db);
     var getOptions = {};
 
     // load all the data
     var datas = db.collection("datum")
 
-
-
     var useCache = true;
-
 
     var d = new Date();
     var n = d.getTime();
 
     function compare(a, b) {
         // console.log(a.number,b.number);
-        if (a.number === b.number){
+        if (a.number === b.number) {
             return 0;
         }
         return a.number < b.number ? -1 : 1;
@@ -89,7 +76,7 @@ app.controller('myCtrl', function ($scope) {
         datas.doc("biomes").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.biomes = doc.data();
-                console.log("Loaded Biomes:", $scope.biomes);
+                console.log("Loaded Biomes");
                 localStorage['biomes'] = JSON.stringify($scope.biomes);
             } else {
                 // doc.data() will be undefined in this case
@@ -103,7 +90,7 @@ app.controller('myCtrl', function ($scope) {
         datas.doc("owners").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.owners = doc.data();
-                console.log("Loaded owners:", $scope.owners);
+                console.log("Loaded owners");
                 localStorage['owners'] = JSON.stringify($scope.owners);
             } else {
                 // doc.data() will be undefined in this case
@@ -116,7 +103,7 @@ app.controller('myCtrl', function ($scope) {
         datas.doc("ratings").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.ratings = doc.data();
-                console.log("Loaded ratings:", $scope.ratings);
+                console.log("Loaded ratings");
                 localStorage['ratings'] = JSON.stringify($scope.ratings);
             } else {
                 // doc.data() will be undefined in this case
@@ -129,7 +116,7 @@ app.controller('myCtrl', function ($scope) {
         datas.doc("types").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.types = doc.data();
-                console.log("Loaded types:", $scope.types);
+                console.log("Loaded types");
                 localStorage['types'] = JSON.stringify($scope.types);
             } else {
                 // doc.data() will be undefined in this case
@@ -141,7 +128,7 @@ app.controller('myCtrl', function ($scope) {
         datas.doc("weathers").get(getOptions).then(function (doc) {
             if (doc.exists) {
                 $scope.weathers = doc.data();
-                console.log("Loaded weathers:", $scope.weathers);
+                console.log("Loaded weathers");
                 localStorage['weathers'] = JSON.stringify($scope.weathers);
             } else {
                 // doc.data() will be undefined in this case
@@ -166,10 +153,10 @@ app.controller('myCtrl', function ($scope) {
         });
     }
 
-    
 
     $scope.selected = undefined;
     $scope.select = function (n) {
+        $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
         console.log("selected ", n, $scope.tiles[n])
         if ($scope.selected != undefined) {
             save($scope.selected)
@@ -183,9 +170,23 @@ app.controller('myCtrl', function ($scope) {
     };
 
     var save = function (t) {
+
+        var old = $scope.old;
+        // console.log("old", old)
+        // console.log("new", t)
+        var different = old.number != t.number || old.name != t.name ||
+            old.biome != t.biome || old.type != t.type ||
+            old.weather != t.weather || old.rating != t.rating ||
+            old.owner != t.owner;
+        if (!different) {
+            // console.log("items not different");
+            return
+        }
+
+
         console.log("saving", t);
         var temp = $scope.tiles;
-        temp[t.number-1] = t;
+        temp[t.number - 1] = t;
         $scope.tiles = temp;
         // save to cache too: 
         localStorage['tiles'] = JSON.stringify($scope.tiles);
@@ -208,7 +209,7 @@ app.controller('myCtrl', function ($scope) {
         // Commit the batch
         batch.commit().then(function () {
             // ...
-            console.log("batch complete");
+            // console.log("batch complete");
         });
 
     }
