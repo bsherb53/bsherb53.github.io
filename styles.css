@@ -23,6 +23,7 @@ body {
 .header {
   margin: auto;
   width: 50%;
+  padding: 10px;
   text-align: center;
   font-size: x-large;
   color: aliceblue;

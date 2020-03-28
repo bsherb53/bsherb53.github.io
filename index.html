@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="button" ng-click="clearCache()">Clear Data</div>
+    <div class="button" ng-if="admin" ng-click="clearCache()">Clear Data</div>
   </div>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
