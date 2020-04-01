@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.1.1";
+    $scope.version = "0.1.2";
     $scope.admin = false;
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
@@ -150,32 +150,69 @@ app.controller('myCtrl', function ($scope) {
             querySnapshot.forEach((doc) => {
                 tile = doc.data();
                 tile.id = doc.id;
+
+                switch (tile.owner.name) {
+                    case $scope.owners[0].name:
+                        tile.owner = $scope.owners[0];
+                        break;
+                    case $scope.owners[1].name:
+                        tile.owner = $scope.owners[1];
+                        break;
+                    case $scope.owners[2].name:
+                        tile.owner = $scope.owners[2];
+                        break;
+                    case $scope.owners[3].name:
+                        tile.owner = $scope.owners[3];
+                        break;
+                    case $scope.owners[5].name:
+                        tile.owner = $scope.owners[5];
+                        break;
+                    case $scope.owners[6].name:
+                        tile.owner = $scope.owners[6];
+                        break;
+                    case $scope.owners[7].name:
+                        tile.owner = $scope.owners[7];
+                        break;
+                    case $scope.owners[8].name:
+                        tile.owner = $scope.owners[8];
+                        break;
+                    case $scope.owners[8].name:
+                        tile.owner = $scope.owners[9];
+                        break;
+                    case $scope.owners[10].name:
+                        tile.owner = $scope.owners[10];
+                        break;
+                    default:
+                        tile.owner = $scope.owners[0];
+
+                }
+
                 alltiles.push(tile);
             });
             alltiles.sort(compare);
             $scope.tiles = alltiles;
             console.log("loaded tiles");
             localStorage['tiles'] = JSON.stringify($scope.tiles);
-            $scope.tiles.forEach(function (item, index) {
-                if (item.owner == "0") {
-                    var batch = db.batch();
-                    var sfRef = db.collection("tiles").doc(item.id);
-                    batch.update(sfRef, {
-                        number: item.number,
-                        name: item.name,
-                        biome: item.biome,
-                        type: item.type,
-                        weather: item.weather,
-                        rating: item.rating,
-                        owner: $scope.owners[0]
-                    });
-                    // Commit the batch
-                    batch.commit().then(function () {
-                        // ...
-                        console.log("batch complete");
-                    });
-                }
-            })
+            // $scope.tiles.forEach(function (item, index) {
+            //     if (item.owner == "0") {
+            //         var batch = db.batch();
+            //         var sfRef = db.collection("tiles").doc(item.id);
+            //         batch.update(sfRef, {
+            //             number: item.number,
+            //             name: item.name,
+            //             biome: item.biome,
+            //             type: item.type,
+            //             weather: item.weather,
+            //             rating: item.rating,
+            //             owner: $scope.owners[0]
+            //         });
+            //         // Commit the batch
+            //         batch.commit().then(function () {
+            //             // ...
+            //             console.log("batch complete");
+            //         });
+            //     }
+            // })
 
         });
     }
@@ -217,9 +254,9 @@ app.controller('myCtrl', function ($scope) {
             console.log("undefined id", t);
             return;
         }
-        var temp = $scope.tiles;
-        temp[t.number] = t;
-        $scope.tiles = temp;
+        // var temp = $scope.tiles;
+        $scope.tiles[t.number] = t;
+        // $scope.tiles = temp;
         // save to cache too: 
         localStorage['tiles'] = JSON.stringify($scope.tiles);
 
