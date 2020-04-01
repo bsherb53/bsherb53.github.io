@@ -2,8 +2,8 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.1.0";
-    $scope.admin = true;
+    $scope.version = "0.1.1";
+    $scope.admin = false;
     // Your web app's Firebase configuration
     var firebaseConfig = JSON.parse(fbcfg);
 
@@ -156,6 +156,27 @@ app.controller('myCtrl', function ($scope) {
             $scope.tiles = alltiles;
             console.log("loaded tiles");
             localStorage['tiles'] = JSON.stringify($scope.tiles);
+            $scope.tiles.forEach(function (item, index) {
+                if (item.owner == "0") {
+                    var batch = db.batch();
+                    var sfRef = db.collection("tiles").doc(item.id);
+                    batch.update(sfRef, {
+                        number: item.number,
+                        name: item.name,
+                        biome: item.biome,
+                        type: item.type,
+                        weather: item.weather,
+                        rating: item.rating,
+                        owner: $scope.owners[0]
+                    });
+                    // Commit the batch
+                    batch.commit().then(function () {
+                        // ...
+                        console.log("batch complete");
+                    });
+                }
+            })
+
         });
     }
 
@@ -183,14 +204,14 @@ app.controller('myCtrl', function ($scope) {
         var different = old.number != t.number || old.name != t.name ||
             old.biome != t.biome || old.type != t.type ||
             old.weather != t.weather || old.rating != t.rating ||
-            old.owner != t.owner;
+            old.owner.name != t.owner.name;
         if (!different) {
             // console.log("items not different");
             return
         }
 
 
-        console.log("saving", t);
+        console.log("saving");
 
         if (t.id == undefined) {
             console.log("undefined id", t);
@@ -220,6 +241,7 @@ app.controller('myCtrl', function ($scope) {
         // Commit the batch
         batch.commit().then(function () {
             // ...
+            console.log("saved", t);
             // console.log("batch complete");
         });
 
@@ -229,6 +251,8 @@ app.controller('myCtrl', function ($scope) {
     if ($scope.tiles == undefined || $scope.tiles.length == 0) {
         $scope.tiles = JSON.parse(data);
     }
+
+
 
     // load all new tiles with blank data
     // for (var i = 0; i < 1520; i++) {
