@@ -20,7 +20,7 @@
     <ul id="hexGrid" ng-if="loading != true">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <a class="hexLink" style="background:#{{t.owner.hex}};" href="#">
             <img src="" alt="" />
           </a>
         </div>
@@ -28,7 +28,6 @@
     </ul>
     <div ng-if="selected != undefined && loading != true">
       <div class="selected-box">
-
         <div class="line">
           <div class="left">Tile {{selected.name}}</div>
           <div id="id" class="right">{{selected.id}}</div>
@@ -36,7 +35,7 @@
         <div class="line">
           <div class="left">DM:</div>
           <div class="right"><select ng-model="selected.owner"
-              ng-options="key as value for (key, value) in owners"></select></div>
+              ng-options="item as item.name for item in owners"></select></div>
         </div>
 
         <div class="line">
