@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.5";
+    $scope.version = "0.2.6";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -144,7 +144,7 @@ app.controller('myCtrl', function ($scope) {
             }).then(function (response) {
                 var range = response.result;
                 if (range.values.length > 0) {
-                    for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
+                    for (i = 0; i < range.values.length; i++) {
                         var row = range.values[i];
                         if (row[0] != "" && row[0] != undefined) {
                             $scope.biomes.push(row[0]);
@@ -175,7 +175,7 @@ app.controller('myCtrl', function ($scope) {
             }).then(function (response) {
                 var range = response.result;
                 if (range.values.length > 0) {
-                    for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
+                    for (i = 0; i < range.values.length; i++) { 
                         var row = range.values[i];
                         // if (row[0] != "" && row[0] != undefined) {
                         //     $scope.biomes.push(row[0]);
