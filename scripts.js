@@ -338,15 +338,10 @@ app.controller('myCtrl', function ($scope) {
         }).then(function () {
           listMajors();
         }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
+          console.log(JSON.stringify(error, null, 2));
         });
       }
 
-      function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
 
       function listMajors() {
         gapi.client.sheets.spreadsheets.values.get({
@@ -355,7 +350,7 @@ app.controller('myCtrl', function ($scope) {
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
-            appendPre('Tile,	Biome,	Owner,	Color,	CR,	Type');
+            console.log('Tile,	Biome,	Owner,	Color,	CR,	Type');
             for (i = 0; i < range.values.length; i++) {
               var row = range.values[i];
               // Print columns A and E, which correspond to indices 0 and 4.
@@ -383,10 +378,10 @@ app.controller('myCtrl', function ($scope) {
             //   appendPre(row[0] + ', ' + row[1]+ ', ' + row[2]+ ', ' + row[3]+ ', ' + row[4]+ ', ' + row[5]);
             }
           } else {
-            appendPre('No data found.');
+            console.log('No data found.');
           }
         }, function(response) {
-          appendPre('Error: ' + response.result.error.message);
+            console.log('Error: ' + response.result.error.message);
         });
       }
 
