@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.1.4";
+    $scope.version = "0.1.5";
 
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -75,9 +75,16 @@ app.controller('myCtrl', function ($scope) {
     var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
     var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
-    $scope.FunCall = function () {
+
+    var init = async function () {
+        while (gapi == undefined) { }
         gapi.load('client:auth2', initClient);
     }
+
+    init();
+    // $scope.FunCall = function () {
+    //     gapi.load('client:auth2', initClient);
+    // }
     function initClient() {
         gapi.client.init({
             apiKey: API_KEY,
