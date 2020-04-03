@@ -16,12 +16,8 @@
 
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
-    <script async defer src="https://apis.google.com/js/api.js">
-
-    </script>
-    <div ng-init="FunCall()"></div>
-
-<div class="header">Version {{version}} made by Ginger King</div>
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    <div ng-init="FunCall()" class="header">Version {{version}} made by Ginger King</div>
     <ul id="hexGrid" ng-if="loading != true">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
@@ -68,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="button" ng-if="admin" ng-click="clearCache()">Clear Data</div>
+    <!-- <div class="button" ng-if="admin" ng-click="clearCache()">Clear Data</div> -->
   </div>
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
@@ -164,7 +160,7 @@ https://sheets.googleapis.com/v4/spreadsheets/1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPs
 
     <pre id="content" style="white-space: pre-wrap;"></pre> -->
 
-    <!-- <script type="text/javascript">
+<!-- <script type="text/javascript">
       var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
       var API_KEY = 'AIzaSyC8fZMlxqKFkt5Wu0sLZUhzXFhuUfa0ZpQ';
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
@@ -219,6 +215,7 @@ https://sheets.googleapis.com/v4/spreadsheets/1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPs
 
     </script> -->
 
-    
-  </body>
+
+</body>
+
 </html>
