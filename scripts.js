@@ -123,6 +123,7 @@ app.controller('myCtrl', function ($scope) {
                 }
                 console.log($scope.tiles);
                 $scope.loading = false;
+                $scope.apply();
             } else {
                 console.log('No data found.');
             }
