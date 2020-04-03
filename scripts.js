@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.1.3";
+    $scope.version = "0.1.4";
 
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -90,7 +90,6 @@ app.controller('myCtrl', function ($scope) {
             console.log(JSON.stringify(error, null, 2));
         });
     }
-
     function LoadTiles() {
         $scope.tiles = [];
         gapi.client.sheets.spreadsheets.values.get({
@@ -114,9 +113,9 @@ app.controller('myCtrl', function ($scope) {
                     }
 
                     $scope.tiles.push(tile);
-                    $scope.loading = false;
                 }
                 console.log($scope.tiles);
+                $scope.loading = false;
             } else {
                 console.log('No data found.');
             }

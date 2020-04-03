@@ -19,7 +19,7 @@
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
     <div ng-init="FunCall()" class="header">Version {{version}} made by Ginger King</div>
-    <ul id="hexGrid" ng-if="loading != true">
+    <ul id="hexGrid">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
           <a class="hexLink" style="background:#{{t.owner.hex}};" href="#">
