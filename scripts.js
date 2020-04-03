@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.1.2";
+    $scope.version = "0.1.3";
     // $scope.admin = false;
     // // Your web app's Firebase configuration
     // var firebaseConfig = JSON.parse(fbcfg);
@@ -327,7 +327,9 @@ app.controller('myCtrl', function ($scope) {
     $scope.$on('$viewContentLoaded', function () {
         gapi.load('client:auth2', initClient);
     });
-    
+    $scope.FunCall = function () {
+        alert("Called");
+}
     function initClient() {
         gapi.client.init({
             apiKey: API_KEY,
