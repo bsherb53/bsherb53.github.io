@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.0";
+    $scope.version = "0.2.1";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -130,6 +130,48 @@ app.controller('myCtrl', function ($scope) {
         }, function (response) {
             console.log('Error: ' + response.result.error.message);
         });
+
+
+        if ($scope.admin) {
+            $scope.biomes = [];
+            $scope.weather = [];
+            $scope.rating = [];
+            $scope.types = [];
+            console.log("getting extra data")
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
+                range: 'Data!A2:D40',
+            }).then(function (response) {
+                var range = response.result;
+                if (range.values.length > 0) {
+                    console.log('Loading Data');
+                    for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
+                        var row = range.values[i];
+                        if (row[0] != "") {
+                            $scope.biomes.push(row[0]);
+                        }
+                        if (row[1] != "") {
+                            $scope.weather.push(row[1]);
+                        }
+                        if (row[2] != "") {
+                            $scope.rating.push(row[2]);
+                        }
+                        if (row[3] != "") {
+                            $scope.types.push(row[3]);
+                        }
+
+                    }
+                } else {
+                    console.log('No data found.');
+                }
+            }, function (response) {
+                console.log('Error: ' + response.result.error.message);
+            });
+        }
+
+
+
+
     }
 
     // handleClientLoad();
