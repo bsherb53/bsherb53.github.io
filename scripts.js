@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.4";
+    $scope.version = "0.2.5";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -99,13 +99,13 @@ app.controller('myCtrl', function ($scope) {
     }
     function LoadTiles() {
         $scope.tiles = [];
+        console.log("loading tiles");
         gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
             range: 'MapData!A:J',
         }).then(function (response) {
             var range = response.result;
             if (range.values.length > 0) {
-                console.log('Loading Data');
                 for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
                     var row = range.values[i];
                     var tile = {
@@ -144,21 +144,51 @@ app.controller('myCtrl', function ($scope) {
             }).then(function (response) {
                 var range = response.result;
                 if (range.values.length > 0) {
-                    console.log('Loading Data');
                     for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
                         var row = range.values[i];
-                        if (row[0] != "") {
+                        if (row[0] != "" && row[0] != undefined) {
                             $scope.biomes.push(row[0]);
                         }
-                        if (row[1] != "") {
+                        if (row[1] != "" && row[1] != undefined) {
                             $scope.weathers.push(row[1]);
                         }
-                        if (row[2] != "") {
+                        if (row[2] != "" && row[2] != undefined) {
                             $scope.ratings.push(row[2]);
                         }
-                        if (row[3] != "") {
+                        if (row[3] != "" && row[3] != undefined) {
                             $scope.types.push(row[3]);
                         }
+
+                    }
+                } else {
+                    console.log('No data found.');
+                }
+            }, function (response) {
+                console.log('Error: ' + response.result.error.message);
+            });
+
+            $scope.owners = [];
+            console.log("loading owners")
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
+                range: 'Owners!A2:G11',
+            }).then(function (response) {
+                var range = response.result;
+                if (range.values.length > 0) {
+                    for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
+                        var row = range.values[i];
+                        // if (row[0] != "" && row[0] != undefined) {
+                        //     $scope.biomes.push(row[0]);
+                        // }
+                        if (row[1] != "" && row[1] != undefined) {
+                            $scope.owners.push(row[1]);
+                        }
+                        // if (row[2] != "" && row[2] != undefined) {
+                        //     $scope.ratings.push(row[2]);
+                        // }
+                        // if (row[3] != "" && row[3] != undefined) {
+                        //     $scope.types.push(row[3]);
+                        // }
 
                     }
                 } else {
