@@ -344,6 +344,7 @@ app.controller('myCtrl', function ($scope) {
 
 
     function listMajors() {
+        $scope.tiles = [];
         gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
             range: 'MapData!A2:G1521',
