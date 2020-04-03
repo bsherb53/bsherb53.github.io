@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.2";
+    $scope.version = "0.2.3";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -151,10 +151,10 @@ app.controller('myCtrl', function ($scope) {
                             $scope.biomes.push(row[0]);
                         }
                         if (row[1] != "") {
-                            $scope.weather.push(row[1]);
+                            $scope.weathers.push(row[1]);
                         }
                         if (row[2] != "") {
-                            $scope.rating.push(row[2]);
+                            $scope.ratings.push(row[2]);
                         }
                         if (row[3] != "") {
                             $scope.types.push(row[3]);
