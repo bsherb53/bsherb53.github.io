@@ -196,9 +196,10 @@ https://sheets.googleapis.com/v4/spreadsheets/1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPs
           discoveryDocs: DISCOVERY_DOCS
           // scope: SCOPES
         }).then(function () {
+          listMajors();
           // Listen for sign-in state changes.
 
-          gapi.auth2.getAuthInstance().signIn();
+          // gapi.auth2.getAuthInstance().signIn();
 
           // gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
