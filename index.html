@@ -22,16 +22,16 @@
     <!-- <div ng-init="FunCall()" class="header">Version {{version}} made by Ginger King</div> -->
     <ul id="hexGrid" ng-hide="loading">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
-        <div class="hexIn"></div>
+        <div class="hexIn">
           <a class="hexLink" style="background:#{{t.color}};" href="#">
-            <img src="" alt="{{t.number}}" />
+            <img src="" alt="" />
           </a>
         </div>
       </li>
     </ul>
     <div ng-if="selected != undefined && loading != true">
       <div class="selected-box">
-        <div class="line">Tile {{selected.number}} </div>
+        <div class="line">Tile {{selected.name}} </div>
         <div class="line">{{selected.name}} </div>
         <div class="line">
           <div class="left">Owner:</div>
