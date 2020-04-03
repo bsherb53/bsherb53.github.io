@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.1.6";
+    $scope.version = "0.1.7";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -121,7 +121,7 @@ app.controller('myCtrl', function ($scope) {
 
                     $scope.tiles.push(tile);
                 }
-                console.log($scope.tiles);
+                // console.log($scope.tiles);
                 $scope.loading = false;
                 $scope.$apply();
             } else {

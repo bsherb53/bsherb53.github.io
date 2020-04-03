@@ -23,7 +23,7 @@
     <ul id="hexGrid" ng-hide="loading">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
-          <a class="hexLink" style="background:#{{t.color}};" href="#">
+          <a class="hexLink" style="background:#{{t.color}};" href="#">{{t.number}}
             <img src="" alt="" />
           </a>
         </div>
@@ -31,10 +31,8 @@
     </ul>
     <div ng-if="selected != undefined && loading != true">
       <div class="selected-box">
-        <div class="line">
-          <div class="left">Tile {{selected.name}}</div>
-          <div id="id" class="right">{{selected.id}}</div>
-        </div>
+        <div class="line">Tile {{selected.number}} </div>
+        <div class="line">{{selected.name}} </div>
         <div class="line">
           <div class="left">Owner:</div>
           <div class="right" ng-hide="admin">{{selected.owner}}</div>
