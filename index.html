@@ -20,8 +20,8 @@
   <div ng-app="myApp" ng-controller="myCtrl">
     <div class="header">Version {{version}} made by Ginger King</div>
     <!-- <div ng-init="FunCall()" class="header">Version {{version}} made by Ginger King</div> -->
-    <ul id="hexGrid" ng-hide="loading">
-      <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
+    <ul id="hexGrid" >
+      <li class="hex" ng-repeat="t in ::tiles" ng-click="select($index)">
         <div class="hexIn">
           <a class="hexLink" style="background:#{{t.color}};" href="#">
             <img src="" alt="" />
@@ -30,38 +30,59 @@
       </li>
     </ul>
     <div ng-if="selected != undefined">
-      <div class="selected-box">
-        <div class="line">Tile {{selected.name}} </div>
-        <div class="line">{{selected.name}} </div>
+      <div class="selected-box" ng-hide="admin">
+        <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
         <div class="line">
           <div class="left">Owner:</div>
-          <div class="right" ng-hide="admin">{{selected.owner}}</div>
-          <div class="right" ng-if="admin"><select ng-model="selected.owner"
+          <div class="right" >{{selected.owner}}</div>
+        </div>
+
+        <div class="line">
+          <div class="left">Biome:</div>
+          <div class="right" >{{selected.biome}}</div>
+        </div>
+        <div class="line">
+          <div class="left">Weather:</div>
+          <div class="right" >{{selected.biome}}</div>
+        </div>
+        <div class="line">
+          <div class="left">Type:</div>
+          <div class="right" >{{selected.biome}}</div>
+        </div>
+        <div class="line">
+          <div class="left">CR:</div>
+          <div class="right" >{{selected.biome}}</div>
+        </div>
+        <div class="line">
+          <p class="button" ng-click="close()">CLOSE</p>
+        </div>
+      </div>
+      <div class="selected-box" ng-if="admin">
+        <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
+        <div class="line">
+          <div class="left">Owner:</div>
+          <div class="right" ><select ng-model="selected.owner"
               ng-options="item as item.name for item in owners"></select></div>
         </div>
 
         <div class="line">
           <div class="left">Biome:</div>
-          <div class="right" ng-hide="admin">{{selected.biome}}</div>
-          <div class="right" ng-if="admin"><select ng-model="selected.biome"
+          <div class="right" ><select ng-model="selected.biome"
               ng-options="key as value for (key, value) in biomes"></select></div>
         </div>
         <div class="line">
           <div class="left">Weather:</div>
-          <div class="right" ng-hide="admin">{{selected.biome}}</div>
-          <div class="right" ng-if="admin"><select ng-model="selected.weather"
+          <div class="right" ><select ng-model="selected.weather"
               ng-options="key as value for (key, value) in weathers"></select></div>
         </div>
         <div class="line">
           <div class="left">Type:</div>
-          <div class="right" ng-hide="admin">{{selected.biome}}</div>
-          <div class="right" ng-if="admin"><select ng-model="selected.type"
+          <div class="right" ><select ng-model="selected.type"
               ng-options="key as value for (key, value) in types"></select></div>
         </div>
         <div class="line">
           <div class="left">CR:</div>
-          <div class="right" ng-hide="admin">{{selected.biome}}</div>
-          <div class="right" ng-if="admin"><select ng-model="selected.rating"
+          <div class="right"><select ng-model="selected.rating"
               ng-options="key as value for (key, value) in ratings"></select></div>
         </div>
         <div class="line">
