@@ -73,9 +73,7 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
-  background: #ffffff11;
   color: #fff;
-  transition: all .2s ease;
   overflow: hidden;
   -webkit-transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
   -ms-transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
@@ -169,7 +167,7 @@ body {
 /*** HOVER EFFECT  **********************************************************************/
 
 .hexLink:hover h1, .hexLink:focus h1, .hexLink:hover, .hexLink:focus .hexLink:hover div, .hexLink:focus div, .hexLink:hover p, .hexLink:focus p {
-  background-color: #ffffff7a !important;
+  background-color: #ffffff !important;
 }
 
 .hex:nth-child(n+1) {

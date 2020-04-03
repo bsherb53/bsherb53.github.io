@@ -3,7 +3,7 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
     $scope.version = "0.2.0";
-    $scope.admin = false;
+    $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
         $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
