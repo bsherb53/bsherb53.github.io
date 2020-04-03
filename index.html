@@ -255,8 +255,8 @@ https://sheets.googleapis.com/v4/spreadsheets/1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPs
        */
       function listMajors() {
         gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-          range: 'Class Data!A2:E',
+          spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
+          range: 'Sheet1!A1:D5',
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
