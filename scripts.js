@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.3";
+    $scope.version = "0.2.4";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
