@@ -192,9 +192,9 @@ https://sheets.googleapis.com/v4/spreadsheets/1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPs
       function initClient() {
         gapi.client.init({
           apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES
+          // clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS
+          // scope: SCOPES
         }).then(function () {
           // Listen for sign-in state changes.
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
