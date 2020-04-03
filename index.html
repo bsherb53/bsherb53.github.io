@@ -17,10 +17,11 @@
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
     <script async defer src="https://apis.google.com/js/api.js">
-    <div ng-view></div>          <div ng-init="FunCall()"></div>
 
     </script>
-    <div class="header">Version {{version}} made by Ginger King</div>
+    <div ng-view></div>          <div ng-init="FunCall()"></div>
+
+<div class="header">Version {{version}} made by Ginger King</div>
     <ul id="hexGrid" ng-if="loading != true">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
