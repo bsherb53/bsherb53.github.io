@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.1";
+    $scope.version = "0.2.2";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -134,8 +134,8 @@ app.controller('myCtrl', function ($scope) {
 
         if ($scope.admin) {
             $scope.biomes = [];
-            $scope.weather = [];
-            $scope.rating = [];
+            $scope.weathers = [];
+            $scope.ratings = [];
             $scope.types = [];
             console.log("getting extra data")
             gapi.client.sheets.spreadsheets.values.get({
