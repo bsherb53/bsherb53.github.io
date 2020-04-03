@@ -94,12 +94,12 @@ app.controller('myCtrl', function ($scope) {
         $scope.tiles = [];
         gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
-            range: 'MapData!A2:G1521',
+            range: 'MapData!A:J',
         }).then(function (response) {
             var range = response.result;
             if (range.values.length > 0) {
                 console.log('Loading Data');
-                for (i = 0; i < range.values.length; i++) {
+                for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
                     var row = range.values[i];
                     var tile = {
                         number: row[0],
