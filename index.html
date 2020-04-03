@@ -22,9 +22,9 @@
     <!-- <div ng-init="FunCall()" class="header">Version {{version}} made by Ginger King</div> -->
     <ul id="hexGrid" ng-hide="loading">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
-        <div class="hexIn" id="{{t.number}}"></div>
+        <div class="hexIn"></div>
           <a class="hexLink" style="background:#{{t.color}};" href="#">
-            <img src="" alt="" />
+            <img src="" alt="{{t.number}}" />
           </a>
         </div>
       </li>
