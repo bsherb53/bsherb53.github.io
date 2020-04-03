@@ -169,7 +169,7 @@ body {
 /*** HOVER EFFECT  **********************************************************************/
 
 .hexLink:hover h1, .hexLink:focus h1, .hexLink:hover, .hexLink:focus .hexLink:hover div, .hexLink:focus div, .hexLink:hover p, .hexLink:focus p {
-  background-color: #ffffff7a;
+  background-color: #ffffff7a !important;
 }
 
 .hex:nth-child(n+1) {
