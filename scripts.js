@@ -317,12 +317,12 @@ app.controller('myCtrl', function ($scope) {
     //     localStorage.clear();
     // }
 
-    var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
+
     var API_KEY = 'AIzaSyC8fZMlxqKFkt5Wu0sLZUhzXFhuUfa0ZpQ';
     var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+
+    var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
     var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
-    var authorizeButton = document.getElementById('authorize_button');
-    var signoutButton = document.getElementById('signout_button');
 
     $scope.FunCall = function () {
         gapi.load('client:auth2', initClient);
@@ -334,14 +334,14 @@ app.controller('myCtrl', function ($scope) {
             discoveryDocs: DISCOVERY_DOCS
             // scope: SCOPES
         }).then(function () {
-            listMajors();
+            LoadTiles();
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
     }
 
 
-    function listMajors() {
+    function LoadTiles() {
         $scope.tiles = [];
         gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
@@ -349,7 +349,7 @@ app.controller('myCtrl', function ($scope) {
         }).then(function (response) {
             var range = response.result;
             if (range.values.length > 0) {
-                console.log('Tile,	Biome,	Owner,	Color,	CR,	Type');
+                console.log('Loading Data');
                 for (i = 0; i < range.values.length; i++) {
                     var row = range.values[i];
                     // Print columns A and E, which correspond to indices 0 and 4.
@@ -376,6 +376,7 @@ app.controller('myCtrl', function ($scope) {
                     $scope.tiles.push(tile);
                     //   appendPre(row[0] + ', ' + row[1]+ ', ' + row[2]+ ', ' + row[3]+ ', ' + row[4]+ ', ' + row[5]);
                 }
+                console.log($scope.tiles);
             } else {
                 console.log('No data found.');
             }
