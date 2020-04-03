@@ -324,11 +324,8 @@ app.controller('myCtrl', function ($scope) {
     var authorizeButton = document.getElementById('authorize_button');
     var signoutButton = document.getElementById('signout_button');
 
-    $scope.$on('$viewContentLoaded', function () {
-        gapi.load('client:auth2', initClient);
-    });
     $scope.FunCall = function () {
-        alert("Called");
+        gapi.load('client:auth2', initClient);
 }
     function initClient() {
         gapi.client.init({
