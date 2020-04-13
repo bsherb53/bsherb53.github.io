@@ -2,12 +2,14 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.4";
+    $scope.version = "0.3.5";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
-        $scope.tiles[n].owner = findOwner($scope.tiles[n].owner);
+        var temp = $scope.tiles[n];
+
+        $scope.tiles[n].owner = findOwner(temp);
         $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
         console.log("selected ", n, $scope.tiles[n])
         if ($scope.selected != undefined) {
@@ -21,9 +23,9 @@ app.controller('myCtrl', function ($scope) {
         $scope.selected = undefined;
     };
 
-    var findOwner = function (o) {
+    var findOwner = function (tile) {
         for (i = 0; i < $scope.owners.length; i++) {
-            if (o == $scope.owners[i]) {
+            if (tile.owner == $scope.owners[i]) {
                 return $scope.owners[i];
             }
         }
