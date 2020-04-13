@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.13";
+    $scope.version = "0.3.14";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -217,7 +217,7 @@ app.controller('myCtrl', function ($scope) {
             range: 'MapData!A' + old.row + ':J' + old.row,  // TODO: Update placeholder value.
 
             // How the input data should be interpreted.
-            valueInputOption: 'RAW',  // TODO: Update placeholder value.
+            // valueInputOption: 'RAW',  // TODO: Update placeholder value.
         };
 
         var valueRangeBody = {
