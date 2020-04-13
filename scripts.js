@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.24";
+    $scope.version = "0.3.25";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -33,7 +33,9 @@ app.controller('myCtrl', function ($scope) {
     }
 
     var API_KEY = 'AIzaSyC8fZMlxqKFkt5Wu0sLZUhzXFhuUfa0ZpQ';
+    var apiKey2 = 'AIzaSyBL0zDnQSkB8psK4oFSmTxKiSiodCOnRUM';
     var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+
     var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
     var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
@@ -44,8 +46,24 @@ app.controller('myCtrl', function ($scope) {
     }
 
     init();
-
+    // $scope.FunCall = function () {
+    //     gapi.load('client:auth2', initClient);
+    // }
     function initClient() {
+        gapi.client.init({
+            apiKey: apiKey2,
+            // clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+        }).then(function () {
+            LoadTiles();
+        }, function (error) {
+            console.log(JSON.stringify(error, null, 2));
+        });
+    }
+
+
+    function initClient2() {
         gapi.client.init({
             apiKey: API_KEY,
             clientId: CLIENT_ID,
@@ -69,6 +87,7 @@ app.controller('myCtrl', function ($scope) {
             console.log(JSON.stringify(error, null, 2));
         });
     }
+
 
     function LoadTiles() {
         $scope.tiles = [];
