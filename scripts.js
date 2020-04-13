@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.17";
+    $scope.version = "0.3.18";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -52,7 +52,7 @@ app.controller('myCtrl', function ($scope) {
     function initClient() {
         gapi.client.init({
             apiKey: apiKey2,
-            clientId: CLIENT_ID,
+            // clientId: CLIENT_ID,
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
         }).then(function () {
@@ -227,8 +227,8 @@ app.controller('myCtrl', function ($scope) {
         gapi.client.sheets.spreadsheets.values.update({
             "spreadsheetId": mapSpreadsheetID,
             "range": 'MapData!A' + old.row + ':J' + old.row,
-            "includeValuesInResponse": false,
-            "valueInputOption": "RAW",
+            // "includeValuesInResponse": false,
+            // "valueInputOption": "RAW",
             "resource": {
                 "values": [[t.number, t.name, t.biome, t.owner.name, t.owner.color, t.rating, t.type, t.weather]]
             }
@@ -236,6 +236,7 @@ app.controller('myCtrl', function ($scope) {
             console.log(response.result);
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
+            console.log(reason);
         });
     }
 });
