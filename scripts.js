@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.5";
+    $scope.version = "0.3.6";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -25,7 +25,8 @@ app.controller('myCtrl', function ($scope) {
 
     var findOwner = function (tile) {
         for (i = 0; i < $scope.owners.length; i++) {
-            if (tile.owner == $scope.owners[i]) {
+            var tempOwner = $scope.owners[i];
+            if (tile.owner == tempOwner.name) {
                 return $scope.owners[i];
             }
         }
