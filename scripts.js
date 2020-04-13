@@ -40,7 +40,7 @@ app.controller('myCtrl', function ($scope) {
         gapi.client.init({
             apiKey: API_KEY,
             // clientId: CLIENT_ID,
-            discoveryDocs: DISCOVERY_DOCS
+            discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
         }).then(function () {
             LoadTiles();
