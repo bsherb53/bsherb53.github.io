@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.11";
+    $scope.version = "0.3.0";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -69,6 +69,7 @@ app.controller('myCtrl', function ($scope) {
                         rating: row[5],
                         type: row[6],
                         weather: row[7],
+                        row: i,
                     }
 
                     $scope.tiles.push(tile);
@@ -181,41 +182,40 @@ app.controller('myCtrl', function ($scope) {
 
 
         console.log("saving");
-         var newT = {
+        //Tile	Name	Biome	Owner	Color	CR	Type	Weather
+        var newT = {
             number: t.number,
             name: t.name,
             biome: t.biome,
-            type: t.type,
-            weather: t.weather,
-            rating: t.rating,
             owner: t.owner.name,
             color: t.owner.color,
+            rating: t.rating,
+            type: t.type,
+            weather: t.weather,
         }
-        $scope.tiles[old.number]= newT;
+        $scope.tiles[old.number] = newT;
 
 
-        // var params = {
-        //     // The ID of the spreadsheet to update.
-        //     spreadsheetId: mapSpreadsheetID,  // TODO: Update placeholder value.
+        var params = {
+            // The ID of the spreadsheet to update.
+            spreadsheetId: mapSpreadsheetID,  // TODO: Update placeholder value.
 
-        //     // The A1 notation of the values to update.
-        //     range: 'my-range',  // TODO: Update placeholder value.
+            // The A1 notation of the values to update.
+            range: 'MapData!A' + old.row + ':J' + old.row,  // TODO: Update placeholder value.
 
-        //     // How the input data should be interpreted.
-        //     valueInputOption: '',  // TODO: Update placeholder value.
-        //   };
+            // How the input data should be interpreted.
+            valueInputOption: '',  // TODO: Update placeholder value.
+        };
 
-        //   var valueRangeBody = {
-        //     // TODO: Add desired properties to the request body. All existing properties
-        //     // will be replaced.
-        //   };
-        //   var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
-        //   request.then(function(response) {
-        //     // TODO: Change code below to process the `response` object:
-        //     console.log(response.result);
-        //   }, function(reason) {
-        //     console.error('error: ' + reason.result.error.message);
-        //   });
+        var valueRangeBody = {
+            values: [t.number, t.name, t.biome, t.owner.name, t.owner.color, t.rating, t.type, t.weather]
+        };
+        var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+        request.then(function (response) {
+            console.log(response.result);
+        }, function (reason) {
+            console.error('error: ' + reason.result.error.message);
+        });
 
     }
     // handleClientLoad();
