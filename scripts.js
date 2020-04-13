@@ -143,6 +143,7 @@ app.controller('myCtrl', function ($scope) {
                         // }
 
                     }
+                    console.log($scope.owners);
                 } else {
                     console.log('No data found.');
                 }
@@ -164,7 +165,7 @@ app.controller('myCtrl', function ($scope) {
         var different = old.number != t.number || old.name != t.name ||
             old.biome != t.biome || old.type != t.type ||
             old.weather != t.weather || old.rating != t.rating ||
-            old.owner.name != t.owner.name;
+            old.owner != t.owner;
         if (!different) {
             console.log("items not different");
             return
