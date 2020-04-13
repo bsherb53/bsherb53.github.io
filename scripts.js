@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.35";
+    $scope.version = "0.3.36";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -100,17 +100,32 @@ app.controller('myCtrl', function ($scope) {
 
         if ($scope.admin) {
 
-            console.log("admin");
-            if (gapi.auth2.getAuthInstance().isSignedIn.get() != false) {
-                gapi.auth2.getAuthInstance().signIn();
-            }
-            gapi.auth2.getAuthInstance().isSignedIn.listen(function (isSignedIn) {
-                if (isSignedIn) {
-                    console.log("signed in");
-                } else {
-                    console.log("signed out");
+            gapi.client.sheets.spreadsheets.values.update({
+                spreadsheetId: spreadsheetId,
+                range: 'Owners!A13:G13',
+                valueInputOption: valueInputOption,
+                resource: {
+                    values:[
+                        ["a","2","3,","4","5","6","75"]
+                    ]
                 }
-            });
+             }).then((response) => {
+               var result = response.result;
+               console.log(`${result.updatedCells} cells updated.`);
+             });
+
+
+            // console.log("admin");
+            // if (gapi.auth2.getAuthInstance().isSignedIn.get() != false) {
+            //     gapi.auth2.getAuthInstance().signIn();
+            // }
+            // gapi.auth2.getAuthInstance().isSignedIn.listen(function (isSignedIn) {
+            //     if (isSignedIn) {
+            //         console.log("signed in");
+            //     } else {
+            //         console.log("signed out");
+            //     }
+            // });
 
             $scope.biomes = [];
             $scope.weathers = [];
