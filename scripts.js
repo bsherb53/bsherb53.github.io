@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.25";
+    $scope.version = "0.3.26";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -52,24 +52,12 @@ app.controller('myCtrl', function ($scope) {
     function initClient() {
         gapi.client.init({
             apiKey: apiKey2,
-            // clientId: CLIENT_ID,
-            discoveryDocs: DISCOVERY_DOCS,
-            scope: SCOPES
-        }).then(function () {
-            LoadTiles();
-        }, function (error) {
-            console.log(JSON.stringify(error, null, 2));
-        });
-    }
-
-
-    function initClient2() {
-        gapi.client.init({
-            apiKey: API_KEY,
             clientId: CLIENT_ID,
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
         }).then(function () {
+            LoadTiles();
+
             if ($scope.admin) {
                 if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
                     gapi.auth2.getAuthInstance().signIn();
@@ -82,12 +70,11 @@ app.controller('myCtrl', function ($scope) {
                     }
                 });
             }
-            LoadTiles();
+
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
     }
-
 
     function LoadTiles() {
         $scope.tiles = [];
