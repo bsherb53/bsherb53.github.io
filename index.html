@@ -62,7 +62,7 @@
         <div class="line">
           <div class="left">Owner:</div>
           <div class="right" ><select ng-model="selected.owner"
-              ng-options="o as o for o in owners"></select></div>
+              ng-options="o as o.name for o in owners track by o.id"></select></div>
         </div>
 
         <div class="line">

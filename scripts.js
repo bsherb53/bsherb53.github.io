@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.8";
+    $scope.version = "0.2.9";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -127,14 +127,19 @@ app.controller('myCtrl', function ($scope) {
             }).then(function (response) {
                 var range = response.result;
                 if (range.values.length > 0) {
-                    for (i = 0; i < range.values.length; i++) { 
+                    for (i = 0; i < range.values.length; i++) {
                         var row = range.values[i];
                         // if (row[0] != "" && row[0] != undefined) {
                         //     $scope.biomes.push(row[0]);
                         // }
-                        if (row[1] != "" && row[1] != undefined) {
-                            $scope.owners.push(row[1]);
+
+                        // Name	AI	Discord	ID	Hex Color	Example	Alpha
+                        var o = {
+                            name: row[1],
+                            color: row[5] + row[7],
+                            id: row[4]
                         }
+                        $scope.owners.push(o);
                         // if (row[2] != "" && row[2] != undefined) {
                         //     $scope.ratings.push(row[2]);
                         // }
@@ -171,6 +176,9 @@ app.controller('myCtrl', function ($scope) {
             return
         }
 
+        // todo - update tile color
+        // todo - update gsheet
+
 
         console.log("saving");
         //  {
@@ -187,14 +195,14 @@ app.controller('myCtrl', function ($scope) {
         // var params = {
         //     // The ID of the spreadsheet to update.
         //     spreadsheetId: mapSpreadsheetID,  // TODO: Update placeholder value.
-    
+
         //     // The A1 notation of the values to update.
         //     range: 'my-range',  // TODO: Update placeholder value.
-    
+
         //     // How the input data should be interpreted.
         //     valueInputOption: '',  // TODO: Update placeholder value.
         //   };
-    
+
         //   var valueRangeBody = {
         //     // TODO: Add desired properties to the request body. All existing properties
         //     // will be replaced.
