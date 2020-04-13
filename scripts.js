@@ -2,11 +2,12 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.2";
+    $scope.version = "0.3.3";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
+        n.owner = findOwner(n.owner);
         $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
         console.log("selected ", n, $scope.tiles[n])
         if ($scope.selected != undefined) {
@@ -19,6 +20,14 @@ app.controller('myCtrl', function ($scope) {
         save($scope.selected)
         $scope.selected = undefined;
     };
+
+    var findOwner = function (o) {
+        for (i = 0; i < $scope.owners.length; i++) {
+            if (o == $scope.owners[i]) {
+                return $scope.owners[i];
+            }
+        }
+    }
 
     var API_KEY = 'AIzaSyC8fZMlxqKFkt5Wu0sLZUhzXFhuUfa0ZpQ';
     var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
