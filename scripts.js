@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.18";
+    $scope.version = "0.3.19";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -60,6 +60,12 @@ app.controller('myCtrl', function ($scope) {
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
+
+        gapi.client.setApiKey(apiKey2);
+        return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
+            .then(function () { console.log("GAPI client loaded for API"); },
+                function (err) { console.error("Error loading GAPI client for API", err); });
+
     }
     function LoadTiles() {
         $scope.tiles = [];
@@ -227,8 +233,8 @@ app.controller('myCtrl', function ($scope) {
         gapi.client.sheets.spreadsheets.values.update({
             "spreadsheetId": mapSpreadsheetID,
             "range": 'MapData!A' + old.row + ':J' + old.row,
-            // "includeValuesInResponse": false,
-            // "valueInputOption": "RAW",
+            "includeValuesInResponse": 'false',
+            "valueInputOption": 'RAW',
             "resource": {
                 "values": [[t.number, t.name, t.biome, t.owner.name, t.owner.color, t.rating, t.type, t.weather]]
             }
