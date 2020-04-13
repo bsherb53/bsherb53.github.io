@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.10";
+    $scope.version = "0.3.11";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -36,7 +36,7 @@ app.controller('myCtrl', function ($scope) {
     var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
     var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
-    var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
+    var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
 
     var init = async function () {
@@ -51,7 +51,7 @@ app.controller('myCtrl', function ($scope) {
     function initClient() {
         gapi.client.init({
             apiKey: API_KEY,
-            clientId: CLIENT_ID,
+            // clientId: CLIENT_ID,
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
         }).then(function () {
