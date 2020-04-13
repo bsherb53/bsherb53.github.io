@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.20";
+    $scope.version = "0.3.21";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -74,13 +74,8 @@ app.controller('myCtrl', function ($scope) {
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
-
-        gapi.client.setApiKey(apiKey2);
-        return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
-            .then(function () { console.log("GAPI client loaded for API"); },
-                function (err) { console.error("Error loading GAPI client for API", err); });
-
     }
+
     function LoadTiles() {
         $scope.tiles = [];
         console.log("loading tiles");
