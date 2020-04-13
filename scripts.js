@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.30";
+    $scope.version = "0.3.31";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -57,21 +57,6 @@ app.controller('myCtrl', function ($scope) {
             scope: SCOPES
         }).then(function () {
             LoadTiles();
-
-            if ($scope.admin) {
-                // console.log("admin");
-                if (gapi.auth2.getAuthInstance().isSignedIn.get() != false) {
-                    gapi.auth2.getAuthInstance().signIn();
-                }
-                gapi.auth2.getAuthInstance().isSignedIn.listen(function (isSignedIn) {
-                    if (isSignedIn) {
-                        console.log("signed in");
-                    } else {
-                        console.log("signed out");
-                    }
-                });
-            }
-
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
