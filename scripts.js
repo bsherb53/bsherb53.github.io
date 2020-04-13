@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.10";
+    $scope.version = "0.2.11";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -181,15 +181,17 @@ app.controller('myCtrl', function ($scope) {
 
 
         console.log("saving");
-        //  {
-        //     number: t.number,
-        //     name: t.name,
-        //     biome: t.biome,
-        //     type: t.type,
-        //     weather: t.weather,
-        //     rating: t.rating,
-        //     owner: t.owner
-        // }
+         var newT = {
+            number: t.number,
+            name: t.name,
+            biome: t.biome,
+            type: t.type,
+            weather: t.weather,
+            rating: t.rating,
+            owner: t.owner.name,
+            color: t.owner.color,
+        }
+        $scope.tiles[old.number]= newT;
 
 
         // var params = {
