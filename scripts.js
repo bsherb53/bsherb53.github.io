@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.36";
+    $scope.version = "0.3.37";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -101,7 +101,7 @@ app.controller('myCtrl', function ($scope) {
         if ($scope.admin) {
 
             gapi.client.sheets.spreadsheets.values.update({
-                spreadsheetId: spreadsheetId,
+                spreadsheetId: mapSpreadsheetID,
                 range: 'Owners!A13:G13',
                 valueInputOption: valueInputOption,
                 resource: {
