@@ -2,12 +2,12 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.3";
+    $scope.version = "0.3.4";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
-        n.owner = findOwner(n.owner);
+        $scope.tiles[n].owner = findOwner($scope.tiles[n].owner);
         $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
         console.log("selected ", n, $scope.tiles[n])
         if ($scope.selected != undefined) {
