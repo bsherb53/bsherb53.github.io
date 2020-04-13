@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.23";
+    $scope.version = "0.3.24";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -34,7 +34,6 @@ app.controller('myCtrl', function ($scope) {
 
     var API_KEY = 'AIzaSyC8fZMlxqKFkt5Wu0sLZUhzXFhuUfa0ZpQ';
     var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-
     var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
     var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
@@ -46,9 +45,6 @@ app.controller('myCtrl', function ($scope) {
 
     init();
 
-    var authorizeButton = document.getElementById('authorize_button');
-    var signoutButton = document.getElementById('signout_button');
-
     function initClient() {
         gapi.client.init({
             apiKey: API_KEY,
@@ -57,15 +53,14 @@ app.controller('myCtrl', function ($scope) {
             scope: SCOPES
         }).then(function () {
             if ($scope.admin) {
-                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                gapi.auth2.getAuthInstance().signIn();
+                if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                    gapi.auth2.getAuthInstance().signIn();
+                }
                 gapi.auth2.getAuthInstance().isSignedIn.listen(function (isSignedIn) {
                     if (isSignedIn) {
-                        authorizeButton.style.display = 'none';
-                        signoutButton.style.display = 'block';
+                        console.log("signed in");
                     } else {
-                        authorizeButton.style.display = 'block';
-                        signoutButton.style.display = 'none';
+                        console.log("signed out");
                     }
                 });
             }

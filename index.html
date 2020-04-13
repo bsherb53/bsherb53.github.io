@@ -21,8 +21,6 @@
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
     <div class="header">Version {{version}} made by Ginger King</div>
-    <button id="authorize_button" >Authorize</button>
-    <button id="signout_button" >Sign Out</button>
     <!-- <div ng-init="FunCall()" class="header">Version {{version}} made by Ginger King</div> -->
     <ul id="hexGrid" >
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
