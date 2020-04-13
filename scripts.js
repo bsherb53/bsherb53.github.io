@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.9";
+    $scope.version = "0.2.10";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -136,8 +136,8 @@ app.controller('myCtrl', function ($scope) {
                         // Name	AI	Discord	ID	Hex Color	Example	Alpha
                         var o = {
                             name: row[1],
-                            color: row[5] + row[7],
-                            id: row[4]
+                            color: row[4] + row[6],
+                            id: row[3]
                         }
                         $scope.owners.push(o);
                         // if (row[2] != "" && row[2] != undefined) {
