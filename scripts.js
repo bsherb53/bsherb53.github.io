@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.2.6";
+    $scope.version = "0.2.7";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.select = function (n) {
@@ -20,21 +20,21 @@ app.controller('myCtrl', function ($scope) {
     };
 
     var save = function (t) {
-        console.log("implement saving ", t, $scope.old)
-        // var old = $scope.old;
-        // // console.log("old", old)
-        // // console.log("new", t)
-        // var different = old.number != t.number || old.name != t.name ||
-        //     old.biome != t.biome || old.type != t.type ||
-        //     old.weather != t.weather || old.rating != t.rating ||
-        //     old.owner.name != t.owner.name;
-        // if (!different) {
-        //     // console.log("items not different");
-        //     return
-        // }
+        // console.log("implement saving ", t, $scope.old)
+        var old = $scope.old;
+        console.log("old", old)
+        // console.log("new", t)
+        var different = old.number != t.number || old.name != t.name ||
+            old.biome != t.biome || old.type != t.type ||
+            old.weather != t.weather || old.rating != t.rating ||
+            old.owner.name != t.owner.name;
+        if (!different) {
+            // console.log("items not different");
+            return
+        }
 
 
-        // console.log("saving");
+        console.log("saving");
 
         // if (t.id == undefined) {
         //     console.log("undefined id", t);
