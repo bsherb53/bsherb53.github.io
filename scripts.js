@@ -2,13 +2,14 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.50";
+    $scope.version = "0.3.51";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.biomes = [];
     $scope.weathers = [];
     $scope.ratings = [];
     $scope.types = [];
+    $scope.owners = [];
 
 
 
@@ -101,7 +102,6 @@ app.controller('myCtrl', function ($scope) {
                 console.log('Error: ' + response.result.error.message);
             });
 
-            $scope.owners = [];
             console.log("loading owners")
             gapi.client.sheets.spreadsheets.values.get({
                 spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
