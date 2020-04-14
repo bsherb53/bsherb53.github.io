@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.46";
+    $scope.version = "0.3.47";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -74,10 +74,10 @@ app.controller('myCtrl', function ($scope) {
                         name: row[1],
                         biome: row[2],
                         owner: row[3],
-                        color: row[4],
-                        rating: row[5],
-                        type: row[6],
-                        weather: row[7],
+                        rating: row[4],
+                        type: row[5],
+                        weather: row[6],
+                        color: row[7],
                         row: i+1,
                     }
 
