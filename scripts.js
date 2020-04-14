@@ -2,9 +2,16 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.49";
+    $scope.version = "0.3.50";
     $scope.admin = true;
     $scope.selected = undefined;
+    $scope.biomes = [];
+    $scope.weathers = [];
+    $scope.ratings = [];
+    $scope.types = [];
+
+
+
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
         var temp = $scope.tiles[n];
@@ -59,11 +66,11 @@ app.controller('myCtrl', function ($scope) {
     };
 
     function LoadAdminInfo() {
+        if ($scope.biomes.length > 0) {
+        return;
+    }
         if ($scope.admin) {
-            $scope.biomes = [];
-            $scope.weathers = [];
-            $scope.ratings = [];
-            $scope.types = [];
+            
             console.log("getting extra data")
             gapi.client.sheets.spreadsheets.values.get({
                 spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
