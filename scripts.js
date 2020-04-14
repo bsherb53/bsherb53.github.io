@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.37";
+    $scope.version = "0.3.38";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -69,7 +69,6 @@ app.controller('myCtrl', function ($scope) {
             range: 'MapData!A:J',
         }).then(function (response) {
             var range = response.result;
-            console.log("range", range);
             if (range.values.length > 0) {
                 for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
                     var row = range.values[i];
