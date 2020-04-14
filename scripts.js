@@ -2,8 +2,8 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.52";
-    $scope.admin = true;
+    $scope.version = "0.3.53";
+    $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
     $scope.weathers = [];
@@ -169,7 +169,14 @@ app.controller('myCtrl', function ($scope) {
     }
 
     $scope.handleSignInClick = function (event) {
-        gapi.auth2.getAuthInstance().signIn();
+        var person = prompt("Please enter your passcode:", "passcode");
+        if (person == null || person != "4785") {
+            return;
+        }
+        gapi.auth2.getAuthInstance().signIn().then(function (response) {
+            $scope.admin = true;
+            LoadAdminInfo();
+        });
     }
 
     $scope.handleSignOutClick = function (event) {
