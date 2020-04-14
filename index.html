@@ -123,14 +123,14 @@
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: 'my-spreadsheet-id',  // TODO: Update placeholder value.
+        spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',  // TODO: Update placeholder value.
 
         // The A1 notation of the values to retrieve.
         range: 'my-range',  // TODO: Update placeholder value.
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
-        valueRenderOption: '',  // TODO: Update placeholder value.
+        valueRenderOption: 'RAW',  // TODO: Update placeholder value.
 
         // How dates, times, and durations should be represented in the output.
         // This is ignored if value_render_option is
@@ -166,7 +166,7 @@
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
       var CLIENT_ID = '299441892540-kahbci33qig5lde0ul4l20uvpmgo349k';
-      var SCOPE = ['https://www.googleapis.com/auth/spreadsheets'];
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
       gapi.client.init({
         'apiKey': API_KEY,
         'clientId': CLIENT_ID,
