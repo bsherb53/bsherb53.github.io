@@ -16,6 +16,8 @@
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
     <div class="header">Version {{version}} made by Ginger King</div>
+    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
     <ul id="hexGrid">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">

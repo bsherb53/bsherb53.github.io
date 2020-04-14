@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.47";
+    $scope.version = "0.3.48";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -53,46 +53,18 @@ app.controller('myCtrl', function ($scope) {
             scope: SCOPES
         }).then(function () {
             LoadTiles();
+            LoadAdminInfo();
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
-    }
+    };
 
-    function LoadTiles() {
-        $scope.tiles = [];
-        console.log("loading tiles");
-        gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: mapSpreadsheetID,
-            range: 'MapData!A:J',
-        }).then(function (response) {
-            var range = response.result;
-            if (range.values.length > 0) {
-                for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
-                    var row = range.values[i];
-                    var tile = {
-                        number: row[0],
-                        name: row[1],
-                        biome: row[2],
-                        owner: row[3],
-                        rating: row[4],
-                        type: row[5],
-                        weather: row[6],
-                        color: row[7],
-                        row: i+1,
-                    }
-
-                    $scope.tiles.push(tile);
-                }
-                $scope.loading = false;
-                $scope.$apply();
-            } else {
-                console.log('No data found.');
-            }
-        }, function (response) {
-            console.log('Error: ' + response.result.error.message);
-        });
-
+    function LoadAdminInfo() {
         if ($scope.admin) {
+
+            gapi.auth2.getAuthInstance().isSignedIn.listen($scope.updateSignInStatus);
+            $scope.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
             $scope.biomes = [];
             $scope.weathers = [];
             $scope.ratings = [];
@@ -153,6 +125,57 @@ app.controller('myCtrl', function ($scope) {
                 console.log('Error: ' + response.result.error.message);
             });
         }
+    };
+
+    function LoadTiles() {
+        $scope.tiles = [];
+        console.log("loading tiles");
+        gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: mapSpreadsheetID,
+            range: 'MapData!A:J',
+        }).then(function (response) {
+            var range = response.result;
+            if (range.values.length > 0) {
+                for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
+                    var row = range.values[i];
+                    var tile = {
+                        number: row[0],
+                        name: row[1],
+                        biome: row[2],
+                        owner: row[3],
+                        rating: row[4],
+                        type: row[5],
+                        weather: row[6],
+                        color: row[7],
+                        row: i + 1,
+                    }
+
+                    $scope.tiles.push(tile);
+                }
+                $scope.loading = false;
+                $scope.$apply();
+            } else {
+                console.log('No data found.');
+            }
+        }, function (response) {
+            console.log('Error: ' + response.result.error.message);
+        });
+
+    }
+
+    $scope.updateSignInStatus = function (isSignedIn) {
+        console.log("isSigned in", isSignedIn);
+        if (isSignedIn) {
+            LoadAdminInfo();
+        }
+    }
+
+    $scope.handleSignInClick = function (event) {
+        gapi.auth2.getAuthInstance().signIn();
+    }
+
+    $scope.handleSignOutClick = function (event) {
+        gapi.auth2.getAuthInstance().signOut();
     }
 
     var save = function (t) {
