@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.53";
+    $scope.version = "0.3.54";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -10,6 +10,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.ratings = [];
     $scope.types = [];
     $scope.owners = [];
+    $scope.loadedAdminData = false;
 
 
 
@@ -68,7 +69,7 @@ app.controller('myCtrl', function ($scope) {
     };
 
     function LoadAdminInfo() {
-        if ($scope.admin) {
+        if ($scope.admin && $scope.loadedAdminData != true) {
             console.log("getting extra data")
             gapi.client.sheets.spreadsheets.values.get({
                 spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
@@ -92,6 +93,7 @@ app.controller('myCtrl', function ($scope) {
                         }
 
                     }
+                    $scope.loadedData = true;
                 } else {
                     console.log('No data found.');
                 }
@@ -117,6 +119,7 @@ app.controller('myCtrl', function ($scope) {
                         $scope.owners.push(o);
                     }
                     console.log($scope.owners);
+                    $scope.loadedAdminData = true;
                 } else {
                     console.log('No data found.');
                 }
@@ -180,6 +183,8 @@ app.controller('myCtrl', function ($scope) {
     }
 
     $scope.handleSignOutClick = function (event) {
+        $scope.admin = false;
+        $scope.selected = undefined;
         gapi.auth2.getAuthInstance().signOut();
     }
 
