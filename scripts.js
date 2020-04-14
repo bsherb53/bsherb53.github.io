@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.44";
+    $scope.version = "0.3.45";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -83,7 +83,6 @@ app.controller('myCtrl', function ($scope) {
 
                     $scope.tiles.push(tile);
                 }
-                // console.log($scope.tiles);
                 $scope.loading = false;
                 $scope.$apply();
             } else {
@@ -93,36 +92,7 @@ app.controller('myCtrl', function ($scope) {
             console.log('Error: ' + response.result.error.message);
         });
 
-
         if ($scope.admin) {
-
-            // gapi.client.sheets.spreadsheets.values.update({
-            //     spreadsheetId: mapSpreadsheetID,
-            //     range: 'Owners!A13:G13',
-            //     valueInputOption: valueInputOption,
-            //     resource: {
-            //         values:[
-            //             ["a","2","3,","4","5","6","75"]
-            //         ]
-            //     }
-            //  }).then((response) => {
-            //    var result = response.result;
-            //    console.log(`${result.updatedCells} cells updated.`);
-            //  });
-
-
-            // console.log("admin");
-            // if (gapi.auth2.getAuthInstance().isSignedIn.get() != false) {
-            //     gapi.auth2.getAuthInstance().signIn();
-            // }
-            // gapi.auth2.getAuthInstance().isSignedIn.listen(function (isSignedIn) {
-            //     if (isSignedIn) {
-            //         console.log("signed in");
-            //     } else {
-            //         console.log("signed out");
-            //     }
-            // });
-
             $scope.biomes = [];
             $scope.weathers = [];
             $scope.ratings = [];
@@ -167,10 +137,6 @@ app.controller('myCtrl', function ($scope) {
                 if (range.values.length > 0) {
                     for (i = 0; i < range.values.length; i++) {
                         var row = range.values[i];
-                        // if (row[0] != "" && row[0] != undefined) {
-                        //     $scope.biomes.push(row[0]);
-                        // }
-
                         // Name	AI	Discord	ID	Hex Color	Example	Alpha
                         var o = {
                             name: row[1],
@@ -178,13 +144,6 @@ app.controller('myCtrl', function ($scope) {
                             id: row[3]
                         }
                         $scope.owners.push(o);
-                        // if (row[2] != "" && row[2] != undefined) {
-                        //     $scope.ratings.push(row[2]);
-                        // }
-                        // if (row[3] != "" && row[3] != undefined) {
-                        //     $scope.types.push(row[3]);
-                        // }
-
                     }
                     console.log($scope.owners);
                 } else {
@@ -194,14 +153,9 @@ app.controller('myCtrl', function ($scope) {
                 console.log('Error: ' + response.result.error.message);
             });
         }
-
-
-
-
     }
 
     var save = function (t) {
-        // console.log("implement saving ", t, $scope.old)
         var old = $scope.old;
         console.log("old", old)
         console.log("new", t)
@@ -213,13 +167,7 @@ app.controller('myCtrl', function ($scope) {
             console.log("items not different");
             return
         }
-
-        // todo - update tile color
-        // todo - update gsheet
-
-
         console.log("saving");
-        //Tile	Name	Biome	Owner	Color	CR	Type	Weather
         var newT = {
             number: t.number,
             name: t.name,
@@ -231,23 +179,6 @@ app.controller('myCtrl', function ($scope) {
             weather: t.weather,
         }
         $scope.tiles[old.number] = newT;
-
-
-        // var params = {
-        //     // The ID of the spreadsheet to update.
-        //     spreadsheetId: mapSpreadsheetID,  // TODO: Update placeholder value.
-
-        //     // The A1 notation of the values to update.
-        //     range: 'MapData!A' + old.row + ':J' + old.row,  // TODO: Update placeholder value.
-
-        //     // How the input data should be interpreted.
-        //     valueInputOption: 'RAW',  // TODO: Update placeholder value.
-        // };
-
-        // var valueRangeBody = {
-        //     // valueInputOption: 'RAW',  // TODO: Update placeholder value.
-        //     values: [[t.number, t.name, t.biome, t.owner.name, t.owner.color, t.rating, t.type, t.weather]],
-        // };
         gapi.client.sheets.spreadsheets.values.update({
             "spreadsheetId": mapSpreadsheetID,
             "range": 'MapData!A' + old.row + ':J' + old.row,
@@ -263,6 +194,7 @@ app.controller('myCtrl', function ($scope) {
             console.log(reason);
         });
     }
+
 
     // $scope.onSignIn = function (googleUser) {
     //     var profile = googleUser.getBasicProfile();
