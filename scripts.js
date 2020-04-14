@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.51";
+    $scope.version = "0.3.52";
     $scope.admin = true;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -61,17 +61,14 @@ app.controller('myCtrl', function ($scope) {
             scope: SCOPES
         }).then(function () {
             LoadTiles();
+            LoadAdminInfo();
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
     };
 
     function LoadAdminInfo() {
-        if ($scope.biomes.length > 0) {
-        return;
-    }
         if ($scope.admin) {
-            
             console.log("getting extra data")
             gapi.client.sheets.spreadsheets.values.get({
                 spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
@@ -168,7 +165,6 @@ app.controller('myCtrl', function ($scope) {
     $scope.updateSignInStatus = function (isSignedIn) {
         console.log("isSigned in", isSignedIn);
         if (isSignedIn) {
-            LoadAdminInfo();
         }
     }
 
