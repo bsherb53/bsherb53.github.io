@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.48";
+    $scope.version = "0.3.49";
     $scope.admin = true;
     $scope.selected = undefined;
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -53,7 +53,6 @@ app.controller('myCtrl', function ($scope) {
             scope: SCOPES
         }).then(function () {
             LoadTiles();
-            LoadAdminInfo();
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
@@ -61,10 +60,6 @@ app.controller('myCtrl', function ($scope) {
 
     function LoadAdminInfo() {
         if ($scope.admin) {
-
-            gapi.auth2.getAuthInstance().isSignedIn.listen($scope.updateSignInStatus);
-            $scope.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
             $scope.biomes = [];
             $scope.weathers = [];
             $scope.ratings = [];
