@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.55";
+    $scope.version = "0.4.0";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -219,7 +219,7 @@ app.controller('myCtrl', function ($scope) {
             "includeValuesInResponse": 'false',
             "valueInputOption": 'RAW',
             "resource": {
-                "values": [[t.number, t.name, t.biome, t.owner.name, t.owner.color, t.rating, t.type, t.weather]]
+                "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather, t.owner.color]]
             }
         }).then(function (response) {
             console.log(response.result);
