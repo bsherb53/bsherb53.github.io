@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.4.2";
+    $scope.version = "0.4.3";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -169,6 +169,9 @@ app.controller('myCtrl', function ($scope) {
     $scope.updateSignInStatus = function (isSignedIn) {
         console.log("isSigned in", isSignedIn);
         if (isSignedIn) {
+            $scope.admin = true;
+        }else{
+            $scope.admin = false;
         }
     }
 
