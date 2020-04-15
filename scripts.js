@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.4.0";
+    $scope.version = "0.4.1";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -215,11 +215,11 @@ app.controller('myCtrl', function ($scope) {
         $scope.tiles[old.number] = newT;
         gapi.client.sheets.spreadsheets.values.update({
             "spreadsheetId": mapSpreadsheetID,
-            "range": 'MapData!A' + old.row + ':J' + old.row,
+            "range": 'MapData!A' + old.row + ':I' + old.row,
             "includeValuesInResponse": 'false',
             "valueInputOption": 'RAW',
             "resource": {
-                "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather, t.owner.color]]
+                "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather]]
             }
         }).then(function (response) {
             console.log(response.result);
