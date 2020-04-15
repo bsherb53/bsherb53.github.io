@@ -15,9 +15,12 @@
 
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
-    <div class="header">Version {{version}} made by Ginger King</div>
-    <button id="signin-button" ng-click="handleSignInClick()">Sign in</button>
-    <button id="signout-button" ng-click="handleSignOutClick()">Sign out</button>
+    <div class="header">
+      <div>Version {{version}} made by Ginger King</div>
+      <button id="signin-button" class="button" ng-hide="admin" ng-click="handleSignInClick()">Sign in</button>
+      <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
+    </div>
+
     <ul id="hexGrid">
       <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
@@ -54,7 +57,7 @@
           <p class="button" ng-click="close()">CLOSE</p>
         </div>
       </div>
-      
+
       <div class="selected-box" ng-if="admin">
         <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
         <div class="line">
