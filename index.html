@@ -32,7 +32,7 @@
         <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
         <div class="line">
           <div class="left">Owner:</div>
-          <div class="right">{{selected.owner}}</div>
+          <div class="right">{{selected.owner.name}}</div>
         </div>
         <div class="line">
           <div class="left">Biome:</div>
@@ -40,15 +40,15 @@
         </div>
         <div class="line">
           <div class="left">Weather:</div>
-          <div class="right">{{selected.biome}}</div>
+          <div class="right">{{selected.weather}}</div>
         </div>
         <div class="line">
           <div class="left">Type:</div>
-          <div class="right">{{selected.biome}}</div>
+          <div class="right">{{selected.type}}</div>
         </div>
         <div class="line">
           <div class="left">CR:</div>
-          <div class="right">{{selected.biome}}</div>
+          <div class="right">{{selected.rating}}</div>
         </div>
         <div class="line">
           <p class="button" ng-click="close()">CLOSE</p>

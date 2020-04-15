@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "0.3.54";
+    $scope.version = "0.3.55";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -17,8 +17,9 @@ app.controller('myCtrl', function ($scope) {
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
         var temp = $scope.tiles[n];
-
-        $scope.tiles[n].owner = findOwner(temp);
+        if ($scope.admin) {
+            $scope.tiles[n].owner = findOwner(temp);
+        }
         $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
         console.log("selected ", n, $scope.tiles[n])
         if ($scope.selected != undefined) {
