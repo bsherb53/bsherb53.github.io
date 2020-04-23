@@ -144,6 +144,7 @@ body {
   min-width: 200px;
   padding: 20px 5px;
   border-radius: 10px;
+  transition: all .2s ease-out;
 }
 
 .visibleBox{
@@ -151,7 +152,7 @@ body {
 }
 
 .hideBox{
-  top: 4%;
+  top: -20%;
 }
 
 .button {
