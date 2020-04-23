@@ -28,10 +28,12 @@ app.controller('myCtrl', function ($scope) {
         console.log("selected ", n, $scope.tiles[n])
 
         $scope.selected = $scope.tiles[n];
+        window.pageYOffset = $scope.yOffset;
     };
 
     $scope.close = function () {
         save($scope.selected)
+        window.pageYOffset = $scope.yOffset;
     };
 
     var findOwner = function (tile) {
