@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.0.2";
+    $scope.version = "1.0.3";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -197,11 +197,16 @@ app.controller('myCtrl', function ($scope) {
         var old = $scope.old;
         console.log("old", old)
         console.log("new", t)
+
         var different = old.number != t.number || old.name != t.name ||
             old.biome != t.biome || old.type != t.type ||
             old.weather != t.weather || old.rating != t.rating ||
             old.owner != t.owner;
         if (!different) {
+
+            $scope.selected = undefined;
+            $scope.showBox = "hideBox";
+
             console.log("items not different");
             return
         }
@@ -226,11 +231,17 @@ app.controller('myCtrl', function ($scope) {
                 "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather]]
             }
         }).then(function (response) {
+
             $scope.selected = undefined;
             $scope.showBox = "hideBox";
+
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
+
+            $scope.selected = undefined;
+            $scope.showBox = "hideBox";
+
         });
     }
 });
