@@ -21,10 +21,10 @@
       <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
     </div>
 
-    <ng-view [autoscroll="false"] id="hexGrid">
-      <li class="hex" ng-repeat="t in ::tiles" ng-click="select($index)">
+    <div id="hexGrid">
+      <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
-          <a class="hexLink" style="background:#{{::t.color}};" href="#">
+          <a class="hexLink" style="background:#{{t.color}};" href="#">
             <img src="" alt="" />
           </a>
         </div>
@@ -84,10 +84,6 @@
     <!-- <div class="button" ng-if="admin" ng-click="clearCache()">Clear Data</div> -->
     <div class="footer" style="height: 600px;"></div>
   </div>
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
   <script src="scripts.js" defer></script>
 </body>
 
