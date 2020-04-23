@@ -21,7 +21,7 @@
       <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
     </div>
 
-    <ul id="hexGrid">
+    <ng-view [autoscroll="false"] id="hexGrid">
       <li class="hex" ng-repeat="t in ::tiles" ng-click="select($index)">
         <div class="hexIn">
           <a class="hexLink" style="background:#{{::t.color}};" href="#">
@@ -29,7 +29,7 @@
           </a>
         </div>
       </li>
-    </ul>
+    </g-view >
     <div class="selected-box" ng-hide="admin">
       <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
       <div class="line">
