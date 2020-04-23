@@ -15,8 +15,25 @@
 
 <body>
   <div ng-app="myApp" ng-controller="myCtrl">
-    <div class="main" style="position: fixed;/* top: -400px */">
-      <div class="selected-box" ng-class="showBox" ng-hide="admin">
+    <div class="main" style="position: fixed;/* top: -400px */">Main Body
+    </div>
+    <div class="header">
+      <div>Version {{version}} made by Ginger King</div>
+      <button id="signin-button" class="button" ng-hide="admin" ng-click="handleSignInClick()">Sign in</button>
+      <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
+    </div>
+
+    <ul id="hexGrid">
+      <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
+        <div class="hexIn">
+          <a class="hexLink" style="background:#{{::t.color}};" href="#">
+            <img src="" alt="" />
+          </a>
+        </div>
+      </li>
+    </ul>
+    <div class="something" ng-class="showBox">
+      <div class="selected-box" ng-hide="admin">
         <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
         <div class="line">
           <div class="left">Owner:</div>
@@ -43,7 +60,7 @@
         </div>
       </div>
 
-      <div class="selected-box" ng-class="showBox" ng-if="admin">
+      <div class="selected-box" ng-if="admin">
         <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
         <div class="line">
           <div class="left">Owner:</div>
@@ -71,21 +88,6 @@
         </div>
       </div>
     </div>
-    <div class="header">
-      <div>Version {{version}} made by Ginger King</div>
-      <button id="signin-button" class="button" ng-hide="admin" ng-click="handleSignInClick()">Sign in</button>
-      <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
-    </div>
-
-    <ul id="hexGrid">
-      <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
-        <div class="hexIn">
-          <a class="hexLink" style="background:#{{::t.color}};" href="#">
-            <img src="" alt="" />
-          </a>
-        </div>
-      </li>
-    </ul>
     <!-- <div class="button" ng-if="admin" ng-click="clearCache()">Clear Data</div> -->
   </div>
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>

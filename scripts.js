@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.0.6";
+    $scope.version = "1.0.8";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
