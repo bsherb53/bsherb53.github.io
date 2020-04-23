@@ -30,60 +30,58 @@
         </div>
       </li>
     </ul>
-    <div ng-class="showBox">
-      <div class="selected-box" ng-hide="admin">
-        <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
-        <div class="line">
-          <div class="left">Owner:</div>
-          <div class="right">{{selected.owner}}</div>
-        </div>
-        <div class="line">
-          <div class="left">Biome:</div>
-          <div class="right">{{selected.biome}}</div>
-        </div>
-        <div class="line">
-          <div class="left">Weather:</div>
-          <div class="right">{{selected.weather}}</div>
-        </div>
-        <div class="line">
-          <div class="left">Type:</div>
-          <div class="right">{{selected.type}}</div>
-        </div>
-        <div class="line">
-          <div class="left">CR:</div>
-          <div class="right">{{selected.rating}}</div>
-        </div>
-        <div class="line">
-          <p class="button" ng-click="close()">CLOSE</p>
-        </div>
+    <div class="selected-box" ng-class="showBox" ng-hide="admin">
+      <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
+      <div class="line">
+        <div class="left">Owner:</div>
+        <div class="right">{{selected.owner}}</div>
       </div>
+      <div class="line">
+        <div class="left">Biome:</div>
+        <div class="right">{{selected.biome}}</div>
+      </div>
+      <div class="line">
+        <div class="left">Weather:</div>
+        <div class="right">{{selected.weather}}</div>
+      </div>
+      <div class="line">
+        <div class="left">Type:</div>
+        <div class="right">{{selected.type}}</div>
+      </div>
+      <div class="line">
+        <div class="left">CR:</div>
+        <div class="right">{{selected.rating}}</div>
+      </div>
+      <div class="line">
+        <p class="button" ng-click="close()">CLOSE</p>
+      </div>
+    </div>
 
-      <div class="selected-box" ng-if="admin">
-        <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
-        <div class="line">
-          <div class="left">Owner:</div>
-          <div class="right"><select ng-model="selected.owner"
-              ng-options="o as o.name for o in owners track by o.id"></select></div>
-        </div>
-        <div class="line">
-          <div class="left">Biome:</div>
-          <div class="right"><select ng-model="selected.biome" ng-options="b as b for b in biomes"></select></div>
-        </div>
-        <div class="line">
-          <div class="left">Weather:</div>
-          <div class="right"><select ng-model="selected.weather" ng-options="w as w for w in weathers"></select></div>
-        </div>
-        <div class="line">
-          <div class="left">Type:</div>
-          <div class="right"><select ng-model="selected.type" ng-options="ty as ty for ty in types"></select></div>
-        </div>
-        <div class="line">
-          <div class="left">CR:</div>
-          <div class="right"><select ng-model="selected.rating" ng-options="r as r for r in ratings"></select></div>
-        </div>
-        <div class="line">
-          <p class="button" ng-click="close()">CLOSE</p>
-        </div>
+    <div class="selected-box" ng-class="showBox" ng-if="admin">
+      <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
+      <div class="line">
+        <div class="left">Owner:</div>
+        <div class="right"><select ng-model="selected.owner"
+            ng-options="o as o.name for o in owners track by o.id"></select></div>
+      </div>
+      <div class="line">
+        <div class="left">Biome:</div>
+        <div class="right"><select ng-model="selected.biome" ng-options="b as b for b in biomes"></select></div>
+      </div>
+      <div class="line">
+        <div class="left">Weather:</div>
+        <div class="right"><select ng-model="selected.weather" ng-options="w as w for w in weathers"></select></div>
+      </div>
+      <div class="line">
+        <div class="left">Type:</div>
+        <div class="right"><select ng-model="selected.type" ng-options="ty as ty for ty in types"></select></div>
+      </div>
+      <div class="line">
+        <div class="left">CR:</div>
+        <div class="right"><select ng-model="selected.rating" ng-options="r as r for r in ratings"></select></div>
+      </div>
+      <div class="line">
+        <p class="button" ng-click="close()">CLOSE</p>
       </div>
     </div>
     <!-- <div class="button" ng-if="admin" ng-click="clearCache()">Clear Data</div> -->

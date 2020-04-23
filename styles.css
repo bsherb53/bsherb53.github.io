@@ -133,7 +133,6 @@ body {
 
 .selected-box {
   position: fixed;
-  top: 2%;
   margin: auto;
   text-align: center;
   left: 0;
@@ -148,11 +147,11 @@ body {
 }
 
 .visibleBox{
-  opacity: 1 !important;
+  top: 2%;
 }
 
 .hideBox{
-  opacity: 0 !important;
+  top: 4%;
 }
 
 .button {
