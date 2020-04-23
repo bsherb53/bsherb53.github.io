@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.0.11";
+    $scope.version = "1.1.0";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -196,7 +196,7 @@ app.controller('myCtrl', function ($scope) {
     var save = function (t) {
         $scope.showBox = "hideBox";
 
-        if (!$scope.admin){
+        if (!$scope.admin) {
             $scope.selected = undefined;
             $scope.showBox = "hideBox";
             return;

@@ -135,7 +135,8 @@ body {
   position: fixed;
   margin: auto;
   text-align: center;
-  left: 0;
+  left: 5px;
+  bottom: 5px;
   background: #ffffffee;
   display: inline-block;
   border: 1px solid black;
@@ -145,7 +146,6 @@ body {
   border-radius: 10px;
   transition: all .2s ease-out;
 }
-
 
 .button {
   width: 50%;
