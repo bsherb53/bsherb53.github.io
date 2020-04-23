@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.1.1";
+    $scope.version = "1.1.2";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -201,6 +201,8 @@ app.controller('myCtrl', function ($scope) {
         if (!$scope.admin) {
             $scope.selected = undefined;
             $scope.showBox = "hideBox";
+            window.pageYOffset = $scope.yOffset;
+
             return;
         }
 
@@ -215,6 +217,8 @@ app.controller('myCtrl', function ($scope) {
         if (!different) {
             $scope.selected = undefined;
             console.log("items not different");
+            window.pageYOffset = $scope.yOffset;
+
             return
         }
         console.log("saving");
