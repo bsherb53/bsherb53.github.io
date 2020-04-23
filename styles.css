@@ -150,8 +150,7 @@ body {
   width: 50%;
   background: #8eabcd;
   border: 1px solid black;
-  transition: all .1s ease-out;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: auto;
   padding: 5px;
   text-align: center;
@@ -159,7 +158,7 @@ body {
 
 .button:hover, .button:focus {
   background: #1E589C;
-  border-radius: 5px;
+  border-radius: 15px;
   color: white;
 }
 
@@ -186,14 +185,11 @@ body {
 .hex:nth-child(20n+1) {
   /* first hexagon of odd rows */
   margin-left: 5px;
-  /*visibility: visible;*/
-  /*background-color: #00ff0066;*/
 }
 
 .hex:nth-child(40n+21) {
   /* first hexagon of even rows */
   margin-left: 42px;
-  /*background-color: #ff000044;*/
 }
 
 .objectText {
@@ -205,21 +201,9 @@ body {
 .line {
   background-color: #e9eff6;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 5px;
 }
-
-/* .left{
-    background-color: green;
-  
-  }
-
-  .right{
-    background-color: yellow;
-  }
-  #id{
-    background-color: teal;
-  }  */
 
 .left, .right {
   width: 48%;

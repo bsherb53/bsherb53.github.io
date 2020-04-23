@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.1.2";
+    $scope.version = "1.1.3";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -11,11 +11,9 @@ app.controller('myCtrl', function ($scope) {
     $scope.types = [];
     $scope.owners = [];
     $scope.loadedAdminData = false;
-    $scope.yOffset = window.pageYOffset;
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
-        $scope.yOffset = window.pageYOffset;
         if ($scope.selected != undefined) {
             save($scope.selected)
         }
@@ -28,12 +26,10 @@ app.controller('myCtrl', function ($scope) {
         console.log("selected ", n, $scope.tiles[n])
 
         $scope.selected = $scope.tiles[n];
-        window.pageYOffset = $scope.yOffset;
     };
 
     $scope.close = function () {
         save($scope.selected)
-        window.pageYOffset = $scope.yOffset;
     };
 
     var findOwner = function (tile) {
@@ -198,13 +194,8 @@ app.controller('myCtrl', function ($scope) {
     }
 
     var save = function (t) {
-        $scope.showBox = "hideBox";
-
         if (!$scope.admin) {
             $scope.selected = undefined;
-            $scope.showBox = "hideBox";
-            window.pageYOffset = $scope.yOffset;
-
             return;
         }
 
@@ -219,8 +210,6 @@ app.controller('myCtrl', function ($scope) {
         if (!different) {
             $scope.selected = undefined;
             console.log("items not different");
-            window.pageYOffset = $scope.yOffset;
-
             return
         }
         console.log("saving");
@@ -245,13 +234,11 @@ app.controller('myCtrl', function ($scope) {
             }
         }).then(function (response) {
             $scope.selected = undefined;
-            window.pageYOffset = $scope.yOffset;
+            $scope.$broadcast('$$rebind:tiles');
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
             $scope.selected = undefined;
-            window.pageYOffset = $scope.yOffset;
-
         });
     }
 });
