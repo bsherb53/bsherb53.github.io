@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.1.0";
+    $scope.version = "1.1.1";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -11,11 +11,11 @@ app.controller('myCtrl', function ($scope) {
     $scope.types = [];
     $scope.owners = [];
     $scope.loadedAdminData = false;
-    $scope.showBox = "hideBox";
 
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
+        var y = window.scrollY
         if ($scope.selected != undefined) {
             save($scope.selected)
         }
@@ -28,7 +28,7 @@ app.controller('myCtrl', function ($scope) {
         console.log("selected ", n, $scope.tiles[n])
 
         $scope.selected = $scope.tiles[n];
-        $scope.showBox = "visibleBox";
+        window.scrollY = y;
     };
 
     $scope.close = function () {
@@ -177,6 +177,9 @@ app.controller('myCtrl', function ($scope) {
     }
 
     $scope.handleSignInClick = function (event) {
+        if ($scope.selected != undefined) {
+            save($scope.selected)
+        }
         var person = prompt("Please enter your passcode:", "passcode");
         if (person == null || person != "4785") {
             return;
@@ -211,10 +214,7 @@ app.controller('myCtrl', function ($scope) {
             old.weather != t.weather || old.rating != t.rating ||
             old.owner != t.owner;
         if (!different) {
-
             $scope.selected = undefined;
-            $scope.showBox = "hideBox";
-
             console.log("items not different");
             return
         }
@@ -243,7 +243,6 @@ app.controller('myCtrl', function ($scope) {
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
-
             $scope.selected = undefined;
         });
     }
