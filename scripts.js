@@ -11,11 +11,11 @@ app.controller('myCtrl', function ($scope) {
     $scope.types = [];
     $scope.owners = [];
     $scope.loadedAdminData = false;
-
+    $scope.yOffset = window.pageYOffset;
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
-        var y = window.pageYOffset
+        $scope.yOffset = window.pageYOffset;
         if ($scope.selected != undefined) {
             save($scope.selected)
         }
@@ -28,7 +28,6 @@ app.controller('myCtrl', function ($scope) {
         console.log("selected ", n, $scope.tiles[n])
 
         $scope.selected = $scope.tiles[n];
-        window.pageYOffset = y;
     };
 
     $scope.close = function () {
@@ -240,10 +239,13 @@ app.controller('myCtrl', function ($scope) {
             }
         }).then(function (response) {
             $scope.selected = undefined;
+            window.pageYOffset = $scope.yOffset;
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
             $scope.selected = undefined;
+            window.pageYOffset = $scope.yOffset;
+
         });
     }
 });
