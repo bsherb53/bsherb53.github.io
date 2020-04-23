@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.1.5";
+    $scope.version = "2.0.0";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -243,3 +243,37 @@ app.controller('myCtrl', function ($scope) {
     }
 });
 
+
+
+app.controller('listCtrl', function ($scope, $element) {
+    $element.on('scroll', function (e) {
+      $scope.visibleList = getVisibleElements(e);
+  
+      $scope.$broadcast('suspend');
+      $scope.$digest();
+      $scope.$broadcast('resume');
+    });
+  });
+
+  app.directive('faSuspendable', function () {
+    return {
+      link: function (scope) {
+        // Heads up: this might break is suspend/resume called out of order
+        // or if watchers are added while suspended
+        var watchers;
+  
+        scope.$on('suspend', function () {
+          watchers = scope.$$watchers;
+          scope.$$watchers = [];
+        });
+  
+        scope.$on('resume', function () {
+          if (watchers)
+            scope.$$watchers = watchers;
+  
+          // discard our copy of the watchers
+          watchers = void 0;
+        });
+      }
+    };
+  });

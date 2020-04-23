@@ -22,7 +22,7 @@
     </div>
 
     <div id="hexGrid">
-      <li class="hex" ng-repeat="t in tiles" ng-click="select($index)">
+      <li class="hex" fa-suspendable ng-repeat="t in tiles" ng-click="select($index)">
         <div class="hexIn">
           <a class="hexLink" style="background:#{{t.color}};" href="#">
             <img src="" alt="" />
