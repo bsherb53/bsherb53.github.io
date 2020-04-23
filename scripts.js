@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.0.0";
+    $scope.version = "1.0.1";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -11,26 +11,28 @@ app.controller('myCtrl', function ($scope) {
     $scope.types = [];
     $scope.owners = [];
     $scope.loadedAdminData = false;
-
+    $scope.showBox = "";
 
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
+        if ($scope.selected != undefined) {
+            save($scope.selected)
+        }
+
         var temp = $scope.tiles[n];
         if ($scope.admin) {
             $scope.tiles[n].owner = findOwner(temp);
         }
         $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
         console.log("selected ", n, $scope.tiles[n])
-        if ($scope.selected != undefined) {
-            save($scope.selected)
-        }
+
         $scope.selected = $scope.tiles[n];
+        $scope.showBox = "visibleBox";
     };
 
     $scope.close = function () {
         save($scope.selected)
-        $scope.selected = undefined;
     };
 
     var findOwner = function (tile) {
@@ -169,7 +171,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.updateSignInStatus = function (isSignedIn) {
         if (isSignedIn) {
             $scope.admin = true;
-        }else{
+        } else {
             $scope.admin = false;
         }
     }
@@ -224,7 +226,8 @@ app.controller('myCtrl', function ($scope) {
                 "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather]]
             }
         }).then(function (response) {
-            console.log(response.result);
+            $scope.selected = undefined;
+            $scope.showBox = "";
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
