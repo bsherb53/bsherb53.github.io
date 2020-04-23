@@ -144,7 +144,6 @@ body {
   width: 50vw;
   padding: 20px 5px;
   border-radius: 10px;
-  transition: all .2s ease-out;
 }
 
 .button {
@@ -223,6 +222,6 @@ body {
   }  */
 
 .left, .right {
-  width: 40%;
+  width: 48%;
   display: inline-grid;
 }
