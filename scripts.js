@@ -194,6 +194,8 @@ app.controller('myCtrl', function ($scope) {
     }
 
     var save = function (t) {
+        $scope.showBox = "hideBox";
+
         var old = $scope.old;
         console.log("old", old)
         console.log("new", t)
@@ -231,17 +233,12 @@ app.controller('myCtrl', function ($scope) {
                 "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather]]
             }
         }).then(function (response) {
-
             $scope.selected = undefined;
-            $scope.showBox = "hideBox";
-
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
 
             $scope.selected = undefined;
-            $scope.showBox = "hideBox";
-
         });
     }
 });
