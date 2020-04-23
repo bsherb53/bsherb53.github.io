@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "1.0.1";
+    $scope.version = "1.0.2";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -11,7 +11,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.types = [];
     $scope.owners = [];
     $scope.loadedAdminData = false;
-    $scope.showBox = "";
+    $scope.showBox = "hideBox";
 
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
@@ -227,7 +227,7 @@ app.controller('myCtrl', function ($scope) {
             }
         }).then(function (response) {
             $scope.selected = undefined;
-            $scope.showBox = "";
+            $scope.showBox = "hideBox";
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);

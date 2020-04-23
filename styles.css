@@ -145,11 +145,14 @@ body {
   min-width: 200px;
   padding: 20px 5px;
   border-radius: 10px;
-  opacity: 0;
 }
 
 .visibleBox{
   opacity: 1 !important;
+}
+
+.hideBox{
+  opacity: 0 !important;
 }
 
 .button {
