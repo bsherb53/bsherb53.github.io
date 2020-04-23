@@ -15,7 +15,7 @@ app.controller('myCtrl', function ($scope) {
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
     $scope.select = function (n) {
-        var y = window.scrollY
+        var y = window.pageYOffset
         if ($scope.selected != undefined) {
             save($scope.selected)
         }
@@ -28,7 +28,7 @@ app.controller('myCtrl', function ($scope) {
         console.log("selected ", n, $scope.tiles[n])
 
         $scope.selected = $scope.tiles[n];
-        window.scrollY = y;
+        window.pageYOffset = y;
     };
 
     $scope.close = function () {
