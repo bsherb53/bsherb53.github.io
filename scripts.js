@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.0.1";
+    $scope.version = "2.0.2";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -200,6 +200,7 @@ app.controller('myCtrl', function ($scope) {
     var save = function (t) {
         if (!$scope.admin) {
             $scope.selected = undefined;
+            $scope.saving = false;
             return;
         }
 
@@ -214,6 +215,7 @@ app.controller('myCtrl', function ($scope) {
         if (!different) {
             $scope.selected = undefined;
             console.log("items not different");
+            $scope.saving = false;
             return
         }
         console.log("saving");
