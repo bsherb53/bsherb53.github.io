@@ -141,7 +141,6 @@ body {
   display: inline-block;
   border: 1px solid black;
   min-width: 400px;
-  width: 50vw;
   padding: 20px 5px;
   border-radius: 10px;
 }
