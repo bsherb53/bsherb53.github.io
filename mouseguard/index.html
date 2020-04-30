@@ -1,4 +1,4 @@
-<div ng-if="pickMouse == true">
+<div ng-if="pickMouse == false">
     <div class="mouse-section mouse-menu-header">
         <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
         <!-- <div class="mouse-button mouse-load-button" ng-click="load()">Load</div> -->
@@ -213,7 +213,7 @@
         <textarea ng-model="importMouse"></textarea>
     </div>
 </div>
-<div ng-if="pickMouse == false">
+<div ng-if="pickMouse == true">
     <li ng-repeat="m in mice" ng-click="selectMouse(m)">
         {{m.name}}
     </li>
