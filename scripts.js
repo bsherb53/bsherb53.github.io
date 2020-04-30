@@ -8,11 +8,7 @@ app.config(function ($routeProvider) {
         .when("/hex", {
             templateUrl: "hexmap/index.html",
             controller: "hexCtrl"
-        })
-        .when("/"), {
-        templateUrl: "index.html",
-        controller: "mainCtrl"
-    };
+        });
 });
 
 app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
@@ -20,7 +16,7 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
 
-    $scope.version = "1.0.3";
+    $scope.version = "1.0.4";
     $scope.page = function (name) {
         if (name == "hex") {
             $location.path("/hex");
