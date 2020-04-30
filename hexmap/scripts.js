@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.1.4";
+    $scope.version = "2.1.5";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -68,8 +68,16 @@ app.controller('hexCtrl', function ($scope) {
             scope: SCOPES
         }).then(function () {
 
-            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            $scope.updateSignInStatus = function (isSignedIn) {
+                if (isSignedIn) {
+                    $scope.admin = true;
+                } else {
+                    $scope.admin = false;
+                }
+            }
+
+            gapi.auth2.getAuthInstance().isSignedIn.listen($scope.updateSignInStatus);
+            $scope.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
             LoadTiles();
             LoadAdminInfo();
@@ -175,13 +183,6 @@ app.controller('hexCtrl', function ($scope) {
 
     }
 
-    $scope.updateSignInStatus = function (isSignedIn) {
-        if (isSignedIn) {
-            $scope.admin = true;
-        } else {
-            $scope.admin = false;
-        }
-    }
 
     $scope.handleSignInClick = function (event) {
         var person = prompt("Please enter your passcode:", "passcode");
