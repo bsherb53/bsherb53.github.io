@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.0.2";
+    $scope.version = "2.0.3";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -11,24 +11,24 @@ app.controller('hexCtrl', function ($scope) {
     $scope.loadedAdminData = false;
 
     var mapSpreadsheetID = '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI';
-    $scope.select = function (n) {
-        if ($scope.saving) {
-            return;
-        }
+    // $scope.select = function (n) {
+    //     if ($scope.saving) {
+    //         return;
+    //     }
 
-        if ($scope.selected != undefined) {
-            save($scope.selected)
-        }
+    //     if ($scope.selected != undefined) {
+    //         save($scope.selected)
+    //     }
 
-        var temp = $scope.tiles[n];
-        if ($scope.admin) {
-            $scope.tiles[n].owner = findOwner(temp);
-        }
-        $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
-        console.log("selected ", n, $scope.tiles[n])
+    //     var temp = $scope.tiles[n];
+    //     if ($scope.admin) {
+    //         $scope.tiles[n].owner = findOwner(temp);
+    //     }
+    //     $scope.old = JSON.parse(JSON.stringify($scope.tiles[n]));
+    //     console.log("selected ", n, $scope.tiles[n])
 
-        $scope.selected = $scope.tiles[n];
-    };
+    //     $scope.selected = $scope.tiles[n];
+    // };
 
     $scope.close = function () {
         save($scope.selected)
@@ -140,6 +140,7 @@ app.controller('hexCtrl', function ($scope) {
         }).then(function (response) {
             var range = response.result;
             if (range.values.length > 0) {
+                var allTiles = [];
                 for (i = 1; i < range.values.length; i++) { // i = 1 to ignore the header row
                     var row = range.values[i];
                     var tile = {
@@ -154,9 +155,10 @@ app.controller('hexCtrl', function ($scope) {
                         row: i + 1,
                     }
 
-                    $scope.tiles.push(tile);
+                    allTiles.push(tile);
                 }
                 $scope.loading = false;
+                $scope.tiles = allTiles;
                 $scope.$apply();
             } else {
                 console.log('No data found.');
