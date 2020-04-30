@@ -11,8 +11,12 @@ app.config(function ($routeProvider) {
         });
 });
 
-app.controller('mainCtrl', function ($scope) {
-    $scope.version = "1.0.0";
+app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
+    $scope.$route = $route;
+    $scope.$location = $location;
+    $scope.$routeParams = $routeParams;
+
+    $scope.version = "1.0.1";
     $scope.page = function (name){
         if (name == "hex"){
             $location.path( "/hex" );
