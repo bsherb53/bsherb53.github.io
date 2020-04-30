@@ -16,7 +16,7 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
 
-    $scope.version = "1.0.4";
+    $scope.version = "1.0.5";
     $scope.page = function (name) {
         if (name == "hex") {
             $location.path("/hex");

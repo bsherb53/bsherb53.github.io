@@ -4,6 +4,15 @@
     <script src="https://use.fontawesome.com/97e407aae1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id"
+        content="299441892540-kahbci33qig5lde0ul4l20uvpmgo349k.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="mouseguard/styles.css">
     <link rel="stylesheet" type="text/css" href="hexmap/styles.css">
@@ -17,7 +26,7 @@
         <div class="contents">
             Version {{version}}
             <div class="button" ng-click="page('mouse')">Play Mouseguard</div>
-            <div  class="button" ng-click="page('hex')">View Hexmap</div>
+            <div class="button" ng-click="page('hex')">View Hexmap</div>
         </div>
         <div ng-view></div>
     </div>
