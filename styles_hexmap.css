@@ -131,8 +131,10 @@
   position: fixed;
   margin: auto;
   text-align: center;
-  left: 5px;
-  bottom: 5px;
+  left: 0;
+  right: 0;
+  top: 10;
+  width: 50%;
   background: #ffffffee;
   display: inline-block;
   border: 1px solid black;
