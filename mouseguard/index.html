@@ -3,6 +3,11 @@
         <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
         <div class="mouse-button mouse-load-button" ng-click="load()">Load</div>
         <div class="mouse-button mouse-load-button" ng-click="clear()">Clear</div>
+
+
+        <div class="mouse-button mouse-save-button" ng-hide="page == 13" ng-click="nextPage(1)">Next</div>
+        <div class="mouse-button mouse-save-button" ng-hide="page == 1" ng-click="nextPage(-1)">Previous</div>
+
     </div>
     <div class="mouse-section" ng-if="page == 1">
         <div class="mouse-section_title">Mouse</div>
@@ -202,11 +207,6 @@
         </div>
     </div>
     <div class="mouse-section mouse-menu-header">
-        <div class="mouse-button mouse-save-button" ng-hide="page == 13" ng-click="nextPage(1)">Next</div>
-        <div class="mouse-button mouse-save-button" ng-hide="page == 1" ng-click="nextPage(-1)">Previous</div>
-
-        <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
-        <div class="mouse-button mouse-load-button" ng-click="load()">Load</div>
-        <div class="mouse-button mouse-load-button" ng-click="clear()">Clear</div>
+        <textarea ng-model="mouse"></textarea>
     </div>
 </div>
