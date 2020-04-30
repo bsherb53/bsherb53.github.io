@@ -32,7 +32,7 @@
             <div class="button" ng-hide="$location.url() == '' || $location.url() == '/'" ng-click="page('home')">Home
             </div>
         </div>
-        <div class="portal" ng-view></div>
+        <div class="portal" autoscroll="false" ng-view></div>
     </div>
 </body>
 
