@@ -202,8 +202,8 @@
         </div>
     </div>
     <div class="mouse-section mouse-menu-header">
-        <div class="mouse-button mouse-save-button" ng-click="nextPage(1)">Next</div>
-        <div class="mouse-button mouse-save-button" ng-click="nextPage(-1)">Previous</div>
+        <div class="mouse-button mouse-save-button" ng-disabled="page == 1" ng-click="nextPage(1)">Next</div>
+        <div class="mouse-button mouse-save-button" ng-disabled="page == 13" ng-click="nextPage(-1)">Previous</div>
 
         <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
         <div class="mouse-button mouse-load-button" ng-click="load()">Load</div>
