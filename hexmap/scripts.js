@@ -59,9 +59,9 @@ app.controller('hexCtrl', function ($scope) {
     function initClient() {
         gapi.client.init({
             apiKey: API_KEY,
-            clientId: CLIENT_ID
-            // discoveryDocs: DISCOVERY_DOCS,
-            // scope: SCOPES
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
         }).then(function () {
             LoadTiles();
             // LoadAdminInfo();
