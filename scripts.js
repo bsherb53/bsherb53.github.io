@@ -8,6 +8,14 @@ app.config(function ($routeProvider) {
         .when("/hex", {
             templateUrl: "hexmap/index.html",
             controller: "hexCtrl"
+        })
+        .when("/", {
+            templateUrl: "hexmap/index.html",
+            controller: "hexCtrl"
+        })
+        .when("", {
+            templateUrl: "hexmap/index.html",
+            controller: "hexCtrl"
         });
 });
 
