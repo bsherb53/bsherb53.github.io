@@ -5,6 +5,7 @@ app.controller('mouseCtrl', function ($scope) {
     if ($scope.mice == null) {
         $scope.mice = [];
         $scope.mice.push(blankMouse());
+        $scope.save();
     }
     $scope.pickMouse = true;
 
@@ -83,8 +84,8 @@ app.controller('mouseCtrl', function ($scope) {
     // menu functions
     $scope.save = function () {
         console.log($scope.mouse)
-        localStorage.setItem($scope.mouse.name, JSON.stringify($scope.mouse));
-        localStorage.setItem('mouseNames', JSON.stringify($scope.mouseNames));
+        $scope.mice.push($scope.mouse);
+        localStorage.setItem('mice', JSON.stringify($scope.mice));
     }
 
     // $scope.load = function (name) {
