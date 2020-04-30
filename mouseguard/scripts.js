@@ -13,13 +13,13 @@ app.controller('mouseCtrl', function ($scope) {
         $scope.pickMouse = false;
     }
 
-    var mouse = JSON.parse(localStorage.getItem('mouse'));
-    if (mouse == null) {
-        $scope.mouse = blankMouse();
-    } else {
-        $scope.mouse = mouse;
-    }
-    console.log($scope.mouse)
+    // var mouse = JSON.parse(localStorage.getItem('mouse'));
+    // if (mouse == null) {
+    //     $scope.mouse = blankMouse();
+    // } else {
+    //     $scope.mouse = mouse;
+    // }
+    // console.log($scope.mouse)
 
 
     // Add items to the mouse
