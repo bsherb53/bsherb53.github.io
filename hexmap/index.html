@@ -1,6 +1,5 @@
 <div class="hex-background">
   <div class="header">
-    <div>Version {{version}} made by Ginger King</div>
     <button id="signin-button" class="button" ng-hide="admin" ng-click="handleSignInClick()">Sign in</button>
     <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
   </div>
@@ -76,5 +75,7 @@
         <div class="line" ng-if="saving">Saving</div>
       </div>
     </div>
-    <div class="footer" style="height: 600px;"></div>
+    <div class="footer" style="height: 600px;">
+      <div>Map {{version}}</div>
+    </div>
   </div>
