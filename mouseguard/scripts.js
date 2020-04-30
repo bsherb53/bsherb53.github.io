@@ -1,4 +1,15 @@
 app.controller('mouseCtrl', function ($scope) {
+    $scope.nextPage = function (num) {
+        if ($scope.page == 0 && num == -1) {
+            return;
+        }
+        if ($scope.page == 13 && num == 1) {
+            return;
+        }
+        $scope.page = $scope.page + num;
+    }
+
+
     var mouse = JSON.parse(localStorage.getItem('mouse'));
     if (mouse == null) {
         $scope.mouse = blankMouse();
