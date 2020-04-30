@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.1.6";
+    $scope.version = "2.1.7";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];

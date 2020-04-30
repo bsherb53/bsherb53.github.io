@@ -4,7 +4,7 @@
     <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
   </div>
 
-  <div id="hexGrid">
+  <div id="hexGrid" ng-if="loading == false">
     <li class="hex" fa-suspendable ng-repeat="t in tiles" ng-click="select($index)">
       <div class="hexIn">
         <a class="hexLink" style="background:#{{t.color}};" href="javascript:void(0)">
