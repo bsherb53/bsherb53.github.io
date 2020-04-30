@@ -1,15 +1,17 @@
 app.controller('mouseCtrl', function ($scope) {
-    $scope.page = 1;
-    $scope.nextPage = function (num) {
-        if ($scope.page == 1 && num == -1) {
-            return;
-        }
-        if ($scope.page == 13 && num == 1) {
-            return;
-        }
-        $scope.page = $scope.page + num;
-    }
+    $scope.pickMouse = false;
 
+    $scope.mice = JSON.parse(localStorage.getItem('mice'));
+    if ($scope.mice == null) {
+        $scope.mice = [];
+        $scope.mice.push(blankMouse());
+    }
+    $scope.pickMouse = true;
+
+    $scope.selectMouse = function (m) {
+        $scope.mouse = m;
+        $scope.pickMouse = false;
+    }
 
     var mouse = JSON.parse(localStorage.getItem('mouse'));
     if (mouse == null) {
@@ -17,7 +19,7 @@ app.controller('mouseCtrl', function ($scope) {
     } else {
         $scope.mouse = mouse;
     }
-    console.log(mouse)
+    console.log($scope.mouse)
 
 
     // Add items to the mouse
@@ -80,12 +82,16 @@ app.controller('mouseCtrl', function ($scope) {
 
     // menu functions
     $scope.save = function () {
-        console.log(mouse)
-        localStorage.setItem('mouse', JSON.stringify($scope.mouse));
+        console.log($scope.mouse)
+        localStorage.setItem($scope.mouse.name, JSON.stringify($scope.mouse));
+        localStorage.setItem('mouseNames', JSON.stringify($scope.mouseNames));
     }
 
-    $scope.load = function () {
-        var mouse = JSON.parse(localStorage.getItem('mouse'));
+    $scope.load = function (name) {
+        if (name == "") {
+            return;
+        }
+        var mouse = JSON.parse(localStorage.getItem(name));
         if (mouse != null) {
             $scope.mouse = mouse;
             console.log(mouse)
@@ -97,11 +103,11 @@ app.controller('mouseCtrl', function ($scope) {
     }
     // end menu
 
-    $scope.export = function(){
+    $scope.export = function () {
         $scope.mouseData = JSON.stringify($scope.mouse);
     }
 
-    $scope.import = function(){
+    $scope.import = function () {
         $scope.mouse = JSON.parse($scope.importMouse);
     }
 });

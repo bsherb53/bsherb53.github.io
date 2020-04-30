@@ -1,15 +1,10 @@
-<div>
+<div ng-if="pickMouse">
     <div class="mouse-section mouse-menu-header">
         <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
         <div class="mouse-button mouse-load-button" ng-click="load()">Load</div>
         <div class="mouse-button mouse-load-button" ng-click="clear()">Clear</div>
-
-
-        <div class="mouse-button mouse-save-button" ng-hide="page == 13" ng-click="nextPage(1)">Next</div>
-        <div class="mouse-button mouse-save-button" ng-hide="page == 1" ng-click="nextPage(-1)">Previous</div>
-
     </div>
-    <div class="mouse-section" ng-if="page == 1">
+    <div class="mouse-section">
         <div class="mouse-section_title">Mouse</div>
         <div class="mouse-split mouse-left">
             <div>Name</div><textarea rows="1" ng-model="mouse.name"></textarea>
@@ -26,14 +21,14 @@
             <div>Missions</div><textarea rows="6" ng-model="mouse.mission"></textarea>
         </div>
     </div>
-    <div class="mouse-section" ng-if="page == 2">WIP: Wises</div>
-    <div class="mouse-section" ng-if="page == 3">WIP: Conditions</div>
-    <div class="mouse-section" ng-if="page == 4">WIP: Gear and Possesions</div>
-    <div class="mouse-section" ng-if="page == 5">WIP: Notes</div>
-    <div class="mouse-section" ng-if="page == 6">WIP: Missions</div>
-    <div class="mouse-section" ng-if="page == 7">WIP: Goals</div>
-    <div class="mouse-section" ng-if="page == 8">WIP: Abilities</div>
-    <div class="mouse-section" ng-if="page == 9">
+    <div class="mouse-section">WIP: Wises</div>
+    <div class="mouse-section">WIP: Conditions</div>
+    <div class="mouse-section">WIP: Gear and Possesions</div>
+    <div class="mouse-section">WIP: Notes</div>
+    <div class="mouse-section">WIP: Missions</div>
+    <div class="mouse-section">WIP: Goals</div>
+    <div class="mouse-section">WIP: Abilities</div>
+    <div class="mouse-section">
         <div class="mouse-section_title">Relationships</div>
         <div class="mouse-table">
             <div class="mouse-row mouse-row_headers">
@@ -46,7 +41,8 @@
                 <div class="mouse-cell">Hometown</div>
                 <div class="mouse-cell">Description/Relation</div>
             </div>
-            <div ng-repeat="relation in mouse.relations" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+            <div ng-repeat="relation in mouse.relations" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'"
+                class="mouse-row">
                 <div class="mouse-cell">
                     <input class="mouse-cell_input" type="text" ng-model="relation.type" disabled="true">
                 </div>
@@ -74,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="mouse-section" ng-if="page == 10">
+    <div class="mouse-section" >
         <div class="mouse-section_title">Friends<i class="fa fa-plus-square" ng-click="addFriend()"></i>
         </div>
         <div class="mouse-table">
@@ -86,7 +82,8 @@
                 <div class="mouse-cell">Skill</div>
                 <div class="mouse-cell">Description/Relation</div>
             </div>
-            <div ng-repeat="friend in mouse.friends" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+            <div ng-repeat="friend in mouse.friends" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'"
+                class="mouse-row">
                 <div class="mouse-cell">
                     <input class="mouse-cell_input" type="text" ng-model="friend.name">
                 </div>
@@ -109,7 +106,7 @@
             </div>
         </div>
     </div>
-    <div class="mouse-section" ng-if="page == 11">
+    <div class="mouse-section" >
         <div class="mouse-section_title">Enemies<i class="fa fa-plus-square" ng-click="addEnemy()"></i></div>
         <div class="mouse-table">
             <div class="mouse-row mouse-row_headers">
@@ -120,7 +117,8 @@
                 <div class="mouse-cell">Skill</div>
                 <div class="mouse-cell">Description/Relation</div>
             </div>
-            <div ng-repeat="enemy in mouse.enemies" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+            <div ng-repeat="enemy in mouse.enemies" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'"
+                class="mouse-row">
                 <div class="mouse-cell">
                     <input class="mouse-cell_input" type="text" ng-model="enemy.name">
                 </div>
@@ -143,7 +141,7 @@
             </div>
         </div>
     </div>
-    <div class="mouse-section" ng-if="page == 12">
+    <div class="mouse-section" >
         <div class="mouse-section_title">Traits<i class="fa fa-plus-square" ng-click="addTrait()"></i></div>
         <div class="mouse-table">
             <div class="mouse-row mouse-row_headers">
@@ -153,7 +151,8 @@
                 <div class="mouse-cell">Uses</div>
                 <div class="mouse-cell">Checks</div>
             </div>
-            <div ng-repeat="trait in mouse.traits" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+            <div ng-repeat="trait in mouse.traits" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'"
+                class="mouse-row">
                 <div class="mouse-cell">
                     <input class="mouse-cell_input" type="text" ng-model="trait.name">
                 </div>
@@ -173,7 +172,7 @@
             </div>
         </div>
     </div>
-    <div class="mouse-section" ng-if="page == 13">
+    <div class="mouse-section" >
         <div class="mouse-section_title">
             Skills
             <i class="fa fa-plus-square" ng-click="addSkill()"></i>
@@ -186,7 +185,8 @@
                 <div class="mouse-cell">- F -</div>
                 <div class="mouse-cell">Specialty</div>
             </div>
-            <div ng-repeat="skill in mouse.skills" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+            <div ng-repeat="skill in mouse.skills" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'"
+                class="mouse-row">
                 <div class="mouse-cell">
                     <input class="mouse-cell_input" type="text" ng-model="skill.name">
                 </div>
@@ -208,8 +208,13 @@
     </div>
     <div class="mouse-section mouse-menu-header">
         <div class="mouse-button mouse-load-button" ng-click="export()">Export JSON</div>
-        <div>{{mouseData}}</div>
+        <div class="mouse-button">{{mouseData}}</div>
         <div class="mouse-button mouse-load-button" ng-click="import()">Import Mouse JSON</div>
         <textarea ng-model="importMouse"></textarea>
     </div>
+</div>
+<div ng-if="pickMouse == false">
+    <li ng-repeat="m in mice" ng-click="selectMouse(m)">
+        {{m.name}}
+    </li>
 </div>
