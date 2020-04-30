@@ -3,12 +3,16 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when("/mouse", {
             templateUrl: "mouseguard/index.html",
-            controller : "mouseCtrl"
+            controller: "mouseCtrl"
         })
         .when("/hex", {
             templateUrl: "hexmap/index.html",
-            controller : "hexCtrl"
-        });
+            controller: "hexCtrl"
+        })
+        .when("/"), {
+        templateUrl: "index.html",
+        controller: "mainCtrl"
+    };
 });
 
 app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
@@ -16,14 +20,17 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
 
-    $scope.version = "1.0.1";
-    $scope.page = function (name){
-        if (name == "hex"){
-            $location.path( "/hex" );
+    $scope.version = "1.0.3";
+    $scope.page = function (name) {
+        if (name == "hex") {
+            $location.path("/hex");
+            return;
         }
 
-        if (name == "mouse"){
-            $location.path( "/mouse" );
+        if (name == "mouse") {
+            $location.path("/mouse");
+            return;
         }
+        $location.path("/");
     }
 });
