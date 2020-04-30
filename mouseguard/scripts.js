@@ -3,7 +3,15 @@ app.controller('mouseCtrl', function ($scope) {
 
     $scope.save = function () {
         console.log($scope.mouse)
-        $scope.mice.push($scope.mouse);
+        if ($scope.mouse == null || $scope.mouse.name == "") {
+            return;
+        };
+        $scope.mice.forEach(function (item, index) {
+            if (item.name == $scope.mouse) {
+                $scope.mice[index] = $scope.mouse;
+            }
+        });
+
         localStorage.setItem('mice', JSON.stringify($scope.mice));
     }
 
@@ -88,7 +96,7 @@ app.controller('mouseCtrl', function ($scope) {
     // end remove
 
     // menu functions
-    
+
 
     // $scope.load = function (name) {
     //     if (name == "") {
@@ -117,7 +125,7 @@ app.controller('mouseCtrl', function ($scope) {
 
 function blankMouse() {
     return {
-        name: "Give me a unique name",
+        name: "New Mouse",
         age: "",
         home: "",
         furColor: "",
