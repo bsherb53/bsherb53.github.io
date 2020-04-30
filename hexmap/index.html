@@ -2,6 +2,7 @@
   <div class="header">
     <button id="signin-button" class="button" ng-hide="admin" ng-click="handleSignInClick()">Sign in</button>
     <button id="signout-button" class="button" ng-if="admin" ng-click="handleSignOutClick()">Sign out</button>
+    <div>Map {{version}}</div>
   </div>
 
   <div id="hexGrid" ng-if="loading == false">
@@ -36,7 +37,7 @@
           <div class="right">{{selected.rating}}</div>
         </div>
         <div class="line">
-          <p class="button" ng-click="close(false)" >Close</p>
+          <p class="button" ng-click="close(false)">Close</p>
         </div>
       </div>
 
@@ -68,14 +69,11 @@
               ng-options="r as r for r in ratings"></select></div>
         </div>
         <div class="line">
-          <p class="left button" ng-click="close(false)" >Cancel</p>
+          <p class="left button" ng-click="close(false)">Cancel</p>
 
           <p class="right button" ng-click="close(true)" ng-disabled="saving">Save Tile</p>
         </div>
         <div class="line" ng-if="saving">Saving</div>
       </div>
-    </div>
-    <div class="footer" style="height: 600px;">
-      <div>Map {{version}}</div>
     </div>
   </div>
