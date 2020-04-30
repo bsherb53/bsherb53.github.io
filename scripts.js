@@ -12,6 +12,14 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('mainCtrl', function ($scope) {
-    $scope.page = 1;
-    $scope.something = "this is a test";
+    $scope.version = "1.0.0";
+    $scope.page = function (name){
+        if (name == "hex"){
+            $location.path( "/hex" );
+        }
+
+        if (name == "mouse"){
+            $location.path( "/mouse" );
+        }
+    }
 });

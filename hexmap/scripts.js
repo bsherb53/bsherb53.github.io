@@ -1,4 +1,3 @@
-
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
     $scope.version = "2.0.2";

@@ -10,11 +10,10 @@
 
 <body class="body">
     <div ng-app="myApp" ng-controller="mainCtrl">
+        {{version}}
+        <div ng-click="page(mouse)">Go Mouse</div>
+        <div ng-click="page(hex)">Go Hex</div>
         <div ng-view></div>
-
-        {{page}}
-        <a href="#/hex">Go Home</a>
-        <a href="#/mouse">Go to About</a>
     </div>
 </body>
 
