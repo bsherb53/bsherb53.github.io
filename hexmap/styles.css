@@ -3,10 +3,6 @@
   padding: 0;
 }
 
-body {
-  background-color: #1E589C;
-}
-
 #hexGrid {
   background: url("images/WorldMap.webp");
   display: flex;
