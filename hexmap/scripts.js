@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.1.1";
+    $scope.version = "2.1.2";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -30,8 +30,12 @@ app.controller('hexCtrl', function ($scope) {
         $scope.selected = $scope.tiles[n];
     };
 
-    $scope.close = function () {
-        save($scope.selected)
+    $scope.close = function (s) {
+        if (s) {
+            save($scope.selected)
+        } else {
+            $scope.selected = undefined;
+        }
     };
 
     var findOwner = function (tile) {

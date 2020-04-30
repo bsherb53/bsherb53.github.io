@@ -37,7 +37,7 @@
           <div class="right">{{selected.rating}}</div>
         </div>
         <div class="line">
-          <p class="button" ng-click="close()" >Close</p>
+          <p class="button" ng-click="close(false)" >Close</p>
         </div>
       </div>
 
@@ -69,7 +69,9 @@
               ng-options="r as r for r in ratings"></select></div>
         </div>
         <div class="line">
-          <p class="button" ng-click="close()" ng-disabled="saving">Save Tile</p>
+          <p class="left button" ng-click="close(false)" >Cancel</p>
+
+          <p class="right button" ng-click="close(true)" ng-disabled="saving">Save Tile</p>
         </div>
         <div class="line" ng-if="saving">Saving</div>
       </div>
