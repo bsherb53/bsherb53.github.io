@@ -6,13 +6,23 @@ app.controller('mouseCtrl', function ($scope) {
         if ($scope.mouse == null || $scope.mouse.name == "") {
             return;
         };
+        var newMice = [];
         $scope.mice.forEach(function (item, index) {
+            if (item == null){
+                
+            }
             if (item.name == $scope.mouse) {
                 $scope.mice[index] = $scope.mouse;
             }
+
+            if (newMice.filter(vendor => vendor.Name === item.name)){
+
+            }
+
+
         });
 
-        localStorage.setItem('mice', JSON.stringify($scope.mice));
+        localStorage.setItem('mice', JSON.stringify(newMice));
     }
 
     $scope.mice = JSON.parse(localStorage.getItem('mice'));
