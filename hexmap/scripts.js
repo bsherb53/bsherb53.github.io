@@ -59,77 +59,77 @@ app.controller('hexCtrl', function ($scope) {
     function initClient() {
         gapi.client.init({
             apiKey: API_KEY,
-            clientId: CLIENT_ID,
-            discoveryDocs: DISCOVERY_DOCS,
-            scope: SCOPES
+            clientId: CLIENT_ID
+            // discoveryDocs: DISCOVERY_DOCS,
+            // scope: SCOPES
         }).then(function () {
             LoadTiles();
-            LoadAdminInfo();
+            // LoadAdminInfo();
         }, function (error) {
             console.log(JSON.stringify(error, null, 2));
         });
     };
 
-    function LoadAdminInfo() {
-        if ($scope.admin && $scope.loadedAdminData != true) {
-            console.log("getting extra data")
-            gapi.client.sheets.spreadsheets.values.get({
-                spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
-                range: 'Data!A2:D50',
-            }).then(function (response) {
-                var range = response.result;
-                if (range.values.length > 0) {
-                    for (i = 0; i < range.values.length; i++) {
-                        var row = range.values[i];
-                        if (row[0] != "" && row[0] != undefined) {
-                            $scope.biomes.push(row[0]);
-                        }
-                        if (row[1] != "" && row[1] != undefined) {
-                            $scope.weathers.push(row[1]);
-                        }
-                        if (row[2] != "" && row[2] != undefined) {
-                            $scope.ratings.push(row[2]);
-                        }
-                        if (row[3] != "" && row[3] != undefined) {
-                            $scope.types.push(row[3]);
-                        }
+    // function LoadAdminInfo() {
+    //     if ($scope.admin && $scope.loadedAdminData != true) {
+    //         console.log("getting extra data")
+    //         gapi.client.sheets.spreadsheets.values.get({
+    //             spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
+    //             range: 'Data!A2:D50',
+    //         }).then(function (response) {
+    //             var range = response.result;
+    //             if (range.values.length > 0) {
+    //                 for (i = 0; i < range.values.length; i++) {
+    //                     var row = range.values[i];
+    //                     if (row[0] != "" && row[0] != undefined) {
+    //                         $scope.biomes.push(row[0]);
+    //                     }
+    //                     if (row[1] != "" && row[1] != undefined) {
+    //                         $scope.weathers.push(row[1]);
+    //                     }
+    //                     if (row[2] != "" && row[2] != undefined) {
+    //                         $scope.ratings.push(row[2]);
+    //                     }
+    //                     if (row[3] != "" && row[3] != undefined) {
+    //                         $scope.types.push(row[3]);
+    //                     }
 
-                    }
-                } else {
-                    console.log('No data found.');
-                }
-            }, function (response) {
-                console.log('Error: ' + response.result.error.message);
-            });
+    //                 }
+    //             } else {
+    //                 console.log('No data found.');
+    //             }
+    //         }, function (response) {
+    //             console.log('Error: ' + response.result.error.message);
+    //         });
 
-            console.log("loading owners")
-            gapi.client.sheets.spreadsheets.values.get({
-                spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
-                range: 'Owners!A2:G11',
-            }).then(function (response) {
-                var range = response.result;
-                if (range.values.length > 0) {
-                    for (i = 0; i < range.values.length; i++) {
-                        var row = range.values[i];
-                        // Name	AI	Discord	ID	Hex Color	Example	Alpha
-                        var o = {
-                            name: row[1],
-                            color: row[4] + row[6],
-                            id: row[3]
-                        }
-                        $scope.owners.push(o);
-                    }
-                    console.log($scope.owners);
-                    $scope.loadedAdminData = true;
-                    $scope.$apply()
-                } else {
-                    console.log('No data found.');
-                }
-            }, function (response) {
-                console.log('Error: ' + response.result.error.message);
-            });
-        }
-    };
+    //         console.log("loading owners")
+    //         gapi.client.sheets.spreadsheets.values.get({
+    //             spreadsheetId: '1B16F1-Dd4lGoAMhGfGTCRUl4FFQg9hBPsxYBXEJp9zI',
+    //             range: 'Owners!A2:G11',
+    //         }).then(function (response) {
+    //             var range = response.result;
+    //             if (range.values.length > 0) {
+    //                 for (i = 0; i < range.values.length; i++) {
+    //                     var row = range.values[i];
+    //                     // Name	AI	Discord	ID	Hex Color	Example	Alpha
+    //                     var o = {
+    //                         name: row[1],
+    //                         color: row[4] + row[6],
+    //                         id: row[3]
+    //                     }
+    //                     $scope.owners.push(o);
+    //                 }
+    //                 console.log($scope.owners);
+    //                 $scope.loadedAdminData = true;
+    //                 $scope.$apply()
+    //             } else {
+    //                 console.log('No data found.');
+    //             }
+    //         }, function (response) {
+    //             console.log('Error: ' + response.result.error.message);
+    //         });
+    //     }
+    // };
 
     function LoadTiles() {
         $scope.tiles = [];
@@ -167,87 +167,87 @@ app.controller('hexCtrl', function ($scope) {
 
     }
 
-    $scope.updateSignInStatus = function (isSignedIn) {
-        if (isSignedIn) {
-            $scope.admin = true;
-        } else {
-            $scope.admin = false;
-        }
-    }
+    // $scope.updateSignInStatus = function (isSignedIn) {
+    //     if (isSignedIn) {
+    //         $scope.admin = true;
+    //     } else {
+    //         $scope.admin = false;
+    //     }
+    // }
 
-    $scope.handleSignInClick = function (event) {
-        if ($scope.selected != undefined) {
-            save($scope.selected)
-        }
-        var person = prompt("Please enter your passcode:", "passcode");
-        if (person == null || person != "4785") {
-            return;
-        }
-        gapi.auth2.getAuthInstance().signIn().then(function (response) {
-            $scope.admin = true;
-            LoadAdminInfo();
-        });
-    }
+    // $scope.handleSignInClick = function (event) {
+    //     if ($scope.selected != undefined) {
+    //         save($scope.selected)
+    //     }
+    //     var person = prompt("Please enter your passcode:", "passcode");
+    //     if (person == null || person != "4785") {
+    //         return;
+    //     }
+    //     gapi.auth2.getAuthInstance().signIn().then(function (response) {
+    //         $scope.admin = true;
+    //         LoadAdminInfo();
+    //     });
+    // }
 
-    $scope.handleSignOutClick = function (event) {
-        $scope.admin = false;
-        $scope.selected = undefined;
-        gapi.auth2.getAuthInstance().signOut();
-    }
+    // $scope.handleSignOutClick = function (event) {
+    //     $scope.admin = false;
+    //     $scope.selected = undefined;
+    //     gapi.auth2.getAuthInstance().signOut();
+    // }
 
-    var save = function (t) {
-        if (!$scope.admin) {
-            $scope.selected = undefined;
-            $scope.saving = false;
-            return;
-        }
+    // var save = function (t) {
+    //     if (!$scope.admin) {
+    //         $scope.selected = undefined;
+    //         $scope.saving = false;
+    //         return;
+    //     }
 
-        var old = $scope.old;
-        console.log("old", old)
-        console.log("new", t)
+    //     var old = $scope.old;
+    //     console.log("old", old)
+    //     console.log("new", t)
 
-        var different = old.number != t.number || old.name != t.name ||
-            old.biome != t.biome || old.type != t.type ||
-            old.weather != t.weather || old.rating != t.rating ||
-            old.owner != t.owner;
-        if (!different) {
-            $scope.selected = undefined;
-            console.log("items not different");
-            $scope.saving = false;
-            return
-        }
-        console.log("saving");
-        $scope.saving = true;
-        var newT = {
-            number: t.number,
-            name: t.name,
-            biome: t.biome,
-            owner: t.owner.name,
-            color: t.owner.color,
-            rating: t.rating,
-            type: t.type,
-            weather: t.weather,
-        }
-        $scope.tiles[old.number] = newT;
-        gapi.client.sheets.spreadsheets.values.update({
-            "spreadsheetId": mapSpreadsheetID,
-            "range": 'MapData!A' + old.row + ':I' + old.row,
-            "includeValuesInResponse": 'false',
-            "valueInputOption": 'RAW',
-            "resource": {
-                "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather]]
-            }
-        }).then(function (response) {
-            $scope.selected = undefined;
-            $scope.$broadcast('$$rebind:tiles');
-            $scope.saving = false;
-        }, function (reason) {
-            console.error('error: ' + reason.result.error.message);
-            console.log(reason);
-            $scope.selected = undefined;
-            $scope.saving = false;
-        });
-    }
+    //     var different = old.number != t.number || old.name != t.name ||
+    //         old.biome != t.biome || old.type != t.type ||
+    //         old.weather != t.weather || old.rating != t.rating ||
+    //         old.owner != t.owner;
+    //     if (!different) {
+    //         $scope.selected = undefined;
+    //         console.log("items not different");
+    //         $scope.saving = false;
+    //         return
+    //     }
+    //     console.log("saving");
+    //     $scope.saving = true;
+    //     var newT = {
+    //         number: t.number,
+    //         name: t.name,
+    //         biome: t.biome,
+    //         owner: t.owner.name,
+    //         color: t.owner.color,
+    //         rating: t.rating,
+    //         type: t.type,
+    //         weather: t.weather,
+    //     }
+    //     $scope.tiles[old.number] = newT;
+    //     gapi.client.sheets.spreadsheets.values.update({
+    //         "spreadsheetId": mapSpreadsheetID,
+    //         "range": 'MapData!A' + old.row + ':I' + old.row,
+    //         "includeValuesInResponse": 'false',
+    //         "valueInputOption": 'RAW',
+    //         "resource": {
+    //             "values": [[t.number, t.name, t.biome, t.owner.name, t.rating, t.type, t.weather]]
+    //         }
+    //     }).then(function (response) {
+    //         $scope.selected = undefined;
+    //         $scope.$broadcast('$$rebind:tiles');
+    //         $scope.saving = false;
+    //     }, function (reason) {
+    //         console.error('error: ' + reason.result.error.message);
+    //         console.log(reason);
+    //         $scope.selected = undefined;
+    //         $scope.saving = false;
+    //     });
+    // }
 });
 
 
