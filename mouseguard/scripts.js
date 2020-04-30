@@ -1,6 +1,12 @@
 app.controller('mouseCtrl', function ($scope) {
     $scope.pickMouse = false;
 
+    $scope.save = function () {
+        console.log($scope.mouse)
+        $scope.mice.push($scope.mouse);
+        localStorage.setItem('mice', JSON.stringify($scope.mice));
+    }
+
     $scope.mice = JSON.parse(localStorage.getItem('mice'));
     if ($scope.mice == null) {
         $scope.mice = [];
@@ -82,11 +88,7 @@ app.controller('mouseCtrl', function ($scope) {
     // end remove
 
     // menu functions
-    $scope.save = function () {
-        console.log($scope.mouse)
-        $scope.mice.push($scope.mouse);
-        localStorage.setItem('mice', JSON.stringify($scope.mice));
-    }
+    
 
     // $scope.load = function (name) {
     //     if (name == "") {

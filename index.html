@@ -24,15 +24,12 @@
 <body class="body">
     <div ng-app="myApp" ng-controller="mainCtrl">
         <div class="contents">
-            Site Version {{version}}
-            <div class="button" ng-if="$location.url() == '' || $location.url() == '/'" ng-click="page('mouse')">Play
-                Mouseguard</div>
-            <div class="button" ng-if="$location.url() == '' || $location.url() == '/'" ng-click="page('hex')">View
-                Hexmap</div>
-            <div class="button" ng-hide="$location.url() == '' || $location.url() == '/'" ng-click="page('home')">Home
-            </div>
+            <div class="button" ng-if="$location.url() == '' || $location.url() == '/'" ng-click="page('mouse')">Mouseguard Sheets</div>
+            <div class="button" ng-if="$location.url() == '' || $location.url() == '/'" ng-click="page('hex')">Hexmap</div>
+            <div class="button" ng-hide="$location.url() == '' || $location.url() == '/'" ng-click="page('home')">Home</div>
         </div>
         <div class="portal" ng-view></div>
+        Site Version {{version}}
     </div>
 </body>
 
