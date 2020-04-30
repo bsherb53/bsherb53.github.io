@@ -14,8 +14,8 @@
 
 
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="mouseguard/styles.css">
-    <link rel="stylesheet" type="text/css" href="hexmap/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles_mouse.css">
+    <link rel="stylesheet" type="text/css" href="styles_hexmap.css">
     <script src="scripts.js"></script>
     <script src="hexmap/scripts.js" defer></script>
     <script src="mouseguard/scripts.js" defer></script>
@@ -24,7 +24,7 @@
 <body class="body">
     <div ng-app="myApp" ng-controller="mainCtrl">
         <div class="contents">
-            Version {{version}} URL {{$location.url()}}
+            Site Version {{version}} URL {{$location.url()}}
             <div class="button" ng-if="$location.url() == '' || $location.url() == '/'" ng-click="page('mouse')">Play
                 Mouseguard</div>
             <div class="button" ng-if="$location.url() == '' || $location.url() == '/'" ng-click="page('hex')">View
@@ -32,7 +32,7 @@
             <div class="button" ng-hide="$location.url() == '' || $location.url() == '/'" ng-click="page('home')">Home
             </div>
         </div>
-        <div ng-view></div>
+        <div class="portal" ng-view></div>
     </div>
 </body>
 
