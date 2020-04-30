@@ -87,16 +87,16 @@ app.controller('mouseCtrl', function ($scope) {
         localStorage.setItem('mouseNames', JSON.stringify($scope.mouseNames));
     }
 
-    $scope.load = function (name) {
-        if (name == "") {
-            return;
-        }
-        var mouse = JSON.parse(localStorage.getItem(name));
-        if (mouse != null) {
-            $scope.mouse = mouse;
-            console.log(mouse)
-        }
-    }
+    // $scope.load = function (name) {
+    //     if (name == "") {
+    //         return;
+    //     }
+    //     var mouse = JSON.parse(localStorage.getItem(name));
+    //     if (mouse != null) {
+    //         $scope.mouse = mouse;
+    //         console.log(mouse)
+    //     }
+    // }
 
     $scope.clear = function () {
         $scope.mouse = blankMouse();
