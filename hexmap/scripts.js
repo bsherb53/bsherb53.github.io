@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.1.5";
+    $scope.version = "2.1.6";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -248,13 +248,15 @@ app.controller('hexCtrl', function ($scope) {
             }
         }).then(function (response) {
             $scope.selected = undefined;
-            $scope.$broadcast('$$rebind:tiles');
             $scope.saving = false;
+            $scope.$broadcast('$$rebind:tiles');
+            $scope.$apply();
         }, function (reason) {
             console.error('error: ' + reason.result.error.message);
             console.log(reason);
             $scope.selected = undefined;
             $scope.saving = false;
+            $scope.$apply();
         });
     }
 });
