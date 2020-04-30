@@ -100,6 +100,10 @@ app.controller('mouseCtrl', function ($scope) {
     $scope.export = function(){
         $scope.mouseData = JSON.stringify($scope.mouse);
     }
+
+    $scope.import = function(){
+        $scope.mouse = JSON.parse($scope.importMouse);
+    }
 });
 
 function blankMouse() {
