@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.1.3";
+    $scope.version = "2.1.4";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -67,6 +67,10 @@ app.controller('hexCtrl', function ($scope) {
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
         }).then(function () {
+
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
             LoadTiles();
             LoadAdminInfo();
         }, function (error) {
@@ -180,9 +184,6 @@ app.controller('hexCtrl', function ($scope) {
     }
 
     $scope.handleSignInClick = function (event) {
-        if ($scope.selected != undefined) {
-            save($scope.selected)
-        }
         var person = prompt("Please enter your passcode:", "passcode");
         if (person == null || person != "4785") {
             return;
@@ -206,7 +207,7 @@ app.controller('hexCtrl', function ($scope) {
             return;
         }
 
-        if ($scope.saving){
+        if ($scope.saving) {
             return;
         }
         var old = $scope.old;
