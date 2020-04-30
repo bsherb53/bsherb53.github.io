@@ -13,11 +13,8 @@
         <div ng-view></div>
 
         {{page}}
-        <div ng-if="page == 1" >Test</div>
-        <div ng-if="page == 2" ng-include="'mouse.html'"></div>
-        <div ng-if="page == 3" ng-include="'hex.html'"></div>
-        <div ng-click="page = page + 1">Next</div>
-        <div ng-click="page = page - 1">Previous</div>
+        <a href="#/hex">Go Home</a>
+<a href="#/mouse">Go to About</a>
     </div>
 </body>
 
