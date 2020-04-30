@@ -6,14 +6,14 @@
   </div>
 
   <div id="hexGrid">
-    <li class="hex" fa-suspendable ng-repeat="t in tiles" >
+    <li class="hex" fa-suspendable ng-repeat="t in tiles" ng-click="select($index)">
       <div class="hexIn">
-        <a class="hexLink" style="background:#{{t.color}};" href="#">
+        <a class="hexLink" style="background:#{{t.color}};" href="javascript:void(0)">
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
         </a>
       </div>
     </li>
-    <!-- <div class="selected-box" ng-hide="admin">
+    <div class="selected-box" ng-hide="admin">
       <div class="line">Tile {{selected.name}} (#{{selected.number}})</div>
       <div class="line">
         <div class="left">Owner:</div>
@@ -63,11 +63,11 @@
         <div class="left">CR:</div>
         <div class="right"><select ng-disabled="saving" ng-model="selected.rating"
             ng-options="r as r for r in ratings"></select></div>
-      </div> -->
-    <!-- <div class="line">
+      </div>
+      <div class="line">
         <p class="button" ng-click="close()" ng-disabled="saving">Save Tile</p>
       </div>
       <div class="line" ng-if="saving">Saving</div>
-    </div> -->
+    </div>
     <div class="footer" style="height: 600px;"></div>
   </div>
