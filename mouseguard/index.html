@@ -1,19 +1,19 @@
 <div>
-    <div class="section menu-header">
-        <div class="button save-button" ng-click="save()">Save</div>
-        <div class="button load-button" ng-click="load()">Load</div>
-        <div class="button load-button" ng-click="clear()">Clear</div>
+    <div class="mouse-section mouse-menu-header">
+        <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
+        <div class="mouse-button mouse-load-button" ng-click="load()">Load</div>
+        <div class="mouse-button mouse-load-button" ng-click="clear()">Clear</div>
     </div>
-    <div class="section">
-        <div class="section_title">Mouse</div>
-        <div class="split left">
+    <div class="mouse-section">
+        <div class="mouse-section_title">Mouse</div>
+        <div class="mouse-split mouse-left">
             <div>Name</div><textarea rows="1" ng-model="mouse.name"></textarea>
             <div>Age</div><textarea rows="1" ng-model="mouse.age"></textarea>
             <div>Fur Color</div><textarea rows="1" ng-model="mouse.furColor"></textarea>
             <div>Personality</div><textarea rows="6" ng-model="mouse.personality"></textarea>
             <div>backstory</div><textarea rows="6" ng-model="mouse.backstory"></textarea>
         </div>
-        <div class="split right">
+        <div class="mouse-split mouse-right">
             <div>Hometown</div><textarea rows="1" ng-model="mouse.home"></textarea>
             <div>Guard Rank</div><textarea rows="1" ng-model="mouse.guardRank"></textarea>
             <div>Cloak Color</div><textarea rows="1" ng-model="mouse.cloakColor"></textarea>
@@ -21,189 +21,189 @@
             <div>Missions</div><textarea rows="6" ng-model="mouse.mission"></textarea>
         </div>
     </div>
-    <div class="section">WIP: Wises</div>
-    <div class="section">WIP: Conditions</div>
-    <div class="section">WIP: Gear and Possesions</div>
-    <div class="section">WIP: Notes</div>
-    <div class="section">WIP: Missions</div>
-    <div class="section">WIP: Goals</div>
-    <div class="section">WIP: Abilities</div>
-    <div class="section">
-        <div class="section_title">Relationships</div>
-        <div class="table">
-            <div class="row row_headers">
-                <div class="cell">Relation</div>
-                <div class="cell">Name</div>
-                <div class="cell">Profession</div>
-                <div class="cell">Skill</div>
-                <div class="cell">Dead</div>
-                <div class="cell cell_age">Age</div>
-                <div class="cell">Hometown</div>
-                <div class="cell">Description/Relation</div>
+    <div class="mouse-section">WIP: Wises</div>
+    <div class="mouse-section">WIP: Conditions</div>
+    <div class="mouse-section">WIP: Gear and Possesions</div>
+    <div class="mouse-section">WIP: Notes</div>
+    <div class="mouse-section">WIP: Missions</div>
+    <div class="mouse-section">WIP: Goals</div>
+    <div class="mouse-section">WIP: Abilities</div>
+    <div class="mouse-section">
+        <div class="mouse-section_title">Relationships</div>
+        <div class="mouse-table">
+            <div class="mouse-row mouse-row_headers">
+                <div class="mouse-cell">Relation</div>
+                <div class="mouse-cell">Name</div>
+                <div class="mouse-cell">Profession</div>
+                <div class="mouse-cell">Skill</div>
+                <div class="mouse-cell">Dead</div>
+                <div class="mouse-cell mouse-cell_age">Age</div>
+                <div class="mouse-cell">Hometown</div>
+                <div class="mouse-cell">Description/Relation</div>
             </div>
-            <div ng-repeat="relation in mouse.relations" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="relation.type" disabled="true">
+            <div ng-repeat="relation in mouse.relations" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="relation.type" disabled="true">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="relation.name">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="relation.name">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="relation.profession">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="relation.profession">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="relation.skill">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="relation.skill">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="checkbox" ng-model="relation.deceased">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="checkbox" ng-model="relation.deceased">
                 </div>
-                <div class="cell cell_age">
-                    <input class="cell_input" type="text" ng-model="relation.age">
+                <div class="mouse-cell mouse-cell_age">
+                    <input class="mouse-cell_input" type="text" ng-model="relation.age">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="relation.hometown">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="relation.hometown">
                 </div>
-                <div class="cell">
-                    <textarea rows="2" class="cell_input" ng-model="relation.description"></textarea>
+                <div class="mouse-cell">
+                    <textarea rows="2" class="mouse-cell_input" ng-model="relation.description"></textarea>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section">
-        <div class="section_title">Friends<i class="fa fa-plus-square" ng-click="addFriend()"></i>
+    <div class="mouse-section">
+        <div class="mouse-section_title">Friends<i class="fa fa-plus-square" ng-click="addFriend()"></i>
         </div>
-        <div class="table">
-            <div class="row row_headers">
-                <div class="cell">Name</div>
-                <div class="cell">Profession</div>
-                <div class="cell">Rank</div>
-                <div class="cell">Hometown</div>
-                <div class="cell">Skill</div>
-                <div class="cell">Description/Relation</div>
+        <div class="mouse-table">
+            <div class="mouse-row mouse-row_headers">
+                <div class="mouse-cell">Name</div>
+                <div class="mouse-cell">Profession</div>
+                <div class="mouse-cell">Rank</div>
+                <div class="mouse-cell">Hometown</div>
+                <div class="mouse-cell">Skill</div>
+                <div class="mouse-cell">Description/Relation</div>
             </div>
-            <div ng-repeat="friend in mouse.friends" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="friend.name">
+            <div ng-repeat="friend in mouse.friends" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="friend.name">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="friend.profession">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="friend.profession">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="friend.rank">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="friend.rank">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="friend.hometown">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="friend.hometown">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="friend.skill">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="friend.skill">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="friend.description">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="friend.description">
                 </div>
                 <i class="fa fa-window-close" ng-click="removeFriend($index)"></i>
             </div>
         </div>
     </div>
-    <div class="section">
-        <div class="section_title">Enemies<i class="fa fa-plus-square" ng-click="addEnemy()"></i></div>
-        <div class="table">
-            <div class="row row_headers">
-                <div class="cell">Name</div>
-                <div class="cell">Profession</div>
-                <div class="cell">Rank</div>
-                <div class="cell">Hometown</div>
-                <div class="cell">Skill</div>
-                <div class="cell">Description/Relation</div>
+    <div class="mouse-section">
+        <div class="mouse-section_title">Enemies<i class="fa fa-plus-square" ng-click="addEnemy()"></i></div>
+        <div class="mouse-table">
+            <div class="mouse-row mouse-row_headers">
+                <div class="mouse-cell">Name</div>
+                <div class="mouse-cell">Profession</div>
+                <div class="mouse-cell">Rank</div>
+                <div class="mouse-cell">Hometown</div>
+                <div class="mouse-cell">Skill</div>
+                <div class="mouse-cell">Description/Relation</div>
             </div>
-            <div ng-repeat="enemy in mouse.enemies" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="enemy.name">
+            <div ng-repeat="enemy in mouse.enemies" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="enemy.name">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="enemy.profession">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="enemy.profession">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="enemy.rank">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="enemy.rank">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="enemy.hometown">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="enemy.hometown">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="enemy.skill">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="enemy.skill">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="enemy.description">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="enemy.description">
                 </div>
                 <i class="fa fa-window-close" ng-click="removeEnemy($index)"></i>
             </div>
         </div>
     </div>
-    <div class="section">
-        <div class="section_title">Traits<i class="fa fa-plus-square" ng-click="addTrait()"></i></div>
-        <div class="table">
-            <div class="row row_headers">
-                <div class="cell">Name</div>
-                <div class="cell">Description</div>
-                <div class="cell">Level</div>
-                <div class="cell">Uses</div>
-                <div class="cell">Checks</div>
+    <div class="mouse-section">
+        <div class="mouse-section_title">Traits<i class="fa fa-plus-square" ng-click="addTrait()"></i></div>
+        <div class="mouse-table">
+            <div class="mouse-row mouse-row_headers">
+                <div class="mouse-cell">Name</div>
+                <div class="mouse-cell">Description</div>
+                <div class="mouse-cell">Level</div>
+                <div class="mouse-cell">Uses</div>
+                <div class="mouse-cell">Checks</div>
             </div>
-            <div ng-repeat="trait in mouse.traits" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="trait.name">
+            <div ng-repeat="trait in mouse.traits" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="trait.name">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="trait.description">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="trait.description">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="trait.level">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="trait.level">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="trait.uses">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="trait.uses">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="trait.checks">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="trait.checks">
                 </div>
                 <i class="fa fa-window-close" ng-click="removeTrait($index)"></i>
             </div>
         </div>
     </div>
-    <div class="section">
-        <div class="section_title">
+    <div class="mouse-section">
+        <div class="mouse-section_title">
             Skills
             <i class="fa fa-plus-square" ng-click="addSkill()"></i>
         </div>
-        <div class="table">
-            <div class="row row_headers">
-                <div class="cell">Name</div>
-                <div class="cell">Rating</div>
-                <div class="cell">- P -</div>
-                <div class="cell">- F -</div>
-                <div class="cell">Specialty</div>
+        <div class="mouse-table">
+            <div class="mouse-row mouse-row_headers">
+                <div class="mouse-cell">Name</div>
+                <div class="mouse-cell">Rating</div>
+                <div class="mouse-cell">- P -</div>
+                <div class="mouse-cell">- F -</div>
+                <div class="mouse-cell">Specialty</div>
             </div>
-            <div ng-repeat="skill in mouse.skills" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="skill.name">
+            <div ng-repeat="skill in mouse.skills" ng-class-even="'mouse-even'" ng-class-odd="'mouse-odd'" class="mouse-row">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="skill.name">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="text" ng-model="skill.rating">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="text" ng-model="skill.rating">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="checkbox" ng-model="skill.p">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="checkbox" ng-model="skill.p">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="checkbox" ng-model="skill.f">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="checkbox" ng-model="skill.f">
                 </div>
-                <div class="cell">
-                    <input class="cell_input" type="checkbox" ng-model="skill.specialty">
+                <div class="mouse-cell">
+                    <input class="mouse-cell_input" type="checkbox" ng-model="skill.specialty">
                 </div>
                 <i class="fa fa-window-close" ng-click="removeSkill($index)"></i>
             </div>
         </div>
     </div>
-    <div class="section menu-header">
-        <div class="button save-button" ng-click="save()">Save</div>
-        <div class="button load-button" ng-click="load()">Load</div>
-        <div class="button load-button" ng-click="clear()">Clear</div>
+    <div class="mouse-section mouse-menu-header">
+        <div class="mouse-button mouse-save-button" ng-click="save()">Save</div>
+        <div class="mouse-button mouse-load-button" ng-click="load()">Load</div>
+        <div class="mouse-button mouse-load-button" ng-click="clear()">Clear</div>
     </div>
 </div>

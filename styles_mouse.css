@@ -1,4 +1,4 @@
-.section {
+.mouse-section {
     border: 1px solid #F7F1CA;
     padding: 10px;
     margin: 15px auto;
@@ -7,20 +7,20 @@
     background-color: #BE7D2B;
 }
 
-.even,
-.odd {
+.mouse-even,
+.mouse-odd {
     min-height: 15px;
 }
 
-.even {
+.mouse-even {
     background-color: #E6C176;
 }
 
-.odd {
+.mouse-odd {
     background-color: #DFB96D;
 }
 
-.data_wrapper {
+.mouse-data_wrapper {
     border-radius: 5px;
     overflow: hidden;
 }
@@ -46,27 +46,27 @@ textarea {
     min-height: 20px;
 }
 
-.section_header div {
+.mouse-section_header div {
     width: 10%;
     display: inline-block;
     text-align: center;
 }
 
-.split {
+.mouse-split {
     width: 49%;
     display: inline-block;
 }
 
 
-.section_title {
+.mouse-section_title {
     color: #F7F1CA;
 }
 
-.fa {
+.mouse-fa {
     float: right;
 }
 
-.button {
+.mouse-button {
     width: 10%;
     text-align: center;
     padding: 10px;
@@ -75,30 +75,30 @@ textarea {
     border-radius: 10px;
 }
 
-.button:hover {
+.mouse-button:hover {
     border: 1px solid black;
     background-color: #F7F1CA;
 }
 
-.menu-header div {
+.mouse-menu-header div {
     display: inline-block;
     margin: auto;
 }
 
 
-.table {
+.mouse-table {
     display: table;
     text-align: center;
     margin: auto;
     table-layout: fixed;
 }
 
-.table .row {
+.mouse-table .mouse-row {
     display: table-row;
     width: 100%;
 }
 
-.table .row .cell {
+.mouse-table .mouse-row .mouse-cell {
     display: table-cell;
     padding: 4px 6px;
     width: auto;
@@ -106,16 +106,16 @@ textarea {
     vertical-align: middle;
 }
 
-.table .row .cell .contents {
+.mouse-table .mouse-row .mouse-cell .mouse-contents {
     background: #444;
     width: 100%;
 }
 
-.cell_input {
+.mouse-cell_input {
     width: 100%;
 }
 
-.main-wrap .container {
+.mouse-main-wrap .mouse-container {
     box-sizing: border-box;
     position: absolute;
     padding: 50px 25px;
@@ -129,6 +129,6 @@ textarea {
     width: 100%;
 }
 
-.table .row .cell.cell_age {
+.mouse-table .mouse-row .mouse-cell.mouse-cell_age {
     width: 5%;
 }
