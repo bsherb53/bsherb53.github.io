@@ -96,6 +96,10 @@ app.controller('mouseCtrl', function ($scope) {
         $scope.mouse = blankMouse();
     }
     // end menu
+
+    $scope.export = function(){
+        $scope.mouseData = JSON.stringify($scope.mouse);
+    }
 });
 
 function blankMouse() {
