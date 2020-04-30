@@ -27,6 +27,5 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
             $location.path("/mouse");
             return;
         }
-        $location.path("/");
     }
 });
