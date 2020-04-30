@@ -117,7 +117,7 @@ app.controller('mouseCtrl', function ($scope) {
 
 function blankMouse() {
     return {
-        name: "",
+        name: "Give me a unique name",
         age: "",
         home: "",
         furColor: "",
