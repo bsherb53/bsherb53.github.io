@@ -15,8 +15,9 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
     $scope.$route = $route;
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
+    
 
-    $scope.version = "1.0.5";
+    $scope.version = "1.0.6";
     $scope.page = function (name) {
         if (name == "hex") {
             $location.path("/hex");
@@ -27,5 +28,7 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
             $location.path("/mouse");
             return;
         }
+
+        $location.path("/");
     }
 });
