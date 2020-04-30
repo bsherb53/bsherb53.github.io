@@ -1,6 +1,6 @@
 app.controller('hexCtrl', function ($scope) {
     $scope.loading = true;
-    $scope.version = "2.1.7";
+    $scope.version = "2.2.0";
     $scope.admin = false;
     $scope.selected = undefined;
     $scope.biomes = [];
@@ -236,6 +236,7 @@ app.controller('hexCtrl', function ($scope) {
             rating: t.rating,
             type: t.type,
             weather: t.weather,
+            row: old.row
         }
         $scope.tiles[old.number] = newT;
         gapi.client.sheets.spreadsheets.values.update({
