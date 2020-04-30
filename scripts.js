@@ -8,14 +8,6 @@ app.config(function ($routeProvider) {
         .when("/hex", {
             templateUrl: "hexmap/index.html",
             controller: "hexCtrl"
-        })
-        .when("/", {
-            templateUrl: "hexmap/index.html",
-            controller: "hexCtrl"
-        })
-        .when("", {
-            templateUrl: "hexmap/index.html",
-            controller: "hexCtrl"
         });
 });
 
@@ -33,10 +25,10 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
             return;
         }
 
-        // if (name == "mouse") {
-        //     $location.path("/mouse");
-        //     return;
-        // }
+        if (name == "mouse") {
+            $location.path("/mouse");
+            return;
+        }
 
         $location.path("/");
     }
