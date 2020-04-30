@@ -1,7 +1,7 @@
 app.controller('mouseCtrl', function ($scope) {
     $scope.page = 1;
     $scope.nextPage = function (num) {
-        if ($scope.page == 0 && num == -1) {
+        if ($scope.page == 1 && num == -1) {
             return;
         }
         if ($scope.page == 13 && num == 1) {
