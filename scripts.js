@@ -15,7 +15,7 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
     $scope.$route = $route;
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
-    $scope.currentPage = $location.url() == "mouse" ? 'mouse' : $location.url() == "hex" ? 'hex' : 'home';
+    $scope.currentPage = $location.url() == "/mouse" ? 'mouse' : $location.url() == "/hex" ? 'hex' : 'home';
 
     $scope.version = "1.0.0";
     $scope.page = function (name) {
