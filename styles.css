@@ -1,5 +1,12 @@
 .contents {
-    background-color: white;
+    background-color: #32353B;
+}
+
+.contents .button {
+    color: #de9898;
+    background: #ADAEB0;
+    width: 10%;
+    display: inline-grid;
 }
 
 .button {
