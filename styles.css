@@ -1,13 +1,19 @@
 .contents {
     background-color: #32353B;
+    text-align:center;
 }
 
 .contents .button {
-    color: #de9898;
     background: #ADAEB0;
     width: 10%;
     display: inline-grid;
 }
+
+.contents .button:hover, .contents .button:focus {
+    background: #32353B;
+    border-radius: 15px;
+    color: white;
+  }
 
 .button {
     width: 10%;
@@ -25,3 +31,4 @@
     text-align: center;
     font-size: x-large;
 }
+
