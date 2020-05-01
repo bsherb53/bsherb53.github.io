@@ -15,10 +15,11 @@ app.controller('mainCtrl', function ($scope, $route, $routeParams, $location) {
     $scope.$route = $route;
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
-    
+    $scope.currentPage = "home"
 
-    $scope.version = "1.0.8";
+    $scope.version = "1.0.0";
     $scope.page = function (name) {
+        $scope.currentPage = name;
         console.log("changing route");
         if (name == "hex") {
             $location.path("/hex");
