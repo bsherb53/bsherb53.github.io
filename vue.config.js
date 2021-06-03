@@ -1,3 +1,4 @@
 module.exports = {
-	publicPath: '/vroomsticks/'
+	publicPath: '/vroomsticks/',
+	baseUrl: '/vroomsticks/',
 }
