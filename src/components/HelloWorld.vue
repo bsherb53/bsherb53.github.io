@@ -1,6 +1,7 @@
 <template>
 	<div class="fullApp">
 		<h1>{{ msg }}</h1>
+		This is something cool?
 	</div>
 </template>
 
