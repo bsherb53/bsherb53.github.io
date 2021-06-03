@@ -1,4 +1,1 @@
-module.exports = {
-	publicPath: '/vroomsticks/',
-	baseUrl: '/vroomsticks/',
-}
+module.exports = {}
