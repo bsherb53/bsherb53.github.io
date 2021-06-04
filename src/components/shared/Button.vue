@@ -1,12 +1,12 @@
 <template>
-	<div>
-		This is the match page
-	</div>
+  <div>
+    Button Here
+  </div>
 </template>
 
 <script>
 export default {
-	name: 'Match'
+  name: 'Button'
 }
 </script>
 

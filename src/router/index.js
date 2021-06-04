@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Match from '@/views/Match.vue';
+import Vroomsticks from '@/views/Vroomsticks.vue';
+import Smashketball from '@/views/Smashketball.vue';
 
 Vue.use(VueRouter)
 
@@ -12,9 +13,14 @@ const routes = [
 		component: Home
 	},
 	{
-		path: '/match',
-		name: 'Match',
-		component: Match
+		path: '/vroomsticks',
+		name: 'Vroomsticks',
+		component: Vroomsticks,
+	},
+	{
+		path: '/smashketball',
+		name: 'Smashketball',
+		component: Smashketball,
 	},
 	{
 		path: '/about',
