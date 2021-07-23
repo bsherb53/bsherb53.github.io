@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-			<router-link to="/">Home</router-link> |
-      <router-link to="/vroomsticks">Vroomsticks</router-link> |
-      <router-link to="/smashketball">Smashketball</router-link> |
-      <router-link to="/about">About</router-link>
+<!--			<router-link to="/">Home</router-link> |-->
+<!--      <router-link to="/vroomsticks">Vroomsticks</router-link> |-->
+<!--			<router-link to="/smashketball">Smashketball</router-link> |-->
+			<router-link to="/">The Witch is Dead!</router-link>
+<!--      <router-link to="/about">About</router-link>-->
     </div>
     <router-view/>
   </div>
