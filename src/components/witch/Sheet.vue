@@ -1,38 +1,61 @@
 <template>
 	<div class="sheet">
 		You are a cute woodland character
-		<div class="sheet_create" v-if="newChar">
-			Create a Character:
-			<div class="button" @click="createRandom">Create Random Character</div>
-
-			<div class="button" @click="pickAnimal">Roll for Animal</div>
-			<div class="Input">Animal Name: <input type="text" v-model="character.name"/></div>
-			<div class="Input">Image URL: <input type="text" v-model="character.url"/></div>
-			<div class="button" @click="pickSpell">Roll for Spell</div>
-
-			{{ character }}
-			{{ animals[character.species] }}
-		</div>
-		<div class="sheet_display" v-else>
-			Display a Character:
-			<div>
-				{{ character.name }}
-				{{ character.species }}
-				{{ animals[character.species] }}
-				<div>
-					Danger Level: {{ character.danger }}
+		<div class="sheet_create">
+			<div class="sheet_title">
+				Create a Character
+			</div>
+			<div class="character_create">
+				<div class="line">
+					<div class="button center" v-if="newChar" @click="createRandom">Random Character</div>
 				</div>
-				<div class="button" @click="danger(1)">+</div>
-				<div class="button" @click="danger(-1)">-</div>
-				
-				<img class="portrait" :src=" character.url "/>
+
+				<div class="line">
+					<div>Animal Name:</div>
+
+					<input type="text" v-if="newChar" v-model="character.name"/>
+					<div v-else>{{ titleCase(character.name) }}</div>
+				</div>
+				<div class="line">
+					<div>Image URL:</div>
+
+					<input type="text" v-model="character.url" v-if="newChar"/>
+					<img v-else class="portrait" :src=" character.url "/>
+
+				</div>
+
+				<div class="line">
+					<div class="text">Species: {{  titleCase(character.species) }}</div>
+					<div class="button" v-if="newChar" @click="pickAnimal">Change</div>
+				</div>
+				<div class="line">
+					<div class="text">Spell: {{ titleCase(character.spell) }}</div>
+					<div class="button" v-if="newChar" @click="pickSpell">Change</div>
+				</div>
+				<div class="line">
+					<div>Stats:</div>
+					<div>Clever: {{ animals[character.species].clever || 0 }}</div>
+					<div>Fierce: {{ animals[character.species].fierce || 0 }}</div>
+					<div>Sly: {{ animals[character.species].sly || 0 }}</div>
+					<div>Quick:{{ animals[character.species].quick || 0 }}</div>
+				</div>
+				<div class="line" v-if="!newChar" >
+					Danger Level: {{ character.danger }}
+					<div class="button" @click="danger(1)">+</div>
+					<div class="button" @click="danger(-1)">-</div>
+				</div>
+				<div class="line" v-if="!newChar" >
+					Notes:
+					<input type="text" v-model="character.notes"/>
+				</div>
 			</div>
 		</div>
-
 		<div class="footer">
-			<div class="button" @click="save">Save</div>
-			<div class="button">Export</div>
-			<div class="button">Import</div>
+			<div class="button" v-if="newChar" @click="save">Save</div>
+			<div class="button" v-else @click="save">Edit</div>
+
+			<div class="button" v-if="newChar">Export</div>
+			<div class="button" v-if="newChar">Import</div>
 		</div>
 	</div>
 </template>
@@ -46,7 +69,7 @@ export default {
 			newChar: true,
 			character: {
 				name: '',
-				species: '',
+				species: 'fox',
 				danger: 0,
 				spell: '',
 				notes: '',
@@ -67,7 +90,15 @@ export default {
 			spells: ['Unseen Hand', 'Conjure Light', 'Speak Human', 'Lock/Unlock/Open/Close', 'Conjure Food', 'Make Flame', 'Tidy/Clean/Mend/Fix', 'Plant Growth', 'Distract/Confuse', 'Make Text Read Itself']
 		};
 	},
+	created() {
+		this.character.spell = this.spells[0];
+	},
 	methods: {
+		titleCase(str) {
+			return str.toLowerCase().split(' ').map(function(word) {
+				return (word.charAt(0).toUpperCase() + word.slice(1));
+			}).join(' ');
+		},
 		createRandom() {
 			this.pickAnimal();
 			this.pickSpell();
@@ -76,39 +107,46 @@ export default {
 			this.character.species = this.randomKey(this.animals);
 		},
 		pickSpell() {
-			let n = Math.floor(Math.random() * this.spells.length);
-			console.log('spell number', n)
-			this.character.spell = this.spells[n];
+			this.character.spell = this.spells[Math.floor(Math.random() * this.spells.length)];
 		},
 		randomKey(obj) {
 			var keys = Object.keys(obj);
 			return keys[keys.length * Math.random() << 0];
 		},
 		save() {
-			this.newChar = !this.newChar;
+			if (!this.saveDisabled) {
+				this.newChar = !this.newChar;
+			}
 		},
 		danger(i) {
 			this.character.danger += i;
-
 			if (this.character.danger < 0) {
 				this.character.danger = 0;
 			}
+		}
+	},
+	computed: {
+		saveDisabled() {
+			return this.character.name === '';
 		}
 	}
 }
 </script>
 
 <style scoped>
-.sheet {
-	color: blue;
+
+.sheet_title {
+	font-size: 48px;
+	color: red;
+	border-bottom: 4px solid red;
+	width: 50%;
+	margin: auto;
 }
 
 .sheet_create {
-
-}
-
-.sheet_display {
-
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .button {
@@ -117,17 +155,39 @@ export default {
 	padding: 8px;
 	height: 20px;
 	min-width: 40px;
-	max-width: 60px;
+	width: fit-content;
 	transition: all .3s ease;
+	margin: 4px;
+	text-align: center;
 }
 
 .button:hover {
 	background: aliceblue;
 }
 
-.portrait{
+.character_create {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid white;
+	width: 50%;
+	text-align: center;
+	margin: auto;
+}
+
+.portrait {
 	max-width: 300px;
 	height: auto;
+}
+
+.text{
+	margin: auto 0;
+}
+
+.line {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	margin: 8px;
 }
 
 .footer {
