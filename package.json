@@ -1,52 +1,42 @@
 {
-  "name": "bsherb53.github.io",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "node scripts/gh-pages-deploy.js",
+  "name":         "bsherb53.github.io",
+  "version":      "0.1.0",
+  "private":      true,
+  "scripts":      {
+    "serve":           "vue-cli-service serve",
+    "build":           "vue-cli-service build",
+    "lint":            "vue-cli-service lint",
+    "deploy":          "node scripts/gh-pages-deploy.js",
     "gh-pages-deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "postcss": ">=8.2.10",
-    "vue": "^2.6.11",
-    "vue-router": "^3.5.1"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "^4.5.13",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "chalk": "^4.0.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "execa": "latest",
-    "node-emoji": "^1.10.0",
-    "postcss": ">=8.2.10",
-    "vue-cli-plugin-gh-pages-auto-deploy": "~0.4.0",
-    "vue-template-compiler": "^2.6.11"
+    "@vue/cli-service":  "^5.0.8",
+    "eslint":            "^7.32.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "sass":              "^1.69.5",
+    "vue":               "^3.3.11",
+    "vue-router":        "^4.2.5"
   },
   "eslintConfig": {
-    "root": true,
-    "env": {
+    "root":          true,
+    "env":           {
       "node": true
     },
-    "extends": [
-      "plugin:vue/essential",
+    "extends":       [
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules":         {
+      "vue/multi-word-component-names": "off"
+    }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
+    "not dead",
+    "not ie 11"
   ]
 }
