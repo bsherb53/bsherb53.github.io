@@ -1,11 +1,18 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="">2 Minute Hero</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
+
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  }
+}
+</script>
 
 <style>
 #app {
@@ -13,22 +20,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: #2c3e50;
-  color: aliceblue;
-  height: 100vh;
-  width: 100vw;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #42b983;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
