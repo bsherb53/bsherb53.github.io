@@ -1,4 +1,0 @@
-const database = {
-};
-
-export { database };
