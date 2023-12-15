@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
 import {createRouter, createWebHistory} from 'vue-router'
 import MinuteHero from "@/components/minuteHero/MinuteHero";
