@@ -1,5 +1,13 @@
 # two_minute_heroes
 
+## To Deploy
+
+```
+rm -r dist && vue-cli-service build && git add dist && git commit && 
+git subtree split --prefix dist -b gh-pages && 
+git push -f origin gh-pages:gh-pages && git branch -D gh-pages
+```
+
 ## Project setup
 ```
 yarn install
