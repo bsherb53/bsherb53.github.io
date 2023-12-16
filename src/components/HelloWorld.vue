@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    Welcome to 2 Minute Heroes
+    Welcome to 2 Minute Heroes v2.0
   </div>
 </template>
 

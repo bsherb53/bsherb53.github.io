@@ -5,13 +5,13 @@
   "scripts":         {
     "serve":   "vue-cli-service serve",
     "lint":    "vue-cli-service lint",
-    "build":   "vue-cli-service build",
     "deploy":  "gh-pages -d build",
     "test":    "git push origin `git subtree split --prefix dist master`:gh-pages --force",
     "deploy2": "git subtree push --prefix dist origin gh-pages",
 
     "step0": "echo 'Make sure you commit all your changes first'",
-    "clean":   "rm dist",
+    "clean":   " rm -r .\\dist\\",
+    "build":   "vue-cli-service build",
     "commit":  "git add dist && git commit -m 'adding dist subtree'",
     "step1":   "git subtree split --prefix dist -b gh-pages",
     "step2":   "git push -f origin gh-pages:gh-pages",
