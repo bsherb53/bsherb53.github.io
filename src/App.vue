@@ -1,27 +1,39 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <router-link to="/">Home</router-link>
-  <HelloWorld msg="2 Minute Heroes"/>
+  <div class="app-header">
+    <router-link to="/">Home</router-link>
+    <router-link to="/two-minute-heroes">2 Minute Heroes</router-link>
+  </div>
+  <router-view class="page"></router-view>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: {}
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: $color-primary;
+  background-color: $color-black;
+  display: flex;
+  font-size: 24px;
+  justify-content: flex-start;
+  padding: 12px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  flex-direction: column;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: auto;
+}
+
+.app-header {
+  justify-content: space-evenly;
+  padding: 12px;
+  display: flex;
 }
 </style>
