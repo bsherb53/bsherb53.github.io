@@ -15,8 +15,8 @@ export default {
 
 <style lang="scss">
 #app {
-  color: $color-primary;
-  background-color: $color-secondary;
+  //color: $color-primary;
+  //background-color: $color-secondary;
   display: flex;
   font-size: 24px;
   justify-content: flex-start;

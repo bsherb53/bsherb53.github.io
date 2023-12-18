@@ -2,24 +2,57 @@
   <div class="tmh">
     <div>Welcome to 2 Minute Heroes</div>
     <div>Create a random character</div>
-    <div @click="createChar">Create</div>
+    <StdButton style="primary" text="Create" @click="randomCharacter"/>
     <input v-model="cName"/>
     <div>
       <div>{{ cName }}</div>
       <div>{{ cRace }}</div>
       <div>{{ cClass }}</div>
+      <div>
+        <div>Character Abilities</div>
+        <div class="abilities">
+          <div class="ability">
+            <div class="ability-title">str</div>
+            <div class="ability-score">{{ cAbilities.str }}</div>
+          </div>
+          <div class="ability">
+            <div class="ability-title">dex</div>
+            <div class="ability-score">{{ cAbilities.dex }}</div>
+          </div>
+          <div class="ability">
+            <div class="ability-title">con</div>
+            <div class="ability-score">{{ cAbilities.con }}</div>
+          </div>
+          <div class="ability">
+            <div class="ability-title">int</div>
+            <div class="ability-score">{{ cAbilities.int }}</div>
+          </div>
+          <div class="ability">
+            <div class="ability-title">wis</div>
+            <div class="ability-score">{{ cAbilities.wis }}</div>
+          </div>
+          <div class="ability">
+            <div class="ability-title">cha</div>
+            <div class="ability-score">{{ cAbilities.cha }}</div>
+          </div>
+        </div>
+      </div>
       <div>{{ cAbilities }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import StdButton from "@/components/Button";
+import data from "@/store/TMH/data";
+
 export default {
   name: 'TwoMinuteHeroes',
+  components: {StdButton},
   data() {
     return {
       cName: '',
-      cRace: '',
+      cRace: {},
       cClass: '',
       cAbilities: {
         str: 10,
@@ -32,19 +65,17 @@ export default {
     }
   },
   methods: {
-    createChar() {
+    randomCharacter() {
       this.cRace = this.randomRace();
       this.cClass = this.randomClass();
       this.cAbilities = this.genAbilities();
     },
     randomRace() {
-      let races = ['Wood Elf', 'High Elf', 'Eladrin', 'Tiefling', 'Leonin', 'Dwarf', 'Gnome', 'Human',
-        'Variant Human', 'Kenku', 'Changeling'];
+      let races = data.allRaces();
       return races[Math.floor(Math.random() * races.length)];
     },
     randomClass() {
-      let classes = ['Artificer', 'Barbarian', 'Rogue', 'Fighter', 'Wizard', 'Warlock', 'Druid', 'Sorcerer',
-        'Cleric', 'Bard'];
+      let classes = data.allClasses()
       return classes[Math.floor(Math.random() * classes.length)];
     },
     genAbilities() {
@@ -62,22 +93,22 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style lang="scss" scoped>
+.tmh {
+  margin: 0 auto;
+  text-align: center;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.abilities {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+  margin: auto;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+.ability {
+  &-title {
+    text-transform: uppercase;
+  }
 }
 </style>
