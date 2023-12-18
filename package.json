@@ -3,19 +3,7 @@
   "version":         "0.1.0",
   "private":         true,
   "scripts":         {
-    "serve":   "vue-cli-service serve",
-    "lint":    "vue-cli-service lint",
-    "deploy":  "gh-pages -d build",
-    "test":    "git push origin `git subtree split --prefix dist master`:gh-pages --force",
-    "deploy2": "git subtree push --prefix dist origin gh-pages",
-    "step0":   "echo 'Make sure you commit all your changes first'",
-    "step1":   "rm -r dist",
-    "step2":   "vue-cli-service build",
-    "step3":   "git add dist ",
-    "step4":   "git commit",
-    "step5":   "git subtree split --prefix dist -b gh-pages",
-    "step6":   "git push -f origin gh-pages:gh-pages",
-    "step7":   "git branch -D gh-pages"
+    "serve":   "vue-cli-service serve"
   },
   "dependencies":    {
     "@fortawesome/fontawesome-free": "^6.5.1",

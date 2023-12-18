@@ -102,7 +102,6 @@ export default {
 .abilities {
   display: flex;
   justify-content: space-evenly;
-  width: 40%;
   margin: auto;
 }
 
