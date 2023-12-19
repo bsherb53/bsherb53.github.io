@@ -41,16 +41,20 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  border: 1px solid black;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  border: 1px solid $color-black;
   width: 100px;
-  margin: auto;
-  border-radius: 4px;
+  margin: 12px auto;
+  border-radius: $radius-small;
   box-shadow: 2px 2px 4px 0px $color-shadow;
   transition: all .2s ease-in-out;
 
   &:hover {
-    background-color: #eeeeee;
+    background-color: $color-off-white;
     cursor: pointer;
+    border-radius: $radius-medium;
   }
 
   &-primary {

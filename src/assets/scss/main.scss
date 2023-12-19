@@ -3,9 +3,20 @@ $color-green: #005B41;
 $color-blue: #232D3F;
 $color-teal: #008170;
 $color-red: #BE3144;
-
+$color-white: #ffffff;
+$color-off-white: #efefef;
 $color-grey: #c0c0c0;
-$color-primary: $color-red;
-$color-secondary: $color-blue;
+$color-yellow: #FFA732;
 
+$color-primary: $color-blue;
+$color-secondary: $color-blue;
 $color-shadow: #0f0f0f55;
+
+$radius-small: 4px;
+$radius-medium: 8px;
+$radius-large: 12px;
+
+$font-color-primary: $color-blue;
+$font-color-secondary: $color-grey;
+
+$shadow-small: 2px 2px 4px 0px $color-shadow;

@@ -2,12 +2,13 @@
   <div class="tmh">
     <div>Welcome to 2 Minute Heroes</div>
     <div>Create a random character</div>
-    <input v-model="cName"/>
+    <StdInput v-model="name" :value="name" hint="What's the name?"/>
     <StdButton buttonStyle="primary" text="Create" @click="randomCharacter"/>
 
-    <div class="tmh-char">
+    <div v-if="loading">Loading</div>
+    <div v-if="hasChar" class="tmh-char">
       <div class="tmh-char-name">{{ cName }}</div>
-      <div v-if="cRace" class="tmh-char-race">
+      <div class="tmh-char-race">
         <div class="tmh-char-race-name">
           {{ cRace.name }}
         </div>
@@ -15,9 +16,9 @@
           {{ cRace.source }}
         </div>
       </div>
-      <div v-if="cClass" class="tmh-char-class">
+      <div class="tmh-char-class">
         <div class="tmh-char-class-name">
-          {{ cClass.name }}: {{ subClass }}
+          {{ subClass }} {{ cClass.name }}
         </div>
         <div class="tmh-char-class-source">
           {{ cClass.source }}
@@ -53,19 +54,29 @@
         </div>
       </div>
     </div>
+
+    <div class="tmh-future">
+      <div class="tmh-future-title">Future Enhancements</div>
+      <div>Quirks/Traits/Bonds/Flaws</div>
+      <div>Sizes/Heights/Weights/Traits/Color</div>
+      <div>Select Sources</div>
+    </div>
   </div>
 </template>
 
 <script>
 import StdButton from "@/components/Button";
 import data from "@/store/TMH/data";
+import StdInput from "@/components/TextInput";
 
 export default {
   name: 'TwoMinuteHeroes',
-  components: {StdButton},
+  components: {StdInput, StdButton},
   data() {
     return {
-      cName: '',
+      loading: false,
+      name: '',
+      cName: null,
       cRace: null,
       cClass: null,
       subClass: null,
@@ -80,13 +91,26 @@ export default {
     }
   },
   methods: {
-    randomCharacter() {
+    async randomCharacter() {
+      if (!this.hasChar) {
+        this.loading = true;
+      }
+
+      if (!this.name || this.name === "") {
+        this.loading = false;
+        return;
+      }
+
+      this.cName = this.name;
       this.cRace = this.randomRace();
       this.cClass = this.randomClass();
       let sc = this.cClass.subclasses;
 
       this.subClass = sc[Math.floor(Math.random() * sc.length)]
       this.cAbilities = this.genAbilities();
+
+      await new Promise(r => setTimeout(r, 200));
+      this.loading = false;
     },
     randomRace() {
       let races = data.allRaces();
@@ -106,6 +130,11 @@ export default {
         wis: 12,
         cha: 13,
       }
+    }
+  },
+  computed: {
+    hasChar() {
+      return this.cRace !== null && !this.loading;
     }
   }
 }
@@ -137,12 +166,24 @@ export default {
         font-style: italic;
         font-size: 16px;
         margin: auto 12px;
-        color: $color-grey;
+        color: $font-color-secondary;
       }
     }
 
     &-class {
 
+    }
+  }
+
+  &-future {
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    &-title {
+      font-size: 16px;
+      text-decoration: underline;
     }
   }
 }
@@ -154,6 +195,11 @@ export default {
 }
 
 .ability {
+  border: 1px solid green;
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow: $shadow-small;
+
   &-title {
     text-transform: uppercase;
   }

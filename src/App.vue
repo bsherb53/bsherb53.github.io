@@ -29,6 +29,7 @@ export default {
   flex-direction: column;
   text-align: center;
   margin: auto;
+  color: $font-color-primary;
 }
 
 .app-header {
