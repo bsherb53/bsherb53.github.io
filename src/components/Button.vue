@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 100px;
   margin: auto;
   border-radius: 4px;
