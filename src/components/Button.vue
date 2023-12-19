@@ -11,7 +11,7 @@ export default {
     return {}
   },
   props: {
-    bStyle: String,
+    buttonStyle: String,
     text: {
       type: String,
       required: true
@@ -26,8 +26,8 @@ export default {
         "button": true,
 
       };
-      if (this.bStyle) {
-        cs["button-" + this.bStyle] = true;
+      if (this.buttonStyle) {
+        cs["button-" + this.buttonStyle] = true;
       } else {
         cs["button-primary"] = true;
       }
@@ -46,6 +46,12 @@ export default {
   margin: auto;
   border-radius: 4px;
   box-shadow: 2px 2px 4px 0px $color-shadow;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+  }
 
   &-primary {
 

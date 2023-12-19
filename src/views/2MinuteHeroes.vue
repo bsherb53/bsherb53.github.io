@@ -2,12 +2,27 @@
   <div class="tmh">
     <div>Welcome to 2 Minute Heroes</div>
     <div>Create a random character</div>
-    <StdButton style="primary" text="Create" @click="randomCharacter"/>
     <input v-model="cName"/>
-    <div>
-      <div>{{ cName }}</div>
-      <div>{{ cRace }}</div>
-      <div>{{ cClass }}</div>
+    <StdButton buttonStyle="primary" text="Create" @click="randomCharacter"/>
+
+    <div class="tmh-char">
+      <div class="tmh-char-name">{{ cName }}</div>
+      <div v-if="cRace" class="tmh-char-race">
+        <div class="tmh-char-race-name">
+          {{ cRace.name }}
+        </div>
+        <div class="tmh-char-race-source">
+          {{ cRace.source }}
+        </div>
+      </div>
+      <div v-if="cClass" class="tmh-char-class">
+        <div class="tmh-char-class-name">
+          {{ cClass.name }}: {{ subClass }}
+        </div>
+        <div class="tmh-char-class-source">
+          {{ cClass.source }}
+        </div>
+      </div>
       <div>
         <div>Character Abilities</div>
         <div class="abilities">
@@ -37,7 +52,6 @@
           </div>
         </div>
       </div>
-      <div>{{ cAbilities }}</div>
     </div>
   </div>
 </template>
@@ -52,8 +66,9 @@ export default {
   data() {
     return {
       cName: '',
-      cRace: {},
-      cClass: '',
+      cRace: null,
+      cClass: null,
+      subClass: null,
       cAbilities: {
         str: 10,
         dex: 10,
@@ -68,6 +83,9 @@ export default {
     randomCharacter() {
       this.cRace = this.randomRace();
       this.cClass = this.randomClass();
+      let sc = this.cClass.subclasses;
+
+      this.subClass = sc[Math.floor(Math.random() * sc.length)]
       this.cAbilities = this.genAbilities();
     },
     randomRace() {
@@ -76,7 +94,8 @@ export default {
     },
     randomClass() {
       let classes = data.allClasses()
-      return classes[Math.floor(Math.random() * classes.length)];
+      let c = classes[Math.floor(Math.random() * classes.length)];
+      return c;
     },
     genAbilities() {
       return {
@@ -97,6 +116,35 @@ export default {
 .tmh {
   margin: 0 auto;
   text-align: center;
+  width: 60%;
+
+  &-char {
+
+    &-name {
+
+    }
+
+    &-race, &-class {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      margin: 12px auto;
+
+      &-name {
+      }
+
+      &-source {
+        font-style: italic;
+        font-size: 16px;
+        margin: auto 12px;
+        color: $color-grey;
+      }
+    }
+
+    &-class {
+
+    }
+  }
 }
 
 .abilities {
