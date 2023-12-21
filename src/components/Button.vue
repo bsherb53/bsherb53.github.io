@@ -49,7 +49,7 @@ export default {
   margin: 12px auto;
   border-radius: $radius-small;
   box-shadow: 2px 2px 4px 0px $color-shadow;
-  transition: all .2s ease-in-out;
+  transition: $transition-normal;
 
   &:hover {
     background-color: $color-off-white;

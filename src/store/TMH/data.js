@@ -13,7 +13,7 @@ const sourceLR = "Locathah Rising"
 const sourceOGA = "One Grung Above"
 const sourceTCoE = "Tasha's Cauldron of Everything"
 
-const allRaces = function () {
+const races = function () {
     return [
         {name: "Dragonborn", source: sourceBasicRules},
         {name: "Dwarf", source: sourceBasicRules},
@@ -90,7 +90,7 @@ const allRaces = function () {
     ]
 }
 
-const allClasses = function () {
+const classes = function () {
     return [
         {
             name: "Barbarian",
@@ -299,8 +299,26 @@ const allClasses = function () {
     ]
 }
 
+const sources = function () {
+    return [
+        sourceBasicRules,
+        sourceMOtM,
+        sourceSAiS,
+        sourceSotDQ,
+        sourceSACoC,
+        sourceVRGtR,
+        sourceMOoT,
+        sourceERftLW,
+        sourceAI,
+        sourceGGtR,
+        sourceSCAG,
+        sourceLR,
+        sourceOGA,
+        // sourceTCoE,
+    ];
+}
 export default {
-    allClasses: allClasses,
-
-    allRaces: allRaces,
+    allClasses: classes,
+    allSources: sources,
+    allRaces: races,
 }

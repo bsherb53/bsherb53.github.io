@@ -2,6 +2,13 @@
   <div class="tmh">
     <div>Welcome to 2 Minute Heroes</div>
     <div>Create a random character</div>
+    <div class="sources-toggle" @click="showSources = !showSources">Filter Sources</div>
+    <div v-if="showSources" class="sources">
+      <div v-for="(v, i) in sources" :key="i" class="sources-source">
+        <CheckBox :text="v" @changed="toggleSource(v)"/>
+      </div>
+    </div>
+
     <StdInput v-model="name" :value="name" hint="What's the name?"/>
     <StdButton buttonStyle="primary" text="Create" @click="randomCharacter"/>
 
@@ -27,29 +34,9 @@
       <div>
         <div>Character Abilities</div>
         <div class="abilities">
-          <div class="ability">
-            <div class="ability-title">str</div>
-            <div class="ability-score">{{ cAbilities.str }}</div>
-          </div>
-          <div class="ability">
-            <div class="ability-title">dex</div>
-            <div class="ability-score">{{ cAbilities.dex }}</div>
-          </div>
-          <div class="ability">
-            <div class="ability-title">con</div>
-            <div class="ability-score">{{ cAbilities.con }}</div>
-          </div>
-          <div class="ability">
-            <div class="ability-title">int</div>
-            <div class="ability-score">{{ cAbilities.int }}</div>
-          </div>
-          <div class="ability">
-            <div class="ability-title">wis</div>
-            <div class="ability-score">{{ cAbilities.wis }}</div>
-          </div>
-          <div class="ability">
-            <div class="ability-title">cha</div>
-            <div class="ability-score">{{ cAbilities.cha }}</div>
+          <div v-for="(v, k) in cAbilities" :key="k" class="ability">
+            <div class="ability-title">{{ k }}</div>
+            <div class="ability-score">{{ v }}</div>
           </div>
         </div>
       </div>
@@ -68,10 +55,11 @@
 import StdButton from "@/components/Button";
 import data from "@/store/TMH/data";
 import StdInput from "@/components/TextInput";
+import CheckBox from "@/components/CheckBox";
 
 export default {
   name: 'TwoMinuteHeroes',
-  components: {StdInput, StdButton},
+  components: {CheckBox, StdInput, StdButton},
   data() {
     return {
       loading: false,
@@ -88,6 +76,9 @@ export default {
         wis: 10,
         cha: 10,
       },
+      sources: data.allSources(),
+      cSources: {},
+      showSources: false,
     }
   },
   methods: {
@@ -114,12 +105,26 @@ export default {
     },
     randomRace() {
       let races = data.allRaces();
+      // filter out the ones based on the sources
+      const enabled = this.enabledSources();
+      console.log(enabled);
+
+      if (enabled.length > 0) {
+        let filteredRaces = races.filter(function (el) {
+          return enabled.includes(el.source);
+        })
+
+        if (filteredRaces.length > 0) {
+          races = filteredRaces;
+          console.log("filtered", races)
+        }
+      }
+
       return races[Math.floor(Math.random() * races.length)];
     },
     randomClass() {
       let classes = data.allClasses()
-      let c = classes[Math.floor(Math.random() * classes.length)];
-      return c;
+      return classes[Math.floor(Math.random() * classes.length)];
     },
     genAbilities() {
       return {
@@ -130,6 +135,19 @@ export default {
         wis: 12,
         cha: 13,
       }
+    },
+    toggleSource(key) {
+      this.cSources[key] = !this.cSources[key];
+    },
+    enabledSources() {
+      let enabled = [];
+      for (const [key, value] of Object.entries(this.cSources)) {
+        console.log(key, value)
+        if (value === true) {
+          enabled.push(key)
+        }
+      }
+      return enabled;
     }
   },
   computed: {
@@ -202,6 +220,37 @@ export default {
 
   &-title {
     text-transform: uppercase;
+  }
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  //height: 0;
+  //overflow: hidden;
+  transition: $transition-normal;
+  margin: 4px;
+
+  &-toggle {
+    border: 1px solid $color-primary;
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+    transition: $transition-normal;
+    width: 200px;
+    margin: 4px auto;
+
+    &:hover {
+      background-color: $color-off-white;
+      cursor: pointer;
+      border-radius: $radius-medium;
+    }
+  }
+
+  &-source {
+    width: 33%;
+    margin: auto;
   }
 }
 </style>
