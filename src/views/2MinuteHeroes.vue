@@ -46,7 +46,6 @@
       <div class="tmh-future-title">Future Enhancements</div>
       <div>Quirks/Traits/Bonds/Flaws</div>
       <div>Sizes/Heights/Weights/Traits/Color</div>
-      <div>Select Sources</div>
     </div>
   </div>
 </template>
@@ -198,6 +197,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin: 4px auto;
 
     &-title {
       font-size: 16px;
