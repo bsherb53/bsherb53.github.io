@@ -95,6 +95,8 @@ const classes = function () {
         {
             name: "Barbarian",
             source: sourceBasicRules,
+            ability1: "str",
+            ability2: "con",
             subclasses: [
                 'Path of the Ancestral Guardian',
                 'Path of the Battlerager',
@@ -110,6 +112,8 @@ const classes = function () {
         {
             name: "Bard",
             source: sourceBasicRules,
+            ability1: "cha",
+            ability2: "dex",
             subclasses: [
                 'College of Creation',
                 'College of Eloquence',
@@ -124,6 +128,9 @@ const classes = function () {
         {
             name: "Cleric",
             source: sourceBasicRules,
+            ability1: "wis",
+            ability2: "str",
+            ability3: "con",
             subclasses: [
                 'Arcana Domain',
                 'Death Domain',
@@ -145,6 +152,8 @@ const classes = function () {
         {
             name: "Druid",
             source: sourceBasicRules,
+            ability1: "wis",
+            ability2: "con",
             subclasses: [
                 'Circle of Dreams',
                 'Circle of Spores',
@@ -159,6 +168,9 @@ const classes = function () {
         {
             name: "Fighter",
             source: sourceBasicRules,
+            ability1: "str",
+            ability2: "con",
+            ability3: "dex",
             subclasses: [
                 'Arcane Archer',
                 'Battle Master',
@@ -176,6 +188,8 @@ const classes = function () {
         {
             name: "Monk",
             source: sourceBasicRules,
+            ability1: "dex",
+            ability2: "wis",
             subclasses: [
                 'Way of Mercy',
                 'Way of Shadow',
@@ -193,6 +207,8 @@ const classes = function () {
         {
             name: "Paladin",
             source: sourceBasicRules,
+            ability1: "str",
+            ability2: "cha",
             subclasses: [
                 'Oath of Conquest',
                 'Oath of Devotion',
@@ -210,6 +226,8 @@ const classes = function () {
         {
             name: "Ranger",
             source: sourceBasicRules,
+            ability1: "dex",
+            ability2: "wis",
             subclasses: [
                 'Beast Master',
                 'Drakewarden',
@@ -224,6 +242,8 @@ const classes = function () {
         {
             name: "Rogue",
             source: sourceBasicRules,
+            ability1: "dex",
+            ability2: "con",
             subclasses: [
                 'Arcane Trickster',
                 'Assassin',
@@ -239,6 +259,8 @@ const classes = function () {
         {
             name: "Sorcerer",
             source: sourceBasicRules,
+            ability1: "cha",
+            ability2: "con",
             subclasses: [
                 'Aberrant Mind',
                 'Clockwork Soul',
@@ -254,6 +276,8 @@ const classes = function () {
         {
             name: "Warlock",
             source: sourceBasicRules,
+            ability1: "cha",
+            ability2: "con",
             subclasses: [
                 'The Archfey',
                 'The Celestial',
@@ -269,6 +293,9 @@ const classes = function () {
         {
             name: "Wizard",
             source: sourceBasicRules,
+            ability1: "int",
+            ability2: "con",
+            ability3: "dex",
             subclasses: [
                 'Bladesinging',
                 'Order of Scribes',
@@ -289,6 +316,9 @@ const classes = function () {
         {
             name: "Artificer",
             source: sourceTCoE,
+            ability1: "int",
+            ability2: "con",
+            ability3: "dex",
             subclasses: [
                 'Alchemist',
                 'Armorer',
@@ -314,7 +344,7 @@ const sources = function () {
         sourceSCAG,
         sourceLR,
         sourceOGA,
-        // sourceTCoE,
+        sourceTCoE,
     ];
 }
 export default {

@@ -76,6 +76,7 @@ export default {
   padding: 4px;
   cursor: pointer;
   transition: $transition-normal;
+  min-width: 150px;
 
   &:hover {
     background-color: $color-off-white;
@@ -84,7 +85,7 @@ export default {
   }
 
   &-text {
-    margin: auto 0;
+    margin: auto;
   }
 }
 </style>
