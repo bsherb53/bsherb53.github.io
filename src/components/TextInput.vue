@@ -31,7 +31,7 @@ export default {
     if (this.type !== undefined) {
       this.inputType = this.type;
     }
-    console.log(this.inputType)
+    // console.log(this.inputType)
 
     this.debouncedFetch = helpers.debounce((newValue) => {
       this.loading = false;
@@ -51,7 +51,7 @@ export default {
       this.debouncedFetch(n, o);
     },
     value(n) {
-      console.log("changed test")
+      // console.log("changed test")
       this.content = n;
       // this.loading = true;
       // this.debouncedFetch(n, o);

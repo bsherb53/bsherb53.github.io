@@ -2,40 +2,26 @@
   <div class="tmh">
     <div>Welcome to 2 Minute Heroes</div>
     <div>Create a random character</div>
-    <StdButton class="sources-toggle" text="Filter Sources" @click="showSources = !showSources"/>
-    <div v-if="showSources" class="sources">
-      <div v-for="(v, i) in sources" :key="i" class="sources-source">
-        <CheckBox :text="v" :value="cSources[v]" @changed="toggleSource(v)"/>
-      </div>
+    <div>
+      <StdButton v-if="pageNum > 0" text="Back" @click="prevPage"/>
+      <StdButton v-if="pageNum < 1" text="Next" @click="nextPage"/>
+      <StdButton v-if="pageNum ===1" buttonStyle="primary" text="Create" @click="randomCharacter"/>
+      {{ pageNum }}
     </div>
-    <div v-else class="tmh-char">
-      <StdInput v-model="name" :value="name" class="tmh-char-name" hint="What's the name?" label="Name"/>
-      <div class="tmh-generation">
-        <div>Generation Method</div>
-        <div class="tmh-generation-options">
-          <CheckBox :value="method === stdArray" text="Standard Array" @click="toggleGenMethod(stdArray)"/>
-          <CheckBox :value="method === pointBuy" text="Point Buy" @click="toggleGenMethod(pointBuy)"/>
-          <CheckBox :value="method === rolled" text="Rolled" @click="toggleGenMethod(rolled)"/>
-        </div>
-      </div>
-      <div v-if="method === rolled" class="tmh-generation-limits">
-        <div>Min:</div>
-        <StdInput v-model="minRoll" :value="minRoll" label="Min" type="number"/>
-        <div>Max:</div>
-
-        <StdInput v-model="maxRoll" :value="maxRoll" label="Max" type="number"/>
-      </div>
-      <StdButton buttonStyle="primary" text="Create" @click="randomCharacter"/>
-      <div v-if="errMsg" class="tmh-error">{{ errMsg }}</div>
-      <div v-if="raceErrMsg" class="tmh-error">{{ raceErrMsg }}</div>
-      <div v-if="classErrMsg" class="tmh-error">{{ classErrMsg }}</div>
-      <div v-if="loading">Loading</div>
-      <div v-if="hasChar" class="tmh-char">
+    <!--    <StdButton v-if="!showSources" class="sources-toggle" text="Sources" @click="showSources = !showSources"/>-->
+    <div v-if="pageNum === 0">
+      <TMHSources :user-sources="cSources" @saved="filterSources"/>
+    </div>
+    <div v-else-if="pageNum === 1">
+      <TMHGenMethod :choice="method" @saved="changedMethod"/>
+    </div>
+    <div v-else-if="pageNum ===2">
+      <div class="tmh-char">
         <div class="tmh-char-name">{{ cName }}</div>
         <div class="tmh-char-race">
-          <div class="tmh-char-race-name">
-            {{ cRace.name }}
-          </div>
+          <!--          <div class="tmh-char-race-name">-->
+          <!--            {{ cRace.name }}-->
+          <!--          </div>-->
           <div class="tmh-char-race-source">
             {{ cRace.source }}
           </div>
@@ -58,6 +44,15 @@
           </div>
         </div>
       </div>
+    </div>
+    <div v-else class="tmh-char">
+      <!--      <StdInput v-model="name" :value="name" class="tmh-char-name" hint="What's the name?" label="Name"/>-->
+
+      <StdButton buttonStyle="primary" text="Create" @click="randomCharacter"/>
+      <div v-if="errMsg" class="tmh-error">{{ errMsg }}</div>
+      <div v-if="raceErrMsg" class="tmh-error">{{ raceErrMsg }}</div>
+      <div v-if="classErrMsg" class="tmh-error">{{ classErrMsg }}</div>
+      <div v-if="loading">Loading</div>
 
       <div class="tmh-future">
         <div class="tmh-future-title">Future Enhancements</div>
@@ -71,18 +66,18 @@
 <script>
 import StdButton from "@/components/Button";
 import data from "@/store/TMH/data";
-import StdInput from "@/components/TextInput";
-import CheckBox from "@/components/CheckBox";
 import helpers from "@/store/TMH/helpers";
+import TMHSources from "@/components/tmh/TMHSources";
+import TMHGenMethod from "@/components/tmh/TMHGenMethod";
 
 export default {
   name: 'TwoMinuteHeroes',
-  components: {CheckBox, StdInput, StdButton},
+  components: {TMHGenMethod, TMHSources, StdButton},
   data() {
     return {
       loading: false,
-      name: null,
-      cName: null,
+      name: "",
+      cName: "",
       cRace: null,
       cClass: null,
       subClass: null,
@@ -94,18 +89,19 @@ export default {
         wis: 10,
         cha: 10,
       },
-      sources: data.allSources(),
-      cSources: {},
-      showSources: false,
+      // sources: data.allSources(),
       errMsg: null,
       raceErrMsg: null,
       classErrMsg: null,
 
-      pointBuy: "Point Buy",
-      rolled: "Rolled",
-      stdArray: "Standard Array",
-      method: "Standard Array",
+      pageNum: 0,
 
+      //sources
+      cSources: {},
+      showSources: false,
+
+      // ability generation
+      method: "Standard Array",
       minRoll: 8,
       maxRoll: 18,
     }
@@ -113,6 +109,57 @@ export default {
   created() {
   },
   methods: {
+    prevPage() {
+      if (this.pageNum > 0) {
+        this.pageNum--;
+      }
+    },
+    nextPage() {
+      this.pageNum++;
+    },
+    filterSources(d) {
+      // console.log("received saved sources", d);
+      this.cSources = d;
+      this.nextPage();
+    },
+    changedMethod(m, min, max) {
+      this.method = m;
+      this.minRoll = min;
+      this.maxRoll = max;
+      this.nextPage();
+    },
+    randomName() {
+      const getRandomElement = (array) => {
+        return array[Math.floor(Math.random() * array.length)];
+      };
+
+      const vowels = 'aeiou';
+      const consonants = 'bcdfghjklmnpqrstvwxyz';
+
+      const getRandomSyllable = () => {
+        const syllable = getRandomElement(consonants) + getRandomElement(vowels);
+        return Math.random() < 0.5 ? syllable : getRandomElement(consonants) + syllable;
+      };
+
+      const getRandomFirstName = () => {
+        const syllableCount = Math.floor(Math.random() * 3) + 1;
+        return Array.from({ length: syllableCount }, () => getRandomSyllable()).join('');
+      };
+
+      const getRandomLastName = () => {
+        const syllableCount = Math.floor(Math.random() * 5) + 1;
+        return Array.from({ length: syllableCount }, () => getRandomSyllable()).join('');
+      };
+
+      const capitalizeFirstLetter = (word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      };
+
+      const randomFirstName = capitalizeFirstLetter(getRandomFirstName());
+      const randomLastName = capitalizeFirstLetter(getRandomLastName());
+
+      return `${randomFirstName} ${randomLastName}`;
+    },
     async randomCharacter() {
       this.errMsg = null;
       this.raceErrMsg = null;
@@ -121,13 +168,7 @@ export default {
         this.loading = true;
       }
 
-      if (!this.name || this.name === "") {
-        console.log(this.name);
-        this.errMsg = "Must provide a name";
-        this.loading = false;
-        return;
-      }
-
+      this.name = this.randomName();
       this.cName = this.name;
       this.cRace = this.randomRace();
       this.cClass = this.randomClass();
@@ -138,12 +179,13 @@ export default {
 
       await new Promise(r => setTimeout(r, 200));
       this.loading = false;
+      this.nextPage();
     },
     randomRace() {
       let races = data.allRaces();
       // filter out the ones based on the sources
       const enabled = this.enabledSources();
-      console.log(enabled);
+      // console.log(enabled);
 
       if (enabled.length > 0) {
         let filteredRaces = races.filter(function (el) {
@@ -174,9 +216,6 @@ export default {
       }
       return classes[Math.floor(Math.random() * classes.length)];
     },
-    toggleGenMethod(m) {
-      this.method = m;
-    },
     genAbilities() {
       let numbers = [15, 14, 13, 12, 10, 8];
       switch (this.method) {
@@ -197,14 +236,14 @@ export default {
       // use the class and see what is the biggest to smallest
       return helpers.asiFromNumbers(this.cClass, numbers);
     },
-    toggleSource(key) {
-      this.sources[key] = !this.sources[key];
-      this.cSources[key] = !this.cSources[key];
-    },
+    // toggleSource(key) {
+    //   this.sources[key] = !this.sources[key];
+    //   this.cSources[key] = !this.cSources[key];
+    // },
     enabledSources() {
       let enabled = [];
       for (const [key, value] of Object.entries(this.cSources)) {
-        console.log(key, value)
+        // console.log(key, value)
         if (value === true) {
           enabled.push(key)
         }
