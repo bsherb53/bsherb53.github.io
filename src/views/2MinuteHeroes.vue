@@ -1,49 +1,22 @@
 <template>
   <div class="tmh">
     <div>Welcome to 2 Minute Heroes</div>
-    <div>Create a random character</div>
+    <!--    <div>Create a random character</div>-->
     <div>
       <StdButton v-if="pageNum > 0" text="Back" @click="prevPage"/>
-      <StdButton v-if="pageNum < 1" text="Next" @click="nextPage"/>
-      <StdButton v-if="pageNum ===1" buttonStyle="primary" text="Create" @click="randomCharacter"/>
-      {{ pageNum }}
+      <!--      <StdButton v-if="pageNum < 1" text="Next" @click="nextPage"/>-->
+      <!--      <StdButton v-if="pageNum ===1" buttonStyle="primary" text="Create" @click="randomCharacter"/>-->
+      <!--      {{ pageNum }}-->
     </div>
     <!--    <StdButton v-if="!showSources" class="sources-toggle" text="Sources" @click="showSources = !showSources"/>-->
     <div v-if="pageNum === 0">
       <TMHSources :user-sources="cSources" @saved="filterSources"/>
     </div>
     <div v-else-if="pageNum === 1">
-      <TMHGenMethod :choice="method" @saved="changedMethod"/>
+      <TMHGenMethod :choice="method" :max="maxRoll" :min="minRoll" @changed="changedMethod" @saved="savedMethod"/>
     </div>
     <div v-else-if="pageNum ===2">
-      <div class="tmh-char">
-        <div class="tmh-char-name">{{ cName }}</div>
-        <div class="tmh-char-race">
-          <!--          <div class="tmh-char-race-name">-->
-          <!--            {{ cRace.name }}-->
-          <!--          </div>-->
-          <div class="tmh-char-race-source">
-            {{ cRace.source }}
-          </div>
-        </div>
-        <div class="tmh-char-class">
-          <div class="tmh-char-class-name">
-            {{ subClass }} {{ cClass.name }}
-          </div>
-          <div class="tmh-char-class-source">
-            {{ cClass.source }}
-          </div>
-        </div>
-        <div>
-          <div>Character Abilities</div>
-          <div class="abilities">
-            <div v-for="(v, k) in cAbilities" :key="k" class="ability">
-              <div class="ability-title">{{ k }}</div>
-              <div class="ability-score">{{ v }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CharacterViewer :char="character"/>
     </div>
     <div v-else class="tmh-char">
       <!--      <StdInput v-model="name" :value="name" class="tmh-char-name" hint="What's the name?" label="Name"/>-->
@@ -69,13 +42,34 @@ import data from "@/store/TMH/data";
 import helpers from "@/store/TMH/helpers";
 import TMHSources from "@/components/tmh/TMHSources";
 import TMHGenMethod from "@/components/tmh/TMHGenMethod";
+import CharacterViewer from "@/components/tmh/CharacterViewer";
 
 export default {
   name: 'TwoMinuteHeroes',
-  components: {TMHGenMethod, TMHSources, StdButton},
+  components: {CharacterViewer, TMHGenMethod, TMHSources, StdButton},
   data() {
     return {
       loading: false,
+      character: {
+        name: "",
+        race: {
+          name: "",
+          source: "",
+        },
+        class: {
+          name: "",
+          source: "",
+        },
+        subclass: "",
+        abilities: {
+          str: 10,
+          dex: 10,
+          con: 10,
+          int: 10,
+          wis: 10,
+          cha: 10,
+        }
+      },
       name: "",
       cName: "",
       cRace: null,
@@ -123,10 +117,16 @@ export default {
       this.nextPage();
     },
     changedMethod(m, min, max) {
+      console.log("recording changed", m, min, max)
       this.method = m;
       this.minRoll = min;
       this.maxRoll = max;
-      this.nextPage();
+    },
+    savedMethod(m, min, max) {
+      this.method = m;
+      this.minRoll = min;
+      this.maxRoll = max;
+      this.randomCharacter();
     },
     randomName() {
       const getRandomElement = (array) => {
@@ -143,12 +143,12 @@ export default {
 
       const getRandomFirstName = () => {
         const syllableCount = Math.floor(Math.random() * 3) + 1;
-        return Array.from({ length: syllableCount }, () => getRandomSyllable()).join('');
+        return Array.from({length: syllableCount}, () => getRandomSyllable()).join('');
       };
 
       const getRandomLastName = () => {
         const syllableCount = Math.floor(Math.random() * 5) + 1;
-        return Array.from({ length: syllableCount }, () => getRandomSyllable()).join('');
+        return Array.from({length: syllableCount}, () => getRandomSyllable()).join('');
       };
 
       const capitalizeFirstLetter = (word) => {
@@ -169,13 +169,14 @@ export default {
       }
 
       this.name = this.randomName();
-      this.cName = this.name;
-      this.cRace = this.randomRace();
-      this.cClass = this.randomClass();
-      let sc = this.cClass.subclasses;
-
-      this.subClass = sc[Math.floor(Math.random() * sc.length)]
-      this.cAbilities = this.genAbilities();
+      this.character.name = this.name;
+      this.character.race = this.randomRace();
+      let c = this.randomClass();
+      let sc = c.subclasses;
+      console.log("class", c);
+      console.log("subclasses", sc);
+      this.character.subclass = sc[Math.floor(Math.random() * sc.length)]
+      this.character.abilities = this.genAbilities();
 
       await new Promise(r => setTimeout(r, 200));
       this.loading = false;
@@ -219,7 +220,7 @@ export default {
     genAbilities() {
       let numbers = [15, 14, 13, 12, 10, 8];
       switch (this.method) {
-        case this.rolled:
+        case "Rolled":
           numbers = [
             helpers.randomIntFromInterval(this.minRoll, this.maxRoll),
             helpers.randomIntFromInterval(this.minRoll, this.maxRoll),
@@ -229,12 +230,12 @@ export default {
             helpers.randomIntFromInterval(this.minRoll, this.maxRoll)
           ]
           break;
-        case this.pointBuy:
-          numbers = [10, 10, 10, 10, 10, 10];
+        case "Point Buy":
+          return [];
       }
 
       // use the class and see what is the biggest to smallest
-      return helpers.asiFromNumbers(this.cClass, numbers);
+      return helpers.asiFromNumbers(this.character.class, numbers);
     },
     // toggleSource(key) {
     //   this.sources[key] = !this.sources[key];
@@ -266,57 +267,11 @@ export default {
   text-align: center;
   width: 60%;
 
-  &-char {
-
-
-    &-name {
-      margin: auto;
-      width: fit-content;
-    }
-
-    &-race, &-class {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      margin: 12px auto;
-
-      &-name {
-      }
-
-      &-source {
-        font-style: italic;
-        font-size: 16px;
-        margin: auto 12px;
-        color: $font-color-secondary;
-      }
-    }
-
-    &-class {
-
-    }
-  }
 
   &-error {
     color: $color-red;
   }
 
-  &-generation {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    margin: 12px;
-
-    &-options {
-      display: flex;
-      justify-content: space-evenly;
-    }
-
-    &-limits {
-      display: flex;
-      margin: auto;
-      justify-content: center;
-    }
-  }
 
   &-future {
     font-size: 12px;
@@ -349,37 +304,4 @@ export default {
   }
 }
 
-.sources {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 12px;
-  //height: 0;
-  //overflow: hidden;
-  transition: $transition-normal;
-  margin: 4px;
-
-  &-toggle {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-    border: 1px solid $color-primary;
-    border-radius: 4px;
-    padding: 4px;
-    cursor: pointer;
-    transition: $transition-normal;
-    width: 200px;
-    margin: 4px auto;
-
-    &:hover {
-      background-color: $color-off-white;
-      cursor: pointer;
-      border-radius: $radius-medium;
-    }
-  }
-
-  &-source {
-    width: 33%;
-    margin: auto;
-  }
-}
 </style>
