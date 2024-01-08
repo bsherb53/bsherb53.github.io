@@ -87,7 +87,7 @@ const races = function () {
         {name: "Locathah", source: sourceLR},
 
         {name: "Grung", source: sourceOGA},
-    ]
+    ].sort();
 }
 
 const classes = function () {
@@ -326,12 +326,11 @@ const classes = function () {
                 'Battle Smith',
             ]
         },
-    ]
+    ].sort();
 }
 
 const sources = function () {
-    return [
-        sourceBasicRules,
+    let sources = [
         sourceMOtM,
         sourceSAiS,
         sourceSotDQ,
@@ -345,7 +344,11 @@ const sources = function () {
         sourceLR,
         sourceOGA,
         sourceTCoE,
-    ];
+    ].sort();
+
+    // sort alphabetically then add the Basic Rules First
+    sources.unshift(sourceBasicRules)
+    return sources;
 }
 export default {
     allClasses: classes,

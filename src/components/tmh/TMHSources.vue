@@ -1,10 +1,17 @@
 <template>
   <div class="sources">
     <StdButton text="Next" @click="saveSources"/>
-    <div>Pick your Sources</div>
-    <div>Leave blank for all</div>
-    <div v-for="(v, i) in sources" :key="i" class="sources-source">
-      <CheckBox :text="v" :value="cSources[v]" @changed="toggleSource(v)"/>
+    <div class="sources-buttons">
+      <div>Pick your Sources</div>
+<!--      <div>-->
+<!--        <StdButton text="Select All" @click="selectAll"/>-->
+<!--        <StdButton text="De-Select All" @click="unselectAll"/>-->
+<!--      </div>-->
+    </div>
+    <div class="sources-data">
+      <div v-for="(v, i) in sources" :key="i" class="sources-source">
+        <CheckBox :text="v" :value="cSources[v]" @changed="toggleSource(v)"/>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +62,9 @@ export default {
   },
   created() {
     this.cSources = this.userSources;
+    if (Object.keys(this.userSources).length === 0) {
+      this.toggleSource("Basic Rules");
+    }
   },
   methods: {
     saveSources() {
@@ -64,43 +74,47 @@ export default {
     toggleSource(key) {
       this.sources[key] = !this.sources[key];
       this.cSources[key] = !this.cSources[key];
+      // if (b !== undefined) {
+      //   this.sources[key] = b;
+      //   this.cSources[key] = b;
+      // }
     },
+    // selectAll() {
+    //   for (const key in this.sources) {
+    //     this.toggleSource(this.sources[key], true)
+    //   }
+    // },
+    // unselectAll() {
+    //   for (const key in this.sources) {
+    //     this.toggleSource(this.sources[key], false)
+    //   }
+    // }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-//.sources {
-//  display: flex;
-//  flex-wrap: wrap;
-//  font-size: 12px;
-//  //height: 0;
-//  //overflow: hidden;
-//  transition: $transition-normal;
-//  margin: 4px;
-//
-//  &-toggle {
-//    -webkit-user-select: none; /* Safari */
-//    -ms-user-select: none; /* IE 10 and IE 11 */
-//    user-select: none; /* Standard syntax */
-//    border: 1px solid $color-primary;
-//    border-radius: 4px;
-//    padding: 4px;
-//    cursor: pointer;
-//    transition: $transition-normal;
-//    width: 200px;
-//    margin: 4px auto;
-//
-//    &:hover {
-//      background-color: $color-off-white;
-//      cursor: pointer;
-//      border-radius: $radius-medium;
-//    }
-//  }
-//
-//  &-source {
-//    width: 33%;
-//    margin: auto;
-//  }
-//}
+.sources {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  //height: 0;
+  //overflow: hidden;
+  transition: $transition-normal;
+  margin: 4px;
+
+  &-buttons {
+
+  }
+
+  &-data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &-source {
+    margin: 4px;
+  }
+}
 </style>
