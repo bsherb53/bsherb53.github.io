@@ -1,18 +1,18 @@
 <template>
   <div class="sources">
-    <StdButton text="Next" @click="saveSources"/>
     <div class="sources-buttons">
-      <div>Pick your Sources</div>
-<!--      <div>-->
-<!--        <StdButton text="Select All" @click="selectAll"/>-->
-<!--        <StdButton text="De-Select All" @click="unselectAll"/>-->
-<!--      </div>-->
+      <div>First, pick your source(s)</div>
+      <!--      <div>-->
+      <!--        <StdButton text="Select All" @click="selectAll"/>-->
+      <!--        <StdButton text="De-Select All" @click="unselectAll"/>-->
+      <!--      </div>-->
     </div>
     <div class="sources-data">
       <div v-for="(v, i) in sources" :key="i" class="sources-source">
         <CheckBox :text="v" :value="cSources[v]" @changed="toggleSource(v)"/>
       </div>
     </div>
+    <StdButton text="Next" @click="saveSources"/>
   </div>
 </template>
 
@@ -69,7 +69,9 @@ export default {
   methods: {
     saveSources() {
       // console.log("saving sources", this.cSources);
-      this.$emit('saved', this.cSources);
+      if (this.hasEnabled) {
+        this.$emit('saved', this.cSources);
+      }
     },
     toggleSource(key) {
       this.sources[key] = !this.sources[key];
@@ -89,6 +91,18 @@ export default {
     //     this.toggleSource(this.sources[key], false)
     //   }
     // }
+  },
+  computed: {
+    hasEnabled() {
+      let enabled = [];
+      for (const [key, value] of Object.entries(this.cSources)) {
+        // console.log(key, value)
+        if (value === true) {
+          enabled.push(key)
+        }
+      }
+      return enabled.length > 0;
+    }
   }
 }
 </script>
@@ -97,11 +111,7 @@ export default {
 .sources {
   display: flex;
   flex-direction: column;
-  font-size: 12px;
-  //height: 0;
-  //overflow: hidden;
   transition: $transition-normal;
-  margin: 4px;
 
   &-buttons {
 
@@ -114,7 +124,8 @@ export default {
   }
 
   &-source {
-    margin: 4px;
+    font-size: 18px;
+    margin: $margin-small;
   }
 }
 </style>

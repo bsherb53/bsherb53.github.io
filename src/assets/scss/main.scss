@@ -1,23 +1,32 @@
 $color-black: #0F0F0F;
 $color-green: #005B41;
 $color-blue: #232D3F;
+$color-light-blue: #354460;
 $color-teal: #008170;
 $color-red: #BE3144;
 $color-white: #ffffff;
 $color-off-white: #efefef;
-$color-grey: #c0c0c0;
+$color-grey: #9a9a9a;
 $color-yellow: #FFA732;
 
 $color-primary: $color-blue;
-$color-secondary: $color-blue;
+$color-secondary: $color-off-white;
 $color-shadow: #0f0f0f55;
 
 $radius-small: 4px;
 $radius-medium: 8px;
 $radius-large: 12px;
 
-$font-color-primary: $color-blue;
-$font-color-secondary: $color-grey;
+$margin-small: 4px;
+$margin-medium: 8px;
+$margin-large: 12px;
+
+$padding-small: 4px;
+$padding-medium: 8px;
+$padding-large: 12px;
+
+$font-color-primary: $color-primary;
+$font-color-secondary: $color-secondary;
 
 $shadow-small: 2px 2px 4px 0px $color-shadow;
 

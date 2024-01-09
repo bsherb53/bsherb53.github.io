@@ -73,15 +73,20 @@ export default {
   display: flex;
   border: 1px solid $color-primary;
   border-radius: 4px;
-  padding: 4px;
+  padding: $padding-medium;
   cursor: pointer;
   transition: $transition-normal;
-  min-width: 150px;
+  box-shadow: 2px 2px 4px 0px $color-shadow;
 
   &:hover {
     background-color: $color-off-white;
     cursor: pointer;
     border-radius: $radius-medium;
+  }
+
+  &:active {
+    background-color: $color-light-blue;
+    color: $color-off-white;
   }
 
   &-text {

@@ -45,20 +45,62 @@ export default {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
   border: 1px solid $color-black;
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
   margin: 12px auto;
   border-radius: $radius-small;
   box-shadow: 2px 2px 4px 0px $color-shadow;
   transition: $transition-normal;
+  padding: $padding-medium;
 
   &:hover {
-    background-color: $color-off-white;
     cursor: pointer;
     border-radius: $radius-medium;
   }
 
-  &-primary {
+  &:active {
+  }
 
+  &-primary {
+    background-color: $color-primary;
+    color: $color-secondary;
+
+    &:hover {
+      background-color: $color-light-blue;
+    }
+
+    &:active {
+      color: $color-primary;
+      background-color: $color-off-white;
+    }
+  }
+
+  &-secondary {
+    background-color: $color-green;
+    color: $color-off-white;
+
+    &:hover {
+      background-color: $color-teal;
+    }
+
+    &:active {
+      background-color: $color-off-white;
+      color: $color-green;
+    }
+  }
+
+  &-trinary {
+    background-color: $color-green;
+    color: $color-off-white;
+
+    &:hover {
+      background-color: $color-teal;
+    }
+
+    &:active {
+      background-color: $color-off-white;
+      color: $color-green;
+    }
   }
 }
 </style>

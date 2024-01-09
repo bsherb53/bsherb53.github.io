@@ -86,7 +86,8 @@ export default {
     padding: 6px;
     border-radius: $radius-small;
     border: 1px solid $color-primary;
-    font-size: 16px;
+    text-align: center;
+    font-size: 24px;
   }
 
   &-narrow {

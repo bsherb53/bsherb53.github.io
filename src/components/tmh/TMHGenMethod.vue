@@ -1,11 +1,13 @@
 <template>
   <div class="tmh-generation">
-    <div>Pick the Generation Method</div>
-    <StdButton text="Next" @click="saveMethod"/>
+    <div>Now pick the Generation Method</div>
+    <div class="subtitle">Note: Point Buy you must do on your own</div>
     <div class="tmh-generation-options">
-      <CheckBox :value="method === stdArray" text="Standard Array" @click="changedMethod(stdArray)"/>
-      <CheckBox :value="method === pointBuy" text="Point Buy" @click="changedMethod(pointBuy)"/>
-      <CheckBox :value="method === rolled" text="Rolled" @click="changedMethod(rolled)"/>
+      <CheckBox :value="method === stdArray" class="tmh-generation-options-b" text="Standard Array"
+                @click="changedMethod(stdArray)"/>
+      <!--      <CheckBox :value="method === pointBuy" text="Point Buy" @click="changedMethod(pointBuy)"/>-->
+      <CheckBox :value="method === rolled" class="tmh-generation-options-b" text="Rolled"
+                @click="changedMethod(rolled)"/>
     </div>
     <div v-if="method === rolled" class="tmh-generation-limits">
       <div>Min:</div>
@@ -14,6 +16,7 @@
 
       <StdInput v-model="maxRoll" :value="maxRoll" label="Max" type="number"/>
     </div>
+    <StdButton text="Next" @click="saveMethod"/>
   </div>
 </template>
 
@@ -85,16 +88,20 @@ export default {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  margin: 12px;
+
 
   &-options {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+
+    &-b {
+      margin: $margin-small;
+    }
   }
 
   &-limits {
     display: flex;
-    margin: auto;
+    margin: $margin-medium auto;
     justify-content: center;
   }
 }

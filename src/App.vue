@@ -1,7 +1,7 @@
 <template>
   <div class="app-header">
-    <div @click="changePage('home')">Home</div>
-    <div @click="changePage('two-minute-heroes')">Two Minute Heroes</div>
+    <div class="app-header-page" @click="changePage('home')">Home</div>
+    <div class="app-header-page" @click="changePage('two-minute-heroes')">Two Minute Heroes</div>
     <!--    <router-link to="/">Home</router-link>-->
     <!--    <router-link to="/two-minute-heroes">2 Minute Heroes</router-link>-->
   </div>
@@ -86,8 +86,30 @@ export default {
 }
 
 .app-header {
-  justify-content: space-evenly;
+  justify-content: flex-start;
   padding: 12px;
   display: flex;
+
+  &-page {
+    border-bottom: 1px solid $color-primary;
+    margin: 4px;
+    cursor: pointer;
+    padding: 8px;
+    font-size: smaller;
+    transition: $transition-normal;
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-secondary;
+      border-radius: $radius-small $radius-small 0 0;
+    }
+  }
+}
+
+
+.subtitle {
+  color: $color-grey;
+  font-style: italic;
+  font-size: 16px;
 }
 </style>

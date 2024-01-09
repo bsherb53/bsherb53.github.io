@@ -1,38 +1,29 @@
 <template>
   <div class="tmh">
-    <div>Welcome to 2 Minute Heroes</div>
-    <!--    <div>Create a random character</div>-->
-    <div>
-      <StdButton v-if="pageNum > 0" text="Back" @click="prevPage"/>
-      <!--      <StdButton v-if="pageNum < 1" text="Next" @click="nextPage"/>-->
-      <!--      <StdButton v-if="pageNum ===1" buttonStyle="primary" text="Create" @click="randomCharacter"/>-->
-      <!--      {{ pageNum }}-->
-    </div>
-    <!--    <StdButton v-if="!showSources" class="sources-toggle" text="Sources" @click="showSources = !showSources"/>-->
-    <div v-if="pageNum === 0">
+<!--    <div>Welcome to 2 Minute Heroes</div>-->
+    <div>Let's make a quick character</div>
+    <!--    <div>-->
+    <!--      <StdButton v-if="pageNum > 0" text="Back" @click="prevPage"/>-->
+    <!--    </div>-->
+    <div v-if="pageNum === 0" class="tmh-section">
       <TMHSources :user-sources="cSources" @saved="filterSources"/>
     </div>
-    <div v-else-if="pageNum === 1">
+    <div v-else-if="pageNum === 1" class="tmh-section">
       <TMHGenMethod :choice="method" :max="maxRoll" :min="minRoll" @changed="changedMethod" @saved="savedMethod"/>
     </div>
-    <div v-else-if="pageNum ===2">
-      <CharacterViewer :char="character"/>
-    </div>
-    <div v-else class="tmh-char">
-      <!--      <StdInput v-model="name" :value="name" class="tmh-char-name" hint="What's the name?" label="Name"/>-->
-
-      <StdButton buttonStyle="primary" text="Create" @click="randomCharacter"/>
-      <div v-if="errMsg" class="tmh-error">{{ errMsg }}</div>
-      <div v-if="raceErrMsg" class="tmh-error">{{ raceErrMsg }}</div>
-      <div v-if="classErrMsg" class="tmh-error">{{ classErrMsg }}</div>
-      <div v-if="loading">Loading</div>
-
-      <div class="tmh-future">
-        <div class="tmh-future-title">Future Enhancements</div>
-        <div>Quirks/Traits/Bonds/Flaws</div>
-        <div>Sizes/Heights/Weights/Traits/Color</div>
+    <div v-else-if="pageNum ===2" class="tmh-section tmh-name">
+      <div>{{ nameHint }}</div>
+      <StdInput v-model="name" :value="name" class="tmh-char-name" hint="eg. Boblin" @change="changedName"/>
+      <div>OR</div>
+      <div class="tmh-name-buttons">
+        <StdButton button-style="secondary" text="Random" @click="getRandomNameWithProbabilities"/>
+        <StdButton text="Create" @click="saveName"/>
       </div>
     </div>
+    <div v-else-if="pageNum ===3" class="tmh-section">
+      <CharacterViewer :char="character"/>
+    </div>
+    <StdButton text="New Character" @click="newChar"/>
   </div>
 </template>
 
@@ -43,10 +34,12 @@ import helpers from "@/store/TMH/helpers";
 import TMHSources from "@/components/tmh/TMHSources";
 import TMHGenMethod from "@/components/tmh/TMHGenMethod";
 import CharacterViewer from "@/components/tmh/CharacterViewer";
+import name_generator from "@/store/TMH/name_generator";
+import StdInput from "@/components/TextInput";
 
 export default {
   name: 'TwoMinuteHeroes',
-  components: {CharacterViewer, TMHGenMethod, TMHSources, StdButton},
+  components: {StdInput, CharacterViewer, TMHGenMethod, TMHSources, StdButton},
   data() {
     return {
       loading: false,
@@ -83,7 +76,7 @@ export default {
         wis: 10,
         cha: 10,
       },
-      // sources: data.allSources(),
+
       errMsg: null,
       raceErrMsg: null,
       classErrMsg: null,
@@ -101,6 +94,7 @@ export default {
     }
   },
   created() {
+    // name_generator.init();
   },
   methods: {
     prevPage() {
@@ -110,6 +104,9 @@ export default {
     },
     nextPage() {
       this.pageNum++;
+      if (this.pageNum === 3) {
+        this.randomCharacter();
+      }
     },
     filterSources(d) {
       // console.log("received saved sources", d);
@@ -127,39 +124,59 @@ export default {
       this.minRoll = min;
       this.maxRoll = max;
       this.randomCharacter();
+      this.nextPage();
     },
-    randomName() {
-      const getRandomElement = (array) => {
-        return array[Math.floor(Math.random() * array.length)];
-      };
-
-      const vowels = 'aeiou';
-      const consonants = 'bcdfghjklmnpqrstvwxyz';
-
-      const getRandomSyllable = () => {
-        const syllable = getRandomElement(consonants) + getRandomElement(vowels);
-        return Math.random() < 0.5 ? syllable : getRandomElement(consonants) + syllable;
-      };
-
-      const getRandomFirstName = () => {
-        const syllableCount = Math.floor(Math.random() * 3) + 1;
-        return Array.from({length: syllableCount}, () => getRandomSyllable()).join('');
-      };
-
-      const getRandomLastName = () => {
-        const syllableCount = Math.floor(Math.random() * 5) + 1;
-        return Array.from({length: syllableCount}, () => getRandomSyllable()).join('');
-      };
-
-      const capitalizeFirstLetter = (word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      };
-
-      const randomFirstName = capitalizeFirstLetter(getRandomFirstName());
-      const randomLastName = capitalizeFirstLetter(getRandomLastName());
-
-      return `${randomFirstName} ${randomLastName}`;
+    changedName(n) {
+      console.log(n);
     },
+    saveName() {
+      if (this.name !== "") {
+        this.character.name = this.name;
+        // name_generator.train(this.name);
+        this.nextPage()
+      }
+    },
+    newChar() {
+      this.pageNum = 0;
+      this.character = {};
+      this.name = "";
+    },
+    getRandomNameWithProbabilities() {
+      this.name = name_generator.randomName();
+      this.character.name = this.name;
+    },
+    // randomName() {
+    //   const getRandomElement = (array) => {
+    //     return array[Math.floor(Math.random() * array.length)];
+    //   };
+    //
+    //   const vowels = 'aeiou';
+    //   const consonants = 'bcdfghjklmnpqrstvwxyz';
+    //
+    //   const getRandomSyllable = () => {
+    //     const syllable = getRandomElement(consonants) + getRandomElement(vowels);
+    //     return Math.random() < 0.5 ? syllable : getRandomElement(consonants) + syllable;
+    //   };
+    //
+    //   const getRandomFirstName = () => {
+    //     const syllableCount = Math.floor(Math.random() * 3) + 1;
+    //     return Array.from({length: syllableCount}, () => getRandomSyllable()).join('');
+    //   };
+    //
+    //   const getRandomLastName = () => {
+    //     const syllableCount = Math.floor(Math.random() * 5) + 1;
+    //     return Array.from({length: syllableCount}, () => getRandomSyllable()).join('');
+    //   };
+    //
+    //   const capitalizeFirstLetter = (word) => {
+    //     return word.charAt(0).toUpperCase() + word.slice(1);
+    //   };
+    //
+    //   const randomFirstName = capitalizeFirstLetter(getRandomFirstName());
+    //   const randomLastName = capitalizeFirstLetter(getRandomLastName());
+    //
+    //   return `${randomFirstName} ${randomLastName}`;
+    // },
     async randomCharacter() {
       this.errMsg = null;
       this.raceErrMsg = null;
@@ -168,19 +185,20 @@ export default {
         this.loading = true;
       }
 
-      this.name = this.randomName();
+      // this.name = this.randomName();
       this.character.name = this.name;
       this.character.race = this.randomRace();
       let c = this.randomClass();
       let sc = c.subclasses;
       console.log("class", c);
       console.log("subclasses", sc);
+      this.character.class = c;
       this.character.subclass = sc[Math.floor(Math.random() * sc.length)]
       this.character.abilities = this.genAbilities();
 
       await new Promise(r => setTimeout(r, 200));
       this.loading = false;
-      this.nextPage();
+      // this.nextPage();
     },
     randomRace() {
       let races = data.allRaces();
@@ -253,6 +271,9 @@ export default {
     }
   },
   computed: {
+    nameHint() {
+      return "Give your " + this.character.race.name + " a name"
+    },
     hasChar() {
       return this.cRace !== null && !this.loading;
     }
@@ -265,8 +286,33 @@ export default {
 .tmh {
   margin: 0 auto;
   text-align: center;
-  width: 60%;
+  width: 70%;
 
+  &-section {
+    border: 1px solid $color-black;
+    margin: 12px auto;
+    border-radius: $radius-small;
+    box-shadow: 2px 2px 16px 0px $color-shadow;
+    transition: $transition-normal;
+    padding: $padding-small;
+    padding-bottom: 24px;
+  }
+
+  &-char-name{
+    max-width: 200px;
+    margin: 8px auto;
+  }
+
+  &-name {
+    display: flex;
+    flex-direction: column;
+    padding: $padding-small 5%;
+
+    &-buttons {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
 
   &-error {
     color: $color-red;
