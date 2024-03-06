@@ -2,21 +2,24 @@
   <div class="app-header">
     <div class="app-header-page" @click="changePage('home')">Home</div>
     <div class="app-header-page" @click="changePage('two-minute-heroes')">Two Minute Heroes</div>
+    <div class="app-header-page" @click="changePage('gym-meet')">Meet Cute</div>
     <!--    <router-link to="/">Home</router-link>-->
     <!--    <router-link to="/two-minute-heroes">2 Minute Heroes</router-link>-->
   </div>
   <!--  <router-view class="page"></router-view>-->
   <TwoMinuteHeroes v-if="tmh"/>
   <GKHome v-else-if="home"/>
+  <GymMeet v-else-if="meet"/>
 </template>
 <script>
 
 import TwoMinuteHeroes from "@/views/2MinuteHeroes";
 import GKHome from "@/views/GKHome";
+import GymMeet from "@/views/GymMeet";
 
 export default {
   name: 'App',
-  components: {GKHome, TwoMinuteHeroes},
+  components: {GymMeet, GKHome, TwoMinuteHeroes},
   data() {
     return {
       url: "bsherb53.github.io?page=",
@@ -50,6 +53,13 @@ export default {
       // let urlParams = new URLSearchParams(window.location.search);
       // let pageParam = urlParams.get('page')
       return value === "two-minute-heroes"
+    },
+    meet() {
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      let value = params.page;
+      return value === "gym-meet"
     },
     home() {
       const params = new Proxy(new URLSearchParams(window.location.search), {

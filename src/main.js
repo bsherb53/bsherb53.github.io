@@ -1,5 +1,7 @@
 import App from './App.vue'
 import {createApp} from "vue";
+import '@vuepic/vue-datepicker/dist/main.css';
+
 // import {createRouter, createWebHistory} from "vue-router/dist/vue-router";
 //
 // const routes = [

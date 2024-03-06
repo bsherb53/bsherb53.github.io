@@ -16,21 +16,30 @@ export default {
       type: String,
       required: true
     },
+    disabled: Boolean,
   },
   created() {
+    console.log(this.disabled)
   },
   methods: {},
   computed: {
     classes() {
       let cs = {
         "button": true,
-
       };
+      if (this.disabled) {
+        return {
+          "button": true,
+          "button-disabled": this.disabled,
+        };
+      }
+
       if (this.buttonStyle) {
         cs["button-" + this.buttonStyle] = true;
       } else {
         cs["button-primary"] = true;
       }
+
 
       return cs;
     }
@@ -59,6 +68,11 @@ export default {
   }
 
   &:active {
+  }
+
+  &-disabled {
+    color: red !important;
+    pointer-events: none;
   }
 
   &-primary {

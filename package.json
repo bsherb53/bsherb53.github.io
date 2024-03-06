@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "@vuepic/vue-datepicker": "^8.2.0",
     "core-js": "^3.34.0",
     "gh-pages": "^6.1.0",
     "npx": "^10.2.2",

@@ -2,9 +2,8 @@
   <div class="tmh">
 <!--    <div>Welcome to 2 Minute Heroes</div>-->
     <div>Let's make a quick character</div>
-    <!--    <div>-->
-    <!--      <StdButton v-if="pageNum > 0" text="Back" @click="prevPage"/>-->
-    <!--    </div>-->
+    <StdButton text="New Character" @click="newChar"/>
+
     <div v-if="pageNum === 0" class="tmh-section">
       <TMHSources :user-sources="cSources" @saved="filterSources"/>
     </div>
@@ -23,7 +22,6 @@
     <div v-else-if="pageNum ===3" class="tmh-section">
       <CharacterViewer :char="character"/>
     </div>
-    <StdButton text="New Character" @click="newChar"/>
   </div>
 </template>
 
