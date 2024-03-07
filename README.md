@@ -10,7 +10,7 @@ rm -r dist && vue-cli-service build && git add dist && git commit && git subtree
 
 Windows IntelliJ Terminal
 
-```a
+```
 rm -r dist ; vue-cli-service build ; git add dist ; git commit -am "Dist Release" ; git subtree split --prefix dist -b gh-pages ; git push -f origin gh-pages:gh-pages ; git branch -D gh-pages
 ```
 
