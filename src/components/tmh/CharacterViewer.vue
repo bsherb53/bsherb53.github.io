@@ -48,7 +48,7 @@ export default {
     char: {},
   },
   created() {
-    console.log(this.char);
+    // console.log(this.char);
   }
 }
 </script>

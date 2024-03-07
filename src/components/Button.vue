@@ -19,7 +19,7 @@ export default {
     disabled: Boolean,
   },
   created() {
-    console.log(this.disabled)
+    // console.log(this.disabled)
   },
   methods: {},
   computed: {
@@ -53,7 +53,7 @@ export default {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-  border: 1px solid $color-black;
+  //border: 1px solid $color-black;
   min-width: 100px;
   width: fit-content;
   margin: 12px auto;
@@ -71,8 +71,9 @@ export default {
   }
 
   &-disabled {
-    color: red !important;
+    color: $color-white !important;
     pointer-events: none;
+    background-color: $color-grey;
   }
 
   &-primary {
@@ -80,7 +81,7 @@ export default {
     color: $color-secondary;
 
     &:hover {
-      background-color: $color-light-blue;
+      background-color: $color-blue-dark;
     }
 
     &:active {
@@ -114,6 +115,18 @@ export default {
     &:active {
       background-color: $color-off-white;
       color: $color-green;
+    }
+  }
+
+  &-delete {
+    background-color: $color-red;
+    color: $color-off-white;
+    &:hover {
+      background-color: $color-red-dark;
+    }
+    &:active {
+      background-color: $color-off-white;
+      color: $color-red-dark;
     }
   }
 }

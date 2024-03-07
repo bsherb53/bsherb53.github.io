@@ -85,7 +85,7 @@ export default {
   }
 
   &:active {
-    background-color: $color-light-blue;
+    background-color: $color-blue-light;
     color: $color-off-white;
   }
 

@@ -59,16 +59,16 @@ export default {
   },
   methods: {
     saveMethod() {
-      console.log("saved method to ", this.method);
+      // console.log("saved method to ", this.method);
       this.$emit('saved', this.method, this.minRoll, this.maxRoll);
     },
     changedMethod(m) {
-      console.log("changed method to ", m);
+      // console.log("changed method to ", m);
       this.method = m;
       this.emitChange();
     },
     emitChange() {
-      console.log("changed generation method");
+      // console.log("changed generation method");
       this.$emit('changed', this.method, this.minRoll, this.maxRoll);
     }
   },

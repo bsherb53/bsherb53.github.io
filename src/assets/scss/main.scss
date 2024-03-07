@@ -1,12 +1,15 @@
 $color-black: #0F0F0F;
 $color-green: #005B41;
 $color-blue: #232D3F;
-$color-light-blue: #354460;
+$color-blue-light: #354460;
+$color-blue-dark: #1c2432;
 $color-teal: #008170;
 $color-red: #BE3144;
+$color-red-dark:#982736;
 $color-white: #ffffff;
-$color-off-white: #efefef;
+$color-off-white: #fafafa;
 $color-grey: #9a9a9a;
+$color-gray-light:#e9eaeb;
 $color-yellow: #FFA732;
 
 $color-primary: $color-blue;
@@ -31,3 +34,5 @@ $font-color-secondary: $color-secondary;
 $shadow-small: 2px 2px 4px 0px $color-shadow;
 
 $transition-normal: all .2s ease-in-out;
+
+$border-small: 1px solid $color-blue;

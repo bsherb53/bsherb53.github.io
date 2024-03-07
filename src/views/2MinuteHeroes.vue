@@ -4,13 +4,13 @@
     <div>Let's make a quick character</div>
     <StdButton text="New Character" @click="newChar"/>
 
-    <div v-if="pageNum === 0" class="tmh-section">
+    <ViewCard v-if="pageNum === 0" class="tmh-section">
       <TMHSources :user-sources="cSources" @saved="filterSources"/>
-    </div>
-    <div v-else-if="pageNum === 1" class="tmh-section">
+    </ViewCard>
+    <ViewCard v-else-if="pageNum === 1" class="tmh-section">
       <TMHGenMethod :choice="method" :max="maxRoll" :min="minRoll" @changed="changedMethod" @saved="savedMethod"/>
-    </div>
-    <div v-else-if="pageNum ===2" class="tmh-section tmh-name">
+    </ViewCard>
+    <ViewCard v-else-if="pageNum ===2" class="tmh-section tmh-name">
       <div>{{ nameHint }}</div>
       <StdInput v-model="name" :value="name" class="tmh-char-name" hint="eg. Boblin" @change="changedName"/>
       <div>OR</div>
@@ -18,7 +18,7 @@
         <StdButton button-style="secondary" text="Random" @click="getRandomNameWithProbabilities"/>
         <StdButton text="Create" @click="saveName"/>
       </div>
-    </div>
+    </ViewCard>
     <div v-else-if="pageNum ===3" class="tmh-section">
       <CharacterViewer :char="character"/>
     </div>
@@ -34,10 +34,11 @@ import TMHGenMethod from "@/components/tmh/TMHGenMethod";
 import CharacterViewer from "@/components/tmh/CharacterViewer";
 import name_generator from "@/store/TMH/name_generator";
 import StdInput from "@/components/TextInput";
+import ViewCard from "@/components/Card";
 
 export default {
   name: 'TwoMinuteHeroes',
-  components: {StdInput, CharacterViewer, TMHGenMethod, TMHSources, StdButton},
+  components: {ViewCard, StdInput, CharacterViewer, TMHGenMethod, TMHSources, StdButton},
   data() {
     return {
       loading: false,
@@ -112,7 +113,7 @@ export default {
       this.nextPage();
     },
     changedMethod(m, min, max) {
-      console.log("recording changed", m, min, max)
+      // console.log("recording changed", m, min, max)
       this.method = m;
       this.minRoll = min;
       this.maxRoll = max;
@@ -188,8 +189,8 @@ export default {
       this.character.race = this.randomRace();
       let c = this.randomClass();
       let sc = c.subclasses;
-      console.log("class", c);
-      console.log("subclasses", sc);
+      // console.log("class", c);
+      // console.log("subclasses", sc);
       this.character.class = c;
       this.character.subclass = sc[Math.floor(Math.random() * sc.length)]
       this.character.abilities = this.genAbilities();
@@ -287,13 +288,13 @@ export default {
   width: 70%;
 
   &-section {
-    border: 1px solid $color-black;
-    margin: 12px auto;
-    border-radius: $radius-small;
-    box-shadow: 2px 2px 16px 0px $color-shadow;
-    transition: $transition-normal;
-    padding: $padding-small;
-    padding-bottom: 24px;
+    //border-radius: 1px solid $color-black;
+    //margin: 12px auto;
+    //border-radius: $radius-small;
+    //box-shadow: 2px 2px 16px 0px $color-shadow;
+    //transition: $transition-normal;
+    //padding: $padding-small;
+    //padding-bottom: 24px;
   }
 
   &-char-name{

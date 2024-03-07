@@ -1,8 +1,9 @@
 <template>
-<!--  <div class="input-box">-->
-<!--    <div v-if="label" class="input-box-label">{{ label }}:</div>-->
-    <input v-model="content" :class="classes" :placeholder="hint" :type="inputType" min="0" max="20"/>
-<!--  </div>-->
+  <!--  <div class="input-box">-->
+  <!--    <div v-if="label" class="input-box-label">{{ label }}:</div>-->
+  <input v-model="content" :class="classes" :placeholder="hint" :type="inputType" max="20" min="0"
+         v-on:keyup.enter="onEnter"/>
+  <!--  </div>-->
 </template>
 
 <script>
@@ -26,7 +27,7 @@ export default {
     "label": {},
     "type": {},
   },
-  emits: ['changed'],
+  emits: ['changed', 'enter'],
   created() {
     if (this.type !== undefined) {
       this.inputType = this.type;
@@ -43,18 +44,26 @@ export default {
       inputType: 'text',
       content: this.value,
       loading: false,
+      currentValue: this.value,
     };
   },
   watch: {
     content(n, o) {
       this.loading = true;
       this.debouncedFetch(n, o);
+      this.currentValue = n;
     },
     value(n) {
       // console.log("changed test")
       this.content = n;
       // this.loading = true;
       // this.debouncedFetch(n, o);
+    }
+  },
+  methods: {
+    onEnter() {
+      this.$emit('enter', this.currentValue);
+      // console.log('clicked enter')
     }
   },
   computed: {
@@ -72,6 +81,8 @@ export default {
 
 <style lang="scss" scoped>
 .input {
+  margin: 12px auto;
+
   &-box {
     display: flex;
     justify-content: space-between;

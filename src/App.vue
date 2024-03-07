@@ -1,8 +1,8 @@
 <template>
   <div class="app-header">
-    <div class="app-header-page" @click="changePage('home')">Home</div>
-    <div class="app-header-page" @click="changePage('two-minute-heroes')">Two Minute Heroes</div>
-    <div class="app-header-page" @click="changePage('gym-meet')">Meet Cute</div>
+    <div :class="classes(pageHome)" @click="changePage(pageHome)">Home</div>
+    <div :class="classes(pageTMH)" @click="changePage(pageTMH)">Two Minute Heroes</div>
+    <div :class="classes(pageGym)" @click="changePage(pageGym)">Meet Cute</div>
     <!--    <router-link to="/">Home</router-link>-->
     <!--    <router-link to="/two-minute-heroes">2 Minute Heroes</router-link>-->
   </div>
@@ -23,54 +23,46 @@ export default {
   data() {
     return {
       url: "bsherb53.github.io?page=",
+      pageTMH: 'two-minute-heroes',
+      pageHome: 'home',
+      pageGym: 'gym',
     }
   },
   created() {
   },
   methods: {
     changePage(s) {
+      if (this.page === s || (!this.page && s === this.pageHome)) {
+        return;
+      }
       const urlParams = new URLSearchParams(window.location.search);
-
       urlParams.set('page', s);
-
       window.location.search = urlParams;
-
-      // console.log(this.$route.params);
-      // console.log(s);
-      // this.$router.push('?' + s)
-      // VueRouter.createRouter()
-      // this.$router.push(this.url + s)
+    },
+    classes(p) {
+      return {
+        'app-header-page': true,
+        'app-header-page-selected': this.page === p || (!this.page && p === this.pageHome),
+      };
     }
   },
   computed: {
-    tmh() {
+
+    page() {
+      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
       const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
       });
-// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let value = params.page; // "some_value"
-
-      // let urlParams = new URLSearchParams(window.location.search);
-      // let pageParam = urlParams.get('page')
-      return value === "two-minute-heroes"
+      return params.page;
+    },
+    tmh() {
+      return this.page === this.tmh;
     },
     meet() {
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      let value = params.page;
-      return value === "gym-meet"
+      return this.page === this.pageGym;
     },
     home() {
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let value = params.page; // "some_value"
-
-      // let urlParams = new URLSearchParams(window.location.search);
-      // let pageParam = urlParams.get('page')
-      return value === "home"
+      return this.page === this.pageHome;
     }
   }
 }
@@ -93,6 +85,7 @@ export default {
   text-align: center;
   margin: auto;
   color: $font-color-primary;
+  background-color: $color-off-white;
 }
 
 .app-header {
@@ -101,17 +94,20 @@ export default {
   display: flex;
 
   &-page {
-    border-bottom: 1px solid $color-primary;
+    //border-bottom: 1px solid $color-primary;
     margin: 4px;
     cursor: pointer;
     padding: 8px;
     font-size: smaller;
     transition: $transition-normal;
+    border-radius: $radius-small;
+    box-shadow: 3px 3px 9px 0px $color-shadow;
+    background-color: $color-white;
 
-    &:hover {
+    &:hover, &-selected {
       background-color: $color-primary;
       color: $color-secondary;
-      border-radius: $radius-small $radius-small 0 0;
+      border-radius: $radius-medium;
     }
   }
 }
