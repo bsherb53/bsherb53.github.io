@@ -39,7 +39,16 @@ export default {
       default: 0,
     },
   },
+  created() {
+    this.selected = this.default
+        ? this.default
+        : this.options.length > 0
+            ? this.options[0]
+            : "";
+    // console.log('dropdown default', this.selected);
+  },
   data() {
+
     return {
       selected: this.default
           ? this.default
@@ -48,6 +57,12 @@ export default {
               : null,
       open: false,
     };
+  },
+  watch: {
+    default: function(newVal) { // watch it
+      this.selected = newVal;
+      this.$emit("input", this.selected)
+    }
   },
   mounted() {
     this.$emit("input", this.selected);
@@ -62,12 +77,14 @@ export default {
   width: 100%;
   text-align: left;
   outline: none;
-  height: 47px;
-  line-height: 47px;
+  height: 40px;
+  line-height: 40px;
+  background-color: $color-white;
+
 }
 
 .custom-select .selected {
-  background-color: $color-off-white;
+  background-color: $color-white;
   border-radius: 6px;
   border: $border-small;
   color: $color-black;
@@ -100,9 +117,9 @@ export default {
   border-left: $border-small;
   border-bottom: $border-small;
   position: absolute;
-  background-color: $color-off-white;
-  left: 0;
-  right: 0;
+  background-color: $color-white;
+  left: 4px;
+  right: 4px;
   z-index: 1;
 }
 

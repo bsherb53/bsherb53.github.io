@@ -1,6 +1,5 @@
 <template>
   <div>
-    Show Totals
   </div>
 </template>
 
