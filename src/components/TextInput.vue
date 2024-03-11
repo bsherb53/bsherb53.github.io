@@ -99,6 +99,7 @@ export default {
     border: 1px solid $color-primary;
     text-align: center;
     font-size: 24px;
+
   }
 
   &-narrow {

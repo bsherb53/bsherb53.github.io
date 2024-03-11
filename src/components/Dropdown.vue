@@ -59,7 +59,7 @@ export default {
     };
   },
   watch: {
-    default: function(newVal) { // watch it
+    default: function (newVal) { // watch it
       this.selected = newVal;
       this.$emit("input", this.selected)
     }
@@ -74,12 +74,14 @@ export default {
 
 .custom-select {
   position: relative;
-  width: 100%;
   text-align: left;
   outline: none;
   height: 40px;
   line-height: 40px;
   background-color: $color-white;
+  width: 90%;
+  min-width: 100px;
+  max-width: 400px;
 
 }
 
@@ -91,22 +93,37 @@ export default {
   padding-left: 1em;
   cursor: pointer;
   user-select: none;
+  transition: $transition-normal;
 }
 
 .custom-select .selected.open {
   border: $border-small;
   border-radius: 6px 6px 0px 0px;
+
+  &:after {
+    position: absolute;
+    content: "";
+    top: 40%;
+    right: 10px;
+    width: auto;
+    height: auto;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid $color-blue-light;
+    border-top: 0;
+  }
 }
 
 .custom-select .selected:after {
   position: absolute;
   content: "";
-  top: 22px;
-  right: 1em;
-  width: 0;
-  height: 0;
-  border: 5px solid transparent;
-  border-color: #fff transparent transparent transparent;
+  top: 40%;
+  right: 10px;
+  width: auto;
+  height: auto;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid $color-blue-light;
 }
 
 .custom-select .items {
@@ -118,8 +135,8 @@ export default {
   border-bottom: $border-small;
   position: absolute;
   background-color: $color-white;
-  left: 4px;
-  right: 4px;
+  left: 0px;
+  right: 0px;
   z-index: 1;
 }
 

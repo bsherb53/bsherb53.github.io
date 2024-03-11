@@ -22,7 +22,8 @@
         <StdDropdown :options="events" @input="chooseEvent"/>
         <StdDropdown :options="teams" @input="chooseTeam"/>
         <StdDropdown :default="firstGymnast" :options="gymnasts" @input="chooseGymnast"/>
-        <StdInput v-model="gymnastScore" :max="10" :min="0" :value="gymnastScore" step=".001" type="number"/>
+        <StdInput v-model="gymnastScore" :max="10" :min="0" :value="gymnastScore" step=".001" type="number"
+                  @enter="addScore"/>
         <StdButton text="Add" @click="addScore"/>
       </div>
     </ViewCard>
@@ -76,10 +77,11 @@ export default {
         return;
       }
 
-      let score = this.currentGymnast;
+      let score = Object.assign({}, this.currentGymnast);
       score['score'] = this.gymnastScore;
       score['event'] = this.selectedEvent;
-      this.data.scores.push(score);
+      score['time'] = new Date();
+      // this.data.scores.push(score);
       this.$emit("score", score);
       this.gymnastScore = null;
       // this.updateGymnastScore(score);
@@ -159,7 +161,7 @@ export default {
     justify-content: space-around;
 
     & div {
-      margin: 4px;
+      margin: auto 4px;
     }
   }
 }

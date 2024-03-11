@@ -48,19 +48,19 @@
       Add Gymnasts
       <div class="meet-create-add-events">
         <div class="meet-create-add-events-item">Team</div>
-        <div class="meet-create-add-events-item">Level</div>
-        <div class="meet-create-add-events-item">Name</div>
-      </div>
-      <div class="meet-create-add-events">
         <StdDropdown :options="meet.teams" @input="selectedTeam"/>
+        <div class="meet-create-add-events-item">Level</div>
         <StdDropdown :options="meet.levels" @input="selectedLevel"/>
-        <StdInput v-model="tempKidName" :value="tempKidName" class="meet-create-add-events-item" @enter="addGymnast"/>
-        <StdButton text="Add" @click="addGymnast"/>
+        <div class="meet-create-add-events-item">Name</div>
+        <div class="meet-create-add-events-item">
+          <StdInput v-model="tempKidName" :value="tempKidName" class="meet-create-add-events-item" @enter="addGymnast"/>
+          <StdButton text="Add" @click="addGymnast"/>
+        </div>
       </div>
-      <div v-for="(e, i) in meet.gymnasts" :key="e" :class="{'odd-row':i % 2 === 0 }" class="meet-create-add-events">
-        <div class="meet-create-add-events-item">{{ e.team }}</div>
-        <div class="meet-create-add-events-item">{{ e.level }}</div>
-        <div class="meet-create-add-events-item">{{ e.name }}</div>
+      <div v-for="(e, i) in meet.gymnasts" :key="e" :class="{'odd-row':i % 2 === 0 }" class="meet-create-view-events">
+        <div class="meet-create-view-events-item">{{ e.team }}</div>
+        <div class="meet-create-view-events-item">{{ e.level }}</div>
+        <div class="meet-create-view-events-item">{{ e.name }}</div>
         <StdButton button-style="delete" text="Delete" @click="deleteTeam(e)"/>
       </div>
       <StdButton text="Finish and Run" @click="saveMeet"/>
@@ -99,10 +99,9 @@ export default {
 
       meet: {
         name: '',
-        test: 'data',
         events: ['Vault', 'Beam', 'Bars', 'Floor'],
-        teams: ['Elite', 'Twisters', 'Pinnacle'],
-        levels: ['Bronze', 'Silver', 'Gold'],
+        teams: [],
+        levels: [],
         gymnasts: [],
       },
       page: 1,
@@ -221,16 +220,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.meet-create-view-events{
+  display: flex;
+  margin: auto;
+  &-item {
+    margin: auto 4px;
+    padding: 10px;
+    width: 60%;
+    font-size: 24px;
+    display: flex;
+  }
+}
+
 .meet-create-add-events {
   display: flex;
   margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
 
   &-item {
-    margin: 4px auto 4px 24px;
+    margin: auto 4px;
     padding: 10px;
     width: 60%;
-    text-align: left;
     font-size: 24px;
+    display: flex;
   }
 }
 
