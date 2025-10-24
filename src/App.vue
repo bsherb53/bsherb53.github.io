@@ -1,31 +1,33 @@
 <template>
   <div class="app-header">
     <div :class="classes(pageHome)" @click="changePage(pageHome)">Home</div>
-    <div :class="classes(pageTMH)" @click="changePage(pageTMH)">Two Minute Heroes</div>
-    <div :class="classes(pageGym)" @click="changePage(pageGym)">Meet Cute</div>
+    <!--    <div :class="classes(pageTMH)" @click="changePage(pageTMH)">Two Minute Heroes</div>-->
+    <!--    <div :class="classes(pageGym)" @click="changePage(pageGym)">Meet Cute</div>-->
+    <div :class="classes(pagePKStats)" @click="changePage(pagePKStats)">Stat Blocks</div>
     <!--    <router-link to="/">Home</router-link>-->
     <!--    <router-link to="/two-minute-heroes">2 Minute Heroes</router-link>-->
   </div>
+  <div class="app-content">
+    <PKMonsters v-if="page === pagePKStats"/>
+    <GKHome v-else/>
+  </div>
   <!--  <router-view class="page"></router-view>-->
-  <TwoMinuteHeroes v-if="tmh"/>
-  <GKHome v-else-if="home"/>
-  <GymMeet v-else-if="meet"/>
 </template>
 <script>
 
-import TwoMinuteHeroes from "@/views/2MinuteHeroes";
 import GKHome from "@/views/GKHome";
-import GymMeet from "@/views/GymMeet";
+import PKMonsters from "@/views/PKMonsters.vue";
 
 export default {
   name: 'App',
-  components: {GymMeet, GKHome, TwoMinuteHeroes},
+  components: {PKMonsters, GKHome},
   data() {
     return {
       url: "bsherb53.github.io?page=",
       pageTMH: 'two-minute-heroes',
       pageHome: 'home',
       pageGym: 'gym',
+      pagePKStats: 'pkStat'
     }
   },
   created() {
@@ -112,7 +114,9 @@ export default {
   }
 }
 
-
+.app-content{
+  overflow: auto;
+}
 .subtitle {
   color: $color-grey;
   font-style: italic;
