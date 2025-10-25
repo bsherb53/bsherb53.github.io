@@ -4,37 +4,53 @@ export default {
   name: "PocketMonster",
   props: {
     pm: {},
-    hideLevel: {type: Boolean},
+    small: {type: Boolean},
     level: {type: Number}
   },
   data() {
     return {}
   },
   created() {
-    console.log(this.hideLevel);
-    console.log(this.pm);
+    console.log(this.small);
   },
   methods: {
-    mod(val) {
-      let r = '-';
-      if (val >= 0) {
+    mod(key, val) {
+      let r = '';
+      let nVal = this.asi(key, val);
+      // console.log(key, val, nVal)
+      if (nVal >= 10) {
         r = "+";
       }
 
-      return r + Math.floor((val - 10) / 2);
+      return r + Math.floor((nVal - 10) / 2);
     },
     asi(key, val) {
       switch (key) {
         case "STR":
           return this.str;
+        case "DEX":
+          return this.dex;
+        case "CON":
+          return this.con;
+        case "INT":
+          return this.int;
+        case "WIS":
+          return this.wis;
+        case "CHA":
+          return this.cha;
       }
       return val;
     }
   },
   computed: {
+    cardClasses() {
+      return {
+        "monster": true,
+        "monster-small": this.small
+      };
+    },
     lvlMod() {
-
-      return 0;
+      return Math.floor((this.level) / 3);
     },
     str() {
       return this.pm.ability_scores.STR + this.lvlMod;
@@ -53,6 +69,12 @@ export default {
     },
     cha() {
       return this.pm.ability_scores.CHA + this.lvlMod;
+    },
+    hp() {
+      return this.pm.hit_points + (6 * this.level);
+    },
+    ac() {
+      return this.pm.armor_class;
     }
   }
 }
@@ -60,26 +82,30 @@ export default {
 </script>
 
 <template>
-  <div class="monster" v-if="pm">
+  <div :class="cardClasses" v-if="pm">
     <div class="monster-header">
       <div class="mh-left">
         <h1 class="monster-name">{{ pm.name }}</h1>
-        <div class="monster-type">{{ pm.type }}</div>
+        <div v-if="small" class="monster-name">{{ pm.id }}</div>
       </div>
-      <div class="monster-cr">CR {{ pm.challenge }}</div>
+      <div class="monster-type">{{ pm.type }}</div>
+      <!--      <div class="monster-cr">CR {{ pm.challenge }}</div>-->
     </div>
 
     <div class="monster-info">
-      <div><strong>Armor Class </strong>{{ pm.armor_class }}</div>
-      <div><strong>Hit Points </strong>{{ pm.hit_points }}</div>
-      <div><strong>Speed </strong>{{ pm.speed }}</div>
+      <div class="monster-info-title">Armor Class</div>
+      <div class="monster-info-subtitle">{{ ac }}</div>
+      <div class="monster-info-title">Hit Points</div>
+      <div class="monster-info-subtitle">{{ hp }}</div>
+      <div class="monster-info-title">Speed</div>
+      <div class="monster-info-subtitle">{{ pm.speed }}</div>
     </div>
 
     <div class="abilities">
       <div v-for="(val, key) in pm.ability_scores" :key="key" class="ability">
         <div class="ab-label">{{ key }}</div>
         <div class="ab-stat">{{ asi(key, val) }}</div>
-        <div class="ab-mod">{{ mod(val) }}</div>
+        <div class="ab-mod">{{ mod(key, val) }}</div>
       </div>
     </div>
 
@@ -88,9 +114,10 @@ export default {
         <strong>Skills</strong>
         <div v-for="(val, key) in pm.skills" :key="key">{{ val }}: {{ key }}</div>
       </div>
-      <div><strong>Senses: </strong>{{ pm.senses }}</div>
-      <div><strong>Languages: </strong>{{ pm.languages }}</div>
-      <div><strong>Challenge: </strong>{{ pm.challenge }}</div>
+      <div style="display: flex; flex-direction: column"><strong>Senses: </strong>{{ pm.senses }}
+        <strong>Languages: </strong>{{ pm.languages }}
+      </div>
+      <!--      <div><strong>Challenge: </strong>{{ pm.challenge }}</div>-->
     </div>
 
     <div class="monster-section">
@@ -123,7 +150,7 @@ $border: #e6e7ea;
 $shadow: 0 6px 18px rgba(22, 24, 27, 0.08);
 $radius: 10px;
 $pad: 18px;
-$maxw: 750px;
+$maxw: 80%;
 $stat-bg: #f4fbfb;
 
 
@@ -146,6 +173,11 @@ body {
   padding: $pad;
   margin: 16px auto;
   text-align: center;
+  &-small{
+    max-width: 32%;
+    font-size: 14px;
+    min-width: 600px;
+  }
 
   &-lvl {
     display: flex;
@@ -170,7 +202,7 @@ body {
 
   &--type {
     margin-top: 6px;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
   }
 
   /* CR badge */
@@ -191,7 +223,6 @@ body {
     grid-template-columns:repeat(2, 1fr);
     gap: 10px;
     padding: 12px 0;
-    font-size: 0.95rem;
     border-bottom: 1px solid $border;
 
     & > div {
@@ -205,7 +236,6 @@ body {
 
     & h3 {
       margin: 0 0 8px 0;
-      font-size: 1rem;
       font-weight: 700;
     }
   }
@@ -213,11 +243,18 @@ body {
   /* Basic info row */
   &-info {
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
     padding: 12px 0;
-    font-size: 0.95rem;
+    justify-content: space-between;
     border-bottom: 1px solid $border;
+
+    &-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    &-subtitle {
+      font-size: 24px;
+    }
   }
 }
 
@@ -248,17 +285,14 @@ body {
 
 .ab-stat {
   font-weight: 700;
-  font-size: 1.05rem;
 }
 
 .ab-mod {
-  font-size: 0.9rem;
   margin-top: 4px;
 }
 
 .ab-label {
   margin-top: 6px;
-  font-size: 0.75rem;
   letter-spacing: 1px;
 }
 
@@ -266,7 +300,6 @@ body {
 .trait, .action {
   background: transparent;
   padding: 8px 0;
-  font-size: 0.95rem;
 }
 
 .action-title {
@@ -295,7 +328,8 @@ body {
 
     &-info {
       flex-direction: column;
-      gap: 6px
+      gap: 6px;
+
     }
 
     &-extra {

@@ -139,6 +139,7 @@ const allMonsters = function () {
 }
 
 const getPokemon = function (id) {
+    // console.log(id)
     switch (id) {
         case squirtle().id:
             return squirtle();
@@ -162,7 +163,7 @@ const squirtle = function () {
         name: "Squirtle",
         type: "Small beast, unaligned",
         armor_class: 15,
-        hit_points: "27 (6d6 + 6)",
+        hit_points: 25,
         speed: "25 ft., swim 30 ft.",
         ability_scores: {
             STR: 10,
@@ -200,7 +201,7 @@ const pidgey = function () {
         name: "Pidgey",
         type: "Tiny beast, unaligned",
         armor_class: 13,
-        hit_points: "18 (4d4 + 8)",
+        hit_points: 25,
         speed: "10 ft., fly 40 ft.",
         ability_scores: {
             STR: 6,
@@ -235,7 +236,7 @@ const machop = function () {
         name: "Machop",
         type: "Medium humanoid, unaligned",
         armor_class: 13,
-        hit_points: "40 (6d8 + 12)",
+        hit_points: 25,
         speed: "30 ft.",
         ability_scores: {
             STR: 16,
@@ -271,7 +272,7 @@ const ponyta = function () {
         name: "Ponyta",
         type: "Medium beast, unaligned",
         armor_class: 14,
-        hit_points: "39 (6d8 + 12)",
+        hit_points: 25,
         speed: "60 ft.",
         ability_scores: {
             STR: 14,
@@ -342,7 +343,7 @@ const sandshrew = function () {
         name: "Sandshrew",
         type: "Small beast, unaligned",
         armor_class: 15,
-        hit_points: "30 (8d6)",
+        hit_points: 25,
         speed: "30 ft., burrow 20 ft.",
         ability_scores: {
             STR: 12,
@@ -374,10 +375,11 @@ const sandshrew = function () {
 
 const abra = function () {
     return {
+        id:"Lance",
         name: "Abra",
         type: "Small monstrosity, unaligned",
         armor_class: 12,
-        hit_points: "22 (5d6 + 5)",
+        hit_points: 25,
         speed: "30 ft.",
         ability_scores: {
             STR: 6,

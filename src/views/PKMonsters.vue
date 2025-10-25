@@ -1,6 +1,13 @@
 <template>
   <div class="">
-    <PocketMonster v-for="p in pokemons" :key="p.name" :pm="p" :hide-level="true"/>
+    <div class="monster-lvl">
+      <div>Level:
+        <input type="number" v-model.number="pLevel" @input="validateNumber" class="monster-lvl-input"/>
+      </div>
+    </div>
+    <div class="monsters">
+      <PocketMonster v-for="p in pokemons" :key="p.name" :pm="p" :level="pLevel" :small="true"/>
+    </div>
 
   </div>
 </template>
@@ -16,16 +23,22 @@ export default {
   data() {
     return {
       pokemons: [],
+      pLevel: 10,
     }
   },
   methods: {
+    validateNumber() {
+      this.pLevel = this.pLevel < 0 ? 0 : this.pLevel;
+      this.pLevel = this.pLevel > 20 ? 20 : this.pLevel;
+
+    },
     mod(val) {
       let r = '';
       if (val >= 0) {
         r = "+";
       }
 
-      return r + (val-10)/2;
+      return r + (val - 10) / 2;
     }
   },
   created() {
@@ -35,6 +48,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.monsters{
+  display: flex;
+  flex-wrap: wrap;
+}
+.monster-lvl-input {
+  font-size: 36px;
+  width: 60px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 12px;
+}
+
 .mon {
   &-image {
     height: 20px;
