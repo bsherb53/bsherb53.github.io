@@ -1,36 +1,44 @@
 <template>
   <div class="app-header">
-    <div :class="classes(pageHome)" @click="changePage(pageHome)">Home</div>
-    <!--    <div :class="classes(pageTMH)" @click="changePage(pageTMH)">Two Minute Heroes</div>-->
-    <!--    <div :class="classes(pageGym)" @click="changePage(pageGym)">Meet Cute</div>-->
-    <div :class="classes(pagePKStats)" @click="changePage(pagePKStats)">Stat Blocks</div>
-    <!--    <router-link to="/">Home</router-link>-->
-    <!--    <router-link to="/two-minute-heroes">2 Minute Heroes</router-link>-->
+    <div v-for="p in pages" :key="p" :class="classes(p)" @click="changePage(p)">{{ p }}</div>
   </div>
   <div class="app-content">
     <PKMonsters v-if="page === pagePKStats"/>
+    <PlayerHome v-else-if="page === pagePlayer"/>
     <GKHome v-else/>
   </div>
   <!--  <router-view class="page"></router-view>-->
 </template>
 <script>
 
-import GKHome from "@/views/GKHome";
 import PKMonsters from "@/views/PKMonsters.vue";
+import PlayerHome from "@/views/PKHome.vue";
+import GKHome from "@/views/Home.vue";
 
 export default {
   name: 'App',
-  components: {PKMonsters, GKHome},
+  components: {GKHome, PlayerHome, PKMonsters},
   data() {
     return {
       url: "bsherb53.github.io?page=",
       pageTMH: 'two-minute-heroes',
-      pageHome: 'home',
-      pageGym: 'gym',
-      pagePKStats: 'pkStat'
+      pageHome: 'Home',
+      pagePlayer: 'Players',
+      pagePKStats: 'Stat Blocks',
+      pages: [],
     }
   },
   created() {
+    // Add Pages in order here
+    this.pages = [
+      this.pageHome,
+      this.pagePlayer,
+      this.pagePKStats
+    ]
+    let page = window.localStorage.getItem("page");
+    if (page !== null) {
+      this.changePage(page);
+    }
   },
   methods: {
     changePage(s) {
@@ -114,9 +122,10 @@ export default {
   }
 }
 
-.app-content{
+.app-content {
   overflow: auto;
 }
+
 .subtitle {
   color: $color-grey;
   font-style: italic;

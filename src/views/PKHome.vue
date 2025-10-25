@@ -26,7 +26,7 @@ import pkStore from "@/store/PKMonsters/pkStore";
 import PocketMonster from "@/components/Pokemon/Monster.vue";
 
 export default {
-  name: "GKHome",
+  name: "PlayerHome",
   components: {PocketMonster},
   data() {
     return {

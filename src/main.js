@@ -5,7 +5,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 // import {createRouter, createWebHistory} from "vue-router/dist/vue-router";
 //
 // const routes = [
-// //     {path: '/', component: GKHome},
+// //     {path: '/', component: PkHome},
 // //     {path: '/two-minute-heroes', component: TwoMinuteHeroes},
 // ]
 

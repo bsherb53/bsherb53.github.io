@@ -274,6 +274,7 @@ body {
 
 .ability {
   background: $stat-bg;
+  border:1px solid grey;
   border-radius: 8px;
   padding: 8px;
   text-align: center;
