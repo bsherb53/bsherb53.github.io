@@ -9,11 +9,11 @@
     <div v-else>
       <div>{{ character.character }}</div>
       <div>played by {{ character.player }}</div>
-      <div class="monster-lvl" v-if="!hideLevel">
+      <div class="monster-lvl">
         <div>Level:</div>
         <input type="number" v-model.number="pLevel" @input="validateNumber"/>
       </div>
-      <PocketMonster :p="pokemon" :level="pLevel"/>
+      <PocketMonster :pm="pokemon" :level="pLevel"/>
     </div>
     <div @click="reset">Reset</div>
   </div>

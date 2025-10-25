@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <PocketMonster v-for="p in pokemons" :key="p.name" :p="p" :hide-level="true"/>
+    <PocketMonster v-for="p in pokemons" :key="p.name" :pm="p" :hide-level="true"/>
 
   </div>
 </template>

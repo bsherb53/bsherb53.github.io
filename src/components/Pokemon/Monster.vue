@@ -3,51 +3,82 @@
 export default {
   name: "PocketMonster",
   props: {
-    p: {},
-    hideLevel: {type:Boolean},
+    pm: {},
+    hideLevel: {type: Boolean},
     level: {type: Number}
   },
   data() {
-    return {
-    }
+    return {}
   },
   created() {
     console.log(this.hideLevel);
+    console.log(this.pm);
   },
   methods: {
     mod(val) {
-      let r = '';
+      let r = '-';
       if (val >= 0) {
         r = "+";
       }
 
       return r + Math.floor((val - 10) / 2);
     },
+    asi(key, val) {
+      switch (key) {
+        case "STR":
+          return this.str;
+      }
+      return val;
+    }
   },
+  computed: {
+    lvlMod() {
+
+      return 0;
+    },
+    str() {
+      return this.pm.ability_scores.STR + this.lvlMod;
+    },
+    dex() {
+      return this.pm.ability_scores.DEX + this.lvlMod;
+    },
+    con() {
+      return this.pm.ability_scores.CON + this.lvlMod;
+    },
+    int() {
+      return this.pm.ability_scores.INT + this.lvlMod;
+    },
+    wis() {
+      return this.pm.ability_scores.WIS + this.lvlMod;
+    },
+    cha() {
+      return this.pm.ability_scores.CHA + this.lvlMod;
+    }
+  }
 }
 
 </script>
 
 <template>
-  <div class="monster" v-if="p">
+  <div class="monster" v-if="pm">
     <div class="monster-header">
       <div class="mh-left">
-        <h1 class="monster-name">{{ p.name }}</h1>
-        <div class="monster-type">{{ p.type }}</div>
+        <h1 class="monster-name">{{ pm.name }}</h1>
+        <div class="monster-type">{{ pm.type }}</div>
       </div>
-      <div class="monster-cr">CR {{ p.challenge }}</div>
+      <div class="monster-cr">CR {{ pm.challenge }}</div>
     </div>
 
     <div class="monster-info">
-      <div><strong>Armor Class </strong>{{ p.armor_class }}</div>
-      <div><strong>Hit Points </strong>{{ p.hit_points }}</div>
-      <div><strong>Speed </strong>{{ p.speed }}</div>
+      <div><strong>Armor Class </strong>{{ pm.armor_class }}</div>
+      <div><strong>Hit Points </strong>{{ pm.hit_points }}</div>
+      <div><strong>Speed </strong>{{ pm.speed }}</div>
     </div>
 
     <div class="abilities">
-      <div v-for="(val, key) in p.ability_scores" :key="key" class="ability">
+      <div v-for="(val, key) in pm.ability_scores" :key="key" class="ability">
         <div class="ab-label">{{ key }}</div>
-        <div class="ab-stat">{{ val }}</div>
+        <div class="ab-stat">{{ asi(key, val) }}</div>
         <div class="ab-mod">{{ mod(val) }}</div>
       </div>
     </div>
@@ -55,23 +86,23 @@ export default {
     <div class="monster-extra">
       <div>
         <strong>Skills</strong>
-        <div v-for="(val, key) in p.skills" :key="key">{{ val }}: {{ key }}</div>
+        <div v-for="(val, key) in pm.skills" :key="key">{{ val }}: {{ key }}</div>
       </div>
-      <div><strong>Senses: </strong>{{ p.senses }}</div>
-      <div><strong>Languages: </strong>{{ p.languages }}</div>
-      <div><strong>Challenge: </strong>{{ p.challenge }}</div>
+      <div><strong>Senses: </strong>{{ pm.senses }}</div>
+      <div><strong>Languages: </strong>{{ pm.languages }}</div>
+      <div><strong>Challenge: </strong>{{ pm.challenge }}</div>
     </div>
 
     <div class="monster-section">
       <h3>Traits</h3>
-      <div class="trait" v-for="(val, key) in p.traits" :key="key">
+      <div class="trait" v-for="(val, key) in pm.traits" :key="key">
         <strong>{{ key }}: </strong>{{ val }}
       </div>
     </div>
 
     <div class="monster-section">
       <h3>Actions</h3>
-      <div class="action" v-for="(val, key) in p.actions || {}" :key="key">
+      <div class="action" v-for="(val, key) in pm.actions || {}" :key="key">
         <strong>{{ key }}: </strong>{{ val }}
 
         <!--        <div class="action-title">{{ key }}:</div>-->

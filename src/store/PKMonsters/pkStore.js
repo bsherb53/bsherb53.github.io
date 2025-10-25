@@ -168,7 +168,7 @@ const squirtle = function () {
             STR: 10,
             DEX: 12,
             CON: 14,
-            INT: 6,
+            INT: 8,
             WIS: 12,
             CHA: 10
         },
